@@ -54,6 +54,28 @@ h1 {
     font-family: inherit;
     color: white;
 }
+.solo-btn {
+    background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+}
+.solo-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+}
+.solo-btn:active {
+    transform: translateY(1px);
+}
+.shop-btn {
+    background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+    box-shadow: 0 4px 15px rgba(20, 184, 166, 0.3);
+}
+.shop-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(20, 184, 166, 0.4);
+}
+.shop-btn:active {
+    transform: translateY(1px);
+}
 .tips-btn {
     background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
@@ -85,6 +107,17 @@ h1 {
     box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
 }
 .study-btn:active {
+    transform: translateY(1px);
+}
+.match-btn {
+    background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+    box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+}
+.match-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4);
+}
+.match-btn:active {
     transform: translateY(1px);
 }
 .info-msg {
@@ -120,6 +153,65 @@ h1 {
 .tips-msg li {
     margin-bottom: 8px;
     font-weight: 500;
+}
+.coin-display {
+    font-size: 20px;
+    font-weight: 700;
+    color: #b45309;
+    text-align: center;
+    margin-bottom: 10px;
+    padding: 15px;
+    background-color: #fef3c7;
+    border: 2px dashed #f59e0b;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(245, 158, 11, 0.1);
+}
+.inventory-display {
+    font-size: 16px;
+    font-weight: 700;
+    color: #475569;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 12px;
+    background-color: #f8fafc;
+    border: 2px dashed #cbd5e1;
+    border-radius: 16px;
+}
+.bet-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    font-weight: 700;
+    color: #475569;
+    font-size: 18px;
+}
+.bet-btn {
+    padding: 10px 18px;
+    border-radius: 12px;
+    border: 2px solid #e2e8f0;
+    background: #ffffff;
+    cursor: pointer;
+    font-weight: 700;
+    color: #334155;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    font-size: 16px;
+}
+.bet-btn:hover:not(:disabled) {
+    border-color: #f59e0b;
+    color: #d97706;
+}
+.bet-selected {
+    background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+}
+.bet-selected:hover:not(:disabled) {
+    color: white;
+    border-color: transparent;
 }
 .progress-container {
     width: 100%;
@@ -171,7 +263,7 @@ h1 {
 }
 .options-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 15px;
 }
 .option-btn {
@@ -298,7 +390,7 @@ h1 {
     text-align: center;
     display: none;
 }
-#study-mode-container {
+#study-mode-container, #shop-mode-container, #solo-mode-container {
     display: none;
 }
 .study-item {
@@ -400,6 +492,84 @@ h1 {
     display: block;
     padding: 0 2px;
 }
+#match-mode-container {
+    display: none;
+}
+.match-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+.match-card {
+    background: #ffffff;
+    border: 2px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 20px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px;
+    color: #334155;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+.match-card:hover:not(.match-matched) {
+    border-color: #ec4899;
+    background-color: #fdf2f8;
+    transform: translateY(-2px);
+}
+.match-selected {
+    border-color: #ec4899;
+    background-color: #fdf2f8;
+    box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.2);
+    transform: translateY(-2px);
+}
+.match-matched {
+    background-color: #d1fae5;
+    border-color: #10b981;
+    color: #047857;
+    pointer-events: none;
+    opacity: 0.6;
+}
+.match-wrong {
+    background-color: #fee2e2;
+    border-color: #ef4444;
+    color: #b91c1c;
+    animation: shake 0.4s ease;
+}
+.match-win-msg {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: #10b981;
+    margin-bottom: 25px;
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+.loader {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #ef4444;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes shake {
+    0%, 100% {transform: translateX(0);}
+    25% {transform: translateX(-5px);}
+    75% {transform: translateX(5px);}
+}
 @media (max-width: 600px) {
     .container {
         padding: 20px;
@@ -433,6 +603,12 @@ h1 {
     .tools-row {
         flex-direction: column;
     }
+    .match-grid {
+        grid-template-columns: 1fr;
+    }
+    .options-grid {
+        grid-template-columns: 1fr;
+    }
 }
 </style>
 </head>
@@ -442,9 +618,12 @@ h1 {
     <h1>TRẮC NGHIỆM ĐẠI SỐ 7</h1>
     
     <div class="header-actions">
+        <button id="solo-btn" class="action-btn solo-btn">Chế độ Solo</button>
+        <button id="shop-btn" class="action-btn shop-btn">Cửa hàng thẻ bài</button>
         <button id="tips-btn" class="action-btn tips-btn">Bí kíp làm bài</button>
         <button id="motivate-btn" class="action-btn motivate-btn">Nhận lời động viên</button>
         <button id="study-btn" class="action-btn study-btn">Góc Luyện Trí Nhớ</button>
+        <button id="match-btn" class="action-btn match-btn">Trò chơi ghép thẻ</button>
     </div>
 
     <div id="tips-msg" class="info-msg tips-msg">
@@ -459,13 +638,101 @@ h1 {
     
     <div id="motivate-msg" class="info-msg motivate-msg"></div>
 
+    <div id="solo-mode-container">
+        <div class="review-title" style="display: block;">CHẾ ĐỘ THÁCH ĐẤU (SOLO 1VS1)</div>
+        <div id="solo-lobby" style="text-align: center;">
+            <p style="margin-bottom: 20px; color: #475569; font-weight: 700;">Thi đấu cùng bạn bè xem ai đạt 40 điểm trước sẽ được thưởng 100 Xu!</p>
+            <button onclick="createSoloRoom()" class="nav-btn solo-btn" style="margin-bottom: 20px; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);">Tạo phòng mới</button>
+            <br>
+            <input type="text" id="room-code-input" placeholder="Nhập mã phòng..." style="padding: 15px; border-radius: 12px; border: 2px solid #e2e8f0; font-size: 18px; font-family: inherit; font-weight: bold; text-align: center; text-transform: uppercase; width: 60%; margin-bottom: 10px;">
+            <button onclick="joinSoloRoom()" class="nav-btn shop-btn">Vào phòng</button>
+            <div id="solo-error-msg" class="info-msg motivate-msg" style="margin-top: 15px; display: none;"></div>
+            <button onclick="exitSoloRoom()" class="nav-btn back-quiz-btn" style="margin-top: 30px;">Quay lại</button>
+        </div>
+
+        <div id="solo-waiting" style="display: none; text-align: center;">
+            <h3 style="color: #334155;">Mã phòng của cậu: <span id="display-room-code" style="color: #ef4444; font-size: 32px; letter-spacing: 2px;"></span></h3>
+            <p style="font-weight: bold; color: #64748b;">Hãy gửi mã này cho bạn bè để bắt đầu nhé!</p>
+            <div class="loader"></div>
+            <button onclick="exitSoloRoom()" class="nav-btn back-quiz-btn" style="margin-top: 30px;">Hủy / Trở về</button>
+        </div>
+
+        <div id="solo-playing" style="display: none;">
+            <div style="background: #f8fafc; padding: 20px; border-radius: 16px; margin-bottom: 30px; border: 2px solid #e2e8f0;">
+                <div style="margin-bottom: 15px;">
+                    <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 8px; color: #047857;">
+                        <span>Cậu (Điểm: <span id="solo-my-score">0</span>)</span>
+                        <span>Đích: 40</span>
+                    </div>
+                    <div class="progress-container" style="margin-bottom: 0;">
+                        <div id="solo-my-progress" class="progress-bar" style="background: linear-gradient(90deg, #10b981, #34d399);"></div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 8px; color: #be123c;">
+                        <span>Đối thủ (Điểm: <span id="solo-opp-score">0</span>)</span>
+                        <span>Đích: 40</span>
+                    </div>
+                    <div class="progress-container" style="margin-bottom: 0;">
+                        <div id="solo-opp-progress" class="progress-bar" style="background: linear-gradient(90deg, #f43f5e, #fb7185);"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="solo-app"></div>
+        </div>
+
+        <div id="solo-result" style="display: none; text-align: center;">
+            <div id="solo-result-text" style="font-size: 32px; font-weight: 700; margin-bottom: 30px; line-height: 1.5;"></div>
+            <button onclick="exitSoloRoom()" class="nav-btn back-quiz-btn">Rời phòng</button>
+        </div>
+    </div>
+
+    <div id="shop-mode-container">
+        <div class="review-title" style="display: block;">CỬA HÀNG THẺ BÀI VIP</div>
+        <div id="shop-message" class="info-msg motivate-msg"></div>
+        <div class="match-grid">
+            <div class="study-item" style="text-align: center;">
+                <div class="study-q">Thẻ Bài Pass 10 Câu</div>
+                <div class="study-e" style="border-left:none; border-radius:12px; margin-bottom:15px; color:#1e40af;">Tự động thông thạo ngay lập tức câu hiện tại và thêm 9 câu hỏi ngẫu nhiên chưa thuộc.</div>
+                <div class="study-a">Giá: 500 Xu</div>
+                <button onclick="buyCard('pass10', 500)" class="nav-btn next-btn" style="margin-top: 10px;">Mua ngay</button>
+            </div>
+            <div class="study-item" style="text-align: center;">
+                <div class="study-q">Thẻ Trợ Giúp 50/50</div>
+                <div class="study-e" style="border-left:none; border-radius:12px; margin-bottom:15px; color:#1e40af;">Miễn phí sử dụng quyền trợ giúp loại bỏ 2 đáp án sai trong bài làm mà không tốn Xu.</div>
+                <div class="study-a">Giá: 50 Xu</div>
+                <button onclick="buyCard('help', 50)" class="nav-btn next-btn" style="margin-top: 10px;">Mua ngay</button>
+            </div>
+            <div class="study-item" style="text-align: center; grid-column: 1 / -1;">
+                <div class="study-q">Thẻ Bảo Vệ Tiền</div>
+                <div class="study-e" style="border-left:none; border-radius:12px; margin-bottom:15px; color:#1e40af;">Tự động kích hoạt khi trả lời sai. Bảo toàn nguyên vẹn số Xu đã cược trong lượt đó!</div>
+                <div class="study-a">Giá: 150 Xu</div>
+                <button onclick="buyCard('protect', 150)" class="nav-btn next-btn" style="margin-top: 10px;">Mua ngay</button>
+            </div>
+        </div>
+        <button id="back-quiz-from-shop-btn" class="nav-btn back-quiz-btn">Quay lại làm bài kiểm tra</button>
+    </div>
+
+    <div id="match-mode-container">
+        <div class="review-title" style="display: block;">GHÉP THẺ TÌM ĐÁP ÁN</div>
+        <div id="match-win-msg" class="match-win-msg">Chúc mừng! Cậu đã ghép đúng toàn bộ!</div>
+        <div id="match-grid" class="match-grid"></div>
+        <button id="play-match-again-btn" class="nav-btn next-btn" style="display: none; margin-bottom: 15px;">Chơi ván mới ngẫu nhiên</button>
+        <button id="back-quiz-from-match-btn" class="nav-btn back-quiz-btn" style="margin-top: 0;">Quay lại làm bài kiểm tra</button>
+    </div>
+
     <div id="study-mode-container">
         <div class="review-title" style="display: block;">THẺ GHI NHỚ FLASHCARD</div>
         <div id="study-list"></div>
-        <button id="back-quiz-btn" class="nav-btn back-quiz-btn">Quay lại làm bài kiểm tra</button>
+        <button id="back-quiz-from-study-btn" class="nav-btn back-quiz-btn">Quay lại làm bài kiểm tra</button>
     </div>
     
     <div id="quiz-mode-container">
+        <div id="coin-display" class="coin-display">Tài sản hiện tại: 1000 Xu</div>
+        <div id="inventory-display" class="inventory-display">Kho đồ: 0 Thẻ Pass | 0 Thẻ Trợ Giúp | 0 Thẻ Bảo Vệ</div>
+
         <div id="result" class="result-container">
             <div id="result-text" class="result-text"></div>
             <div id="compliment-text" class="compliment-text"></div>
@@ -486,7 +753,40 @@ h1 {
     </div>
 </div>
 
-<script>
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js';
+import { getAuth, signInAnonymously, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js';
+import { getDatabase, ref, set, get, onValue, update } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js';
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDzE74eLLu6VVmG2FlBnH8oac843dHe7r4",
+    authDomain: "emqiziutility-web.firebaseapp.com",
+    databaseURL: "https://emqiziutility-web-default-rtdb.firebaseio.com",
+    projectId: "emqiziutility-web",
+    storageBucket: "emqiziutility-web.firebasestorage.app",
+    messagingSenderId: "645675862911",
+    appId: "1:645675862911:web:3298820136a699ef99a84a"
+};
+
+const fbApp = initializeApp(firebaseConfig);
+const auth = getAuth(fbApp);
+const db = getDatabase(fbApp);
+
+let currentUser = null;
+
+const initAuth = async () => {
+    try {
+        await signInAnonymously(auth);
+    } catch (e) {
+        console.error(e);
+    }
+};
+initAuth();
+
+onAuthStateChanged(auth, user => {
+    currentUser = user;
+});
+
 function parseFraction(text) {
     if (!text) return '';
     return text.replace(/F\{([^}]+)\}\{([^}]+)\}/g, '<span class="frac"><span class="top">$1</span><span class="bot">$2</span></span>');
@@ -501,6 +801,20 @@ const quotes = [
     "Cố lên cậu ơi, tớ luôn ở đây ủng hộ cậu!",
     "Hôm nay cậu đã vất vả rồi, tự hào về bản thân nhé!"
 ];
+
+let shopMsgTimeout;
+function showShopMsg(text, isError) {
+    const msg = document.getElementById('shop-message');
+    msg.textContent = text;
+    msg.style.color = isError ? '#b91c1c' : '#047857';
+    msg.style.backgroundColor = isError ? '#fee2e2' : '#d1fae5';
+    msg.style.borderColor = isError ? '#ef4444' : '#10b981';
+    msg.classList.add('show-msg');
+    clearTimeout(shopMsgTimeout);
+    shopMsgTimeout = setTimeout(function() {
+        msg.classList.remove('show-msg');
+    }, 3000);
+}
 
 const motivateBtn = document.getElementById('motivate-btn');
 const motivateMsg = document.getElementById('motivate-msg');
@@ -586,6 +900,27 @@ let currentIndex = 0;
 let currentStudyIndex = 0;
 let isStudyFlipped = false;
 
+let matchCards = [];
+let matchFirstCard = null;
+let matchedPairsCount = 0;
+let isMatchingCards = false;
+
+let userCoins = 1000;
+let inventory = { pass10: 0, help: 0, protect: 0 };
+
+let currentBet = 10;
+let betWonLost = 0;
+let selectedBetStr = '10';
+
+let isPass10Used = false;
+
+let soloRoomId = null;
+let isPlayer1 = false;
+let soloQs = [];
+let soloCurrentIdx = 0;
+let soloMyScore = 0;
+let soloUnsubscribe = null;
+
 const app = document.getElementById('app');
 const nextBtn = document.getElementById('next-btn');
 const resultDiv = document.getElementById('result');
@@ -600,7 +935,341 @@ const quizModeContainer = document.getElementById('quiz-mode-container');
 const studyModeContainer = document.getElementById('study-mode-container');
 const studyList = document.getElementById('study-list');
 const studyBtn = document.getElementById('study-btn');
-const backQuizBtn = document.getElementById('back-quiz-btn');
+const backQuizFromStudyBtn = document.getElementById('back-quiz-from-study-btn');
+
+const matchModeContainer = document.getElementById('match-mode-container');
+const matchGrid = document.getElementById('match-grid');
+const matchBtn = document.getElementById('match-btn');
+const backQuizFromMatchBtn = document.getElementById('back-quiz-from-match-btn');
+const playMatchAgainBtn = document.getElementById('play-match-again-btn');
+const matchWinMsg = document.getElementById('match-win-msg');
+
+const shopModeContainer = document.getElementById('shop-mode-container');
+const shopBtn = document.getElementById('shop-btn');
+const backQuizFromShopBtn = document.getElementById('back-quiz-from-shop-btn');
+
+const soloModeContainer = document.getElementById('solo-mode-container');
+const soloBtn = document.getElementById('solo-btn');
+
+function hideAllModes() {
+    quizModeContainer.style.display = 'none';
+    studyModeContainer.style.display = 'none';
+    matchModeContainer.style.display = 'none';
+    shopModeContainer.style.display = 'none';
+    soloModeContainer.style.display = 'none';
+}
+
+function updateCoinDisplay() {
+    const coinDisplay = document.getElementById('coin-display');
+    coinDisplay.textContent = 'Tài sản hiện tại: ' + userCoins + ' Xu';
+}
+
+function updateInventoryDisplay() {
+    const invDisplay = document.getElementById('inventory-display');
+    invDisplay.textContent = 'Kho đồ: ' + inventory.pass10 + ' Thẻ Pass | ' + inventory.help + ' Thẻ Trợ Giúp | ' + inventory.protect + ' Thẻ Bảo Vệ';
+}
+
+window.buyCard = function(type, price) {
+    if (userCoins >= price) {
+        userCoins -= price;
+        if (type === 'pass10') inventory.pass10++;
+        else if (type === 'help') inventory.help++;
+        else if (type === 'protect') inventory.protect++;
+        updateCoinDisplay();
+        updateInventoryDisplay();
+        showShopMsg('Mua thẻ thành công!', false);
+    } else {
+        showShopMsg('Ối, cậu không đủ Xu rồi!', true);
+    }
+}
+
+shopBtn.addEventListener('click', function() {
+    hideAllModes();
+    shopModeContainer.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+backQuizFromShopBtn.addEventListener('click', function() {
+    hideAllModes();
+    quizModeContainer.style.display = 'block';
+    renderQuestion(currentIndex);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+soloBtn.addEventListener('click', function() {
+    hideAllModes();
+    soloModeContainer.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+window.showSoloError = function(msg) {
+    const el = document.getElementById('solo-error-msg');
+    el.textContent = msg;
+    el.style.display = 'block';
+    setTimeout(() => el.style.display = 'none', 3000);
+};
+
+window.createSoloRoom = async function() {
+    if (!currentUser) return window.showSoloError('Đang kết nối hệ thống, vui lòng chờ chút...');
+    soloRoomId = Math.random().toString(36).substring(2, 8).toUpperCase();
+    isPlayer1 = true;
+    
+    let shuffledQs = [...questions].map((_, i) => i).sort(() => 0.5 - Math.random());
+    
+    const roomRef = ref(db, 'rooms/' + soloRoomId);
+    await set(roomRef, {
+        p1: currentUser.uid,
+        p2: null,
+        p1Score: 0,
+        p2Score: 0,
+        status: 'waiting',
+        qs: shuffledQs
+    });
+    
+    document.getElementById('solo-lobby').style.display = 'none';
+    document.getElementById('display-room-code').textContent = soloRoomId;
+    document.getElementById('solo-waiting').style.display = 'block';
+    
+    listenSoloRoom();
+};
+
+window.joinSoloRoom = async function() {
+    if (!currentUser) return window.showSoloError('Đang kết nối hệ thống...');
+    const codeInput = document.getElementById('room-code-input').value.trim().toUpperCase();
+    if (!codeInput) return window.showSoloError('Vui lòng nhập mã phòng!');
+    
+    const roomRef = ref(db, 'rooms/' + codeInput);
+    const snap = await get(roomRef);
+    
+    if (snap.exists()) {
+        const data = snap.val();
+        if (data.status === 'waiting') {
+            soloRoomId = codeInput;
+            isPlayer1 = false;
+            soloQs = data.qs;
+            
+            await update(roomRef, {
+                p2: currentUser.uid,
+                status: 'playing'
+            });
+            
+            document.getElementById('solo-lobby').style.display = 'none';
+            document.getElementById('solo-playing').style.display = 'block';
+            soloCurrentIdx = 0;
+            soloMyScore = 0;
+            renderSoloQuestion();
+            listenSoloRoom();
+        } else {
+            window.showSoloError('Phòng này đã bắt đầu hoặc kết thúc!');
+        }
+    } else {
+        window.showSoloError('Phòng không tồn tại!');
+    }
+};
+
+window.exitSoloRoom = function() {
+    if (soloUnsubscribe) soloUnsubscribe();
+    soloRoomId = null;
+    document.getElementById('solo-lobby').style.display = 'block';
+    document.getElementById('solo-waiting').style.display = 'none';
+    document.getElementById('solo-playing').style.display = 'none';
+    document.getElementById('solo-result').style.display = 'none';
+    hideAllModes();
+    quizModeContainer.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function listenSoloRoom() {
+    if (!currentUser || !soloRoomId) return;
+    const roomRef = ref(db, 'rooms/' + soloRoomId);
+    
+    soloUnsubscribe = onValue(roomRef, (snap) => {
+        if (!snap.exists()) return;
+        const data = snap.val();
+        
+        if (isPlayer1 && data.status === 'playing' && document.getElementById('solo-waiting').style.display === 'block') {
+            document.getElementById('solo-waiting').style.display = 'none';
+            document.getElementById('solo-playing').style.display = 'block';
+            soloQs = data.qs;
+            soloCurrentIdx = 0;
+            soloMyScore = 0;
+            renderSoloQuestion();
+        }
+        
+        const myScore = isPlayer1 ? data.p1Score : data.p2Score;
+        const oppScore = isPlayer1 ? data.p2Score : data.p1Score;
+        
+        document.getElementById('solo-my-score').textContent = myScore;
+        document.getElementById('solo-opp-score').textContent = oppScore;
+        document.getElementById('solo-my-progress').style.width = (myScore * 2.5) + '%';
+        document.getElementById('solo-opp-progress').style.width = (oppScore * 2.5) + '%';
+        
+        if (data.status === 'p1_won' || data.status === 'p2_won') {
+            finishSoloGame(data.status);
+        }
+    }, (err) => {
+        console.error(err);
+    });
+}
+
+function renderSoloQuestion() {
+    const appDiv = document.getElementById('solo-app');
+    appDiv.innerHTML = '';
+    
+    if (soloCurrentIdx >= soloQs.length) soloCurrentIdx = 0;
+    const qIdx = soloQs[soloCurrentIdx];
+    const q = questions[qIdx];
+    
+    const qBlock = document.createElement('div');
+    qBlock.className = 'question-block';
+    
+    const qText = document.createElement('div');
+    qText.className = 'question-text';
+    qText.innerHTML = parseFraction(q.q);
+    qBlock.appendChild(qText);
+    
+    const optionsGrid = document.createElement('div');
+    optionsGrid.className = 'options-grid';
+    
+    q.o.forEach((optText, optIndex) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.innerHTML = parseFraction(optText);
+        
+        btn.onclick = async function() {
+            const allBtns = optionsGrid.querySelectorAll('.option-btn');
+            allBtns.forEach(b => b.disabled = true);
+            
+            if (optIndex === q.a) {
+                btn.classList.add('correct-answer');
+                soloMyScore++;
+                const roomRef = ref(db, 'rooms/' + soloRoomId);
+                
+                const updates = isPlayer1 ? { p1Score: soloMyScore } : { p2Score: soloMyScore };
+                if (soloMyScore >= 40) {
+                    updates.status = isPlayer1 ? 'p1_won' : 'p2_won';
+                }
+                await update(roomRef, updates);
+            } else {
+                btn.classList.add('wrong-answer');
+                allBtns[q.a].classList.add('correct-answer');
+            }
+            
+            setTimeout(() => {
+                soloCurrentIdx++;
+                renderSoloQuestion();
+            }, 1000);
+        };
+        
+        optionsGrid.appendChild(btn);
+    });
+    
+    qBlock.appendChild(optionsGrid);
+    appDiv.appendChild(qBlock);
+}
+
+function finishSoloGame(status) {
+    if (soloUnsubscribe) soloUnsubscribe();
+    
+    document.getElementById('solo-playing').style.display = 'none';
+    document.getElementById('solo-result').style.display = 'block';
+    
+    const resText = document.getElementById('solo-result-text');
+    
+    const iWon = (isPlayer1 && status === 'p1_won') || (!isPlayer1 && status === 'p2_won');
+    if (iWon) {
+        resText.textContent = "🏆 Tuyệt vời! Cậu đã thắng ván này!";
+        resText.style.color = '#10b981';
+        userCoins += 100;
+        updateCoinDisplay();
+    } else {
+        resText.textContent = "💥 Rất tiếc! Đối thủ đã nhanh tay hơn rồi!";
+        resText.style.color = '#ef4444';
+    }
+}
+
+function initMatchGame() {
+    hideAllModes();
+    matchModeContainer.style.display = 'block';
+    matchWinMsg.style.display = 'none';
+    playMatchAgainBtn.style.display = 'none';
+    matchedPairsCount = 0;
+    matchFirstCard = null;
+    isMatchingCards = false;
+
+    let shuffledQs = [...questions].sort(function() { return 0.5 - Math.random() }).slice(0, 5);
+    matchCards = [];
+    
+    shuffledQs.forEach(function(q, idx) {
+        matchCards.push({ id: 'q' + idx, pairId: idx, text: q.q, type: 'q', matched: false });
+        matchCards.push({ id: 'a' + idx, pairId: idx, text: q.o[q.a], type: 'a', matched: false });
+    });
+
+    matchCards.sort(function() { return 0.5 - Math.random() });
+    renderMatchGrid();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderMatchGrid() {
+    matchGrid.innerHTML = '';
+    matchCards.forEach(function(card, index) {
+        const el = document.createElement('div');
+        el.className = 'match-card';
+        if (card.matched) {
+            el.classList.add('match-matched');
+        }
+        el.innerHTML = parseFraction(card.text);
+        
+        el.addEventListener('click', function() {
+            if (isMatchingCards || card.matched || el.classList.contains('match-selected')) return;
+            
+            el.classList.add('match-selected');
+            
+            if (!matchFirstCard) {
+                matchFirstCard = { card: card, el: el };
+            } else {
+                isMatchingCards = true;
+                const matchSecondCard = { card: card, el: el };
+                
+                if (matchFirstCard.card.pairId === matchSecondCard.card.pairId && matchFirstCard.card.type !== matchSecondCard.card.type) {
+                    setTimeout(function() {
+                        matchFirstCard.el.className = 'match-card match-matched';
+                        matchSecondCard.el.className = 'match-card match-matched';
+                        matchFirstCard.card.matched = true;
+                        matchSecondCard.card.matched = true;
+                        matchedPairsCount++;
+                        matchFirstCard = null;
+                        isMatchingCards = false;
+                        
+                        if (matchedPairsCount === 5) {
+                            matchWinMsg.style.display = 'block';
+                            playMatchAgainBtn.style.display = 'block';
+                        }
+                    }, 300);
+                } else {
+                    matchFirstCard.el.classList.add('match-wrong');
+                    matchSecondCard.el.classList.add('match-wrong');
+                    setTimeout(function() {
+                        matchFirstCard.el.className = 'match-card';
+                        matchSecondCard.el.className = 'match-card';
+                        matchFirstCard = null;
+                        isMatchingCards = false;
+                    }, 600);
+                }
+            }
+        });
+        matchGrid.appendChild(el);
+    });
+}
+
+matchBtn.addEventListener('click', initMatchGame);
+playMatchAgainBtn.addEventListener('click', initMatchGame);
+
+backQuizFromMatchBtn.addEventListener('click', function() {
+    hideAllModes();
+    quizModeContainer.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
 function renderStudyMode() {
     studyList.innerHTML = '';
@@ -698,14 +1367,14 @@ function renderStudyMode() {
 }
 
 studyBtn.addEventListener('click', function() {
-    quizModeContainer.style.display = 'none';
+    hideAllModes();
     studyModeContainer.style.display = 'block';
     renderStudyMode();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-backQuizBtn.addEventListener('click', function() {
-    studyModeContainer.style.display = 'none';
+backQuizFromStudyBtn.addEventListener('click', function() {
+    hideAllModes();
     quizModeContainer.style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
@@ -724,10 +1393,37 @@ function updateProgress() {
 function renderQuestion(index) {
     app.innerHTML = '';
     updateProgress();
+    updateCoinDisplay();
+    updateInventoryDisplay();
 
-    const q = questions[index];
     const qBlock = document.createElement('div');
     qBlock.className = 'question-block';
+
+    if (!currentQuestionAnswered && userCoins <= 0 && inventory.protect === 0) {
+        userCoins = 50;
+        currentBet = 10;
+        selectedBetStr = '10';
+        updateCoinDisplay();
+        
+        const bailoutMsg = document.createElement('div');
+        bailoutMsg.style.padding = '10px';
+        bailoutMsg.style.backgroundColor = '#fef3c7';
+        bailoutMsg.style.color = '#b45309';
+        bailoutMsg.style.borderRadius = '8px';
+        bailoutMsg.style.marginBottom = '15px';
+        bailoutMsg.style.fontWeight = '700';
+        bailoutMsg.style.textAlign = 'center';
+        bailoutMsg.style.border = '2px dashed #f59e0b';
+        bailoutMsg.textContent = 'Hết sạch Xu rồi! Hệ thống cấp vốn cho cậu 50 Xu để tiếp tục chiến đấu!';
+        qBlock.appendChild(bailoutMsg);
+    }
+
+    if (!currentQuestionAnswered && currentBet > userCoins) {
+        currentBet = userCoins;
+        selectedBetStr = 'Tất tay';
+    }
+
+    const q = questions[index];
 
     const masteryBadge = document.createElement('div');
     masteryBadge.className = 'mastery-badge';
@@ -738,6 +1434,75 @@ function renderQuestion(index) {
     qText.className = 'question-text';
     qText.innerHTML = parseFraction(q.q);
     qBlock.appendChild(qText);
+
+    if (!currentQuestionAnswered && inventory.pass10 > 0) {
+        const pass10Btn = document.createElement('button');
+        pass10Btn.className = 'action-btn study-btn';
+        pass10Btn.style.width = '100%';
+        pass10Btn.style.marginBottom = '20px';
+        pass10Btn.textContent = 'Dùng Thẻ Pass 10 Câu (Tự động hoàn thành ngay)';
+        pass10Btn.onclick = function() {
+            inventory.pass10--;
+            updateInventoryDisplay();
+            
+            let passedCount = 0;
+            if (correctCounts[index] < TARGET_MASTERY) {
+                correctCounts[index] = TARGET_MASTERY;
+                passedCount++;
+            }
+            
+            let unmastered = [];
+            for(let i=0; i<questions.length; i++) {
+                if (correctCounts[i] < TARGET_MASTERY) unmastered.push(i);
+            }
+            unmastered.sort(function() { return 0.5 - Math.random(); });
+            
+            for(let i=0; i<unmastered.length; i++) {
+                if (passedCount >= 10) break;
+                correctCounts[unmastered[i]] = TARGET_MASTERY;
+                passedCount++;
+            }
+            
+            isPass10Used = true;
+            currentQuestionAnswered = true;
+            currentSelection = q.a;
+            betWonLost = 0;
+            renderQuestion(index);
+        };
+        qBlock.appendChild(pass10Btn);
+    }
+
+    if (!currentQuestionAnswered) {
+        const betContainer = document.createElement('div');
+        betContainer.className = 'bet-container';
+        betContainer.textContent = 'Chọn mức cược: ';
+
+        const betAmounts = [10, 30, 50, 'Tất tay'];
+        betAmounts.forEach(function(amount) {
+            const btn = document.createElement('button');
+            btn.className = 'bet-btn';
+            
+            let amtValue = amount === 'Tất tay' ? userCoins : amount;
+            
+            if (amount.toString() === selectedBetStr) {
+                btn.classList.add('bet-selected');
+            }
+            if (amount !== 'Tất tay' && amount > userCoins) {
+                btn.disabled = true;
+                btn.style.opacity = '0.5';
+                btn.style.cursor = 'not-allowed';
+            }
+
+            btn.textContent = amount;
+            btn.onclick = function() {
+                selectedBetStr = amount.toString();
+                currentBet = amtValue;
+                renderQuestion(index);
+            };
+            betContainer.appendChild(btn);
+        });
+        qBlock.appendChild(betContainer);
+    }
 
     const optionsGrid = document.createElement('div');
     optionsGrid.className = 'options-grid';
@@ -764,8 +1529,20 @@ function renderQuestion(index) {
 
                 if (currentSelection === q.a) {
                     correctCounts[index]++;
+                    betWonLost = currentBet;
+                    userCoins += currentBet;
+                } else {
+                    if (inventory.protect > 0) {
+                        inventory.protect--;
+                        updateInventoryDisplay();
+                        betWonLost = 0;
+                    } else {
+                        betWonLost = -currentBet;
+                        userCoins -= currentBet;
+                    }
                 }
                 
+                updateCoinDisplay();
                 renderQuestion(index);
             });
         }
@@ -783,19 +1560,46 @@ function renderQuestion(index) {
         const fiftyBtn = document.createElement('button');
         fiftyBtn.className = 'action-btn motivate-btn';
         fiftyBtn.style.flex = '1';
-        fiftyBtn.textContent = 'Dùng phao: Gợi ý 50/50';
-        fiftyBtn.onclick = function() {
-            let wrongIndexes = [];
-            for(let i=0; i<4; i++) {
-                if(i !== q.a) wrongIndexes.push(i);
+        
+        if (inventory.help > 0) {
+            fiftyBtn.textContent = 'Dùng phao: Gợi ý 50/50 (Miễn phí nhờ Thẻ)';
+            fiftyBtn.onclick = function() {
+                inventory.help--;
+                updateInventoryDisplay();
+                let wrongIndexes = [];
+                for(let i=0; i<4; i++) {
+                    if(i !== q.a) wrongIndexes.push(i);
+                }
+                wrongIndexes.sort(function() { return Math.random() - 0.5; });
+                
+                const optionBtns = optionsGrid.children;
+                optionBtns[wrongIndexes[0]].classList.add('hidden-option');
+                optionBtns[wrongIndexes[1]].classList.add('hidden-option');
+                fiftyBtn.style.display = 'none';
+            };
+        } else {
+            fiftyBtn.textContent = 'Dùng phao: Gợi ý 50/50 (Phí: 20 Xu)';
+            if (userCoins < 20) {
+                fiftyBtn.disabled = true;
+                fiftyBtn.style.opacity = '0.5';
+                fiftyBtn.textContent += ' - Không đủ Xu';
+            } else {
+                fiftyBtn.onclick = function() {
+                    userCoins -= 20;
+                    updateCoinDisplay();
+                    let wrongIndexes = [];
+                    for(let i=0; i<4; i++) {
+                        if(i !== q.a) wrongIndexes.push(i);
+                    }
+                    wrongIndexes.sort(function() { return Math.random() - 0.5; });
+                    
+                    const optionBtns = optionsGrid.children;
+                    optionBtns[wrongIndexes[0]].classList.add('hidden-option');
+                    optionBtns[wrongIndexes[1]].classList.add('hidden-option');
+                    fiftyBtn.style.display = 'none';
+                };
             }
-            wrongIndexes.sort(function() { return Math.random() - 0.5; });
-            
-            const optionBtns = optionsGrid.children;
-            optionBtns[wrongIndexes[0]].classList.add('hidden-option');
-            optionBtns[wrongIndexes[1]].classList.add('hidden-option');
-            fiftyBtn.style.display = 'none';
-        };
+        }
 
         const giveUpBtn = document.createElement('button');
         giveUpBtn.className = 'action-btn give-up-btn';
@@ -805,6 +1609,8 @@ function renderQuestion(index) {
             currentSelection = -1;
             currentQuestionAnswered = true;
             totalAttempts++;
+            correctCounts[index] = 0;
+            betWonLost = 0;
             
             renderQuestion(index);
         };
@@ -820,19 +1626,30 @@ function renderQuestion(index) {
         feedbackDiv.style.fontWeight = '700';
         feedbackDiv.style.fontSize = '18px';
         
-        if (currentSelection === q.a) {
+        if (isPass10Used) {
+            feedbackDiv.style.color = '#8b5cf6';
+            feedbackDiv.textContent = 'Quyền năng vĩ đại! Cậu đã dùng thẻ Pass và tự động thông thạo câu này cùng tối đa 9 câu chưa thuộc khác!';
+            isPass10Used = false;
+        } else if (currentSelection === q.a) {
             feedbackDiv.style.color = '#10b981';
+            let txt = 'Chính xác! Cậu thắng ' + betWonLost + ' Xu!';
             if (correctCounts[index] >= TARGET_MASTERY) {
-                feedbackDiv.textContent = 'Chính xác! Cậu đã thuộc lòng câu này rồi!';
+                txt += ' Cậu đã thuộc lòng câu này!';
             } else {
-                feedbackDiv.textContent = 'Đúng rồi! Cố gắng trả lời đúng ' + (TARGET_MASTERY - correctCounts[index]) + ' lần nữa khi gặp lại để thuộc bài nhé!';
+                txt += ' Trả lời đúng ' + (TARGET_MASTERY - correctCounts[index]) + ' lần nữa để thuộc bài nhé!';
             }
+            feedbackDiv.textContent = txt;
         } else if (currentSelection === -1) {
             feedbackDiv.style.color = '#f59e0b';
-            feedbackDiv.textContent = 'Không sao cả! Tớ đã mở đáp án cho cậu xem. Cứ thong thả đọc giải thích nhé!';
+            feedbackDiv.textContent = 'Đã mở đáp án! Cược được hoàn trả. Cứ thong thả đọc giải thích nhé!';
         } else {
-            feedbackDiv.style.color = '#ef4444';
-            feedbackDiv.textContent = 'Sai rồi! Nhưng điểm thuộc không bị trừ đâu. Hãy đọc thật kỹ giải thích nhé!';
+            if (betWonLost === 0) {
+                feedbackDiv.style.color = '#f59e0b';
+                feedbackDiv.textContent = 'Sai rồi! Nhưng Thẻ Bảo Vệ Tiền đã được kích hoạt, cậu không bị trừ Xu nào!';
+            } else {
+                feedbackDiv.style.color = '#ef4444';
+                feedbackDiv.textContent = 'Sai rồi! Cậu bị trừ ' + Math.abs(betWonLost) + ' Xu nhưng mức độ thuộc vẫn được giữ nguyên. Đọc kỹ giải thích nhé!';
+            }
         }
         qBlock.appendChild(feedbackDiv);
 
@@ -953,6 +1770,8 @@ nextBtn.addEventListener('click', function() {
     }
 });
 
+updateCoinDisplay();
+updateInventoryDisplay();
 renderQuestion(currentIndex);
 </script>
 </body>
