@@ -561,6 +561,30 @@ h1 {
     animation: spin 1s linear infinite;
     margin: 20px auto;
 }
+.win-animation {
+    animation: winPulse 1.5s infinite alternate;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.6);
+}
+@keyframes winPulse {
+    0% { transform: scale(1); box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); }
+    100% { transform: scale(1.05); box-shadow: 0 0 40px rgba(16, 185, 129, 0.8); }
+}
+.lose-animation {
+    animation: loseFade 2s forwards;
+    background: linear-gradient(135deg, #64748b, #334155);
+    color: #f1f5f9;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+}
+@keyframes loseFade {
+    0% { filter: grayscale(0%); transform: translateY(-10px); }
+    100% { filter: grayscale(100%); transform: translateY(0); }
+}
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -639,9 +663,9 @@ h1 {
     <div id="motivate-msg" class="info-msg motivate-msg"></div>
 
     <div id="solo-mode-container">
-        <div class="review-title" style="display: block;">CHẾ ĐỘ THÁCH ĐẤU (SOLO 1VS1)</div>
+        <div class="review-title" style="display: block;">THÁCH ĐẤU BO3 (CHẠM 2 VÁN THẮNG)</div>
         <div id="solo-lobby" style="text-align: center;">
-            <p style="margin-bottom: 20px; color: #475569; font-weight: 700;">Thi đấu cùng bạn bè xem ai đạt 40 điểm trước sẽ được thưởng 100 Xu!</p>
+            <p style="margin-bottom: 20px; color: #475569; font-weight: 700; line-height: 1.6;">Thi đấu BO3 cùng bạn bè. Mỗi ván 10 điểm, ai thắng 2 ván trước sẽ ẵm trọn 100 Xu phần thưởng!</p>
             <button onclick="createSoloRoom()" class="nav-btn solo-btn" style="margin-bottom: 20px; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);">Tạo phòng mới</button>
             <br>
             <input type="text" id="room-code-input" placeholder="Nhập mã phòng..." style="padding: 15px; border-radius: 12px; border: 2px solid #e2e8f0; font-size: 18px; font-family: inherit; font-weight: bold; text-align: center; text-transform: uppercase; width: 60%; margin-bottom: 10px;">
@@ -661,8 +685,8 @@ h1 {
             <div style="background: #f8fafc; padding: 20px; border-radius: 16px; margin-bottom: 30px; border: 2px solid #e2e8f0;">
                 <div style="margin-bottom: 15px;">
                     <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 8px; color: #047857;">
-                        <span>Cậu (Điểm: <span id="solo-my-score">0</span>)</span>
-                        <span>Đích: 40</span>
+                        <span>Cậu (Thắng: <span id="solo-my-rounds">0</span>) - Điểm: <span id="solo-my-score">0</span></span>
+                        <span>Đích ván: 10</span>
                     </div>
                     <div class="progress-container" style="margin-bottom: 0;">
                         <div id="solo-my-progress" class="progress-bar" style="background: linear-gradient(90deg, #10b981, #34d399);"></div>
@@ -671,8 +695,8 @@ h1 {
                 
                 <div>
                     <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 8px; color: #be123c;">
-                        <span>Đối thủ (Điểm: <span id="solo-opp-score">0</span>)</span>
-                        <span>Đích: 40</span>
+                        <span>Đối thủ (Thắng: <span id="solo-opp-rounds">0</span>) - Điểm: <span id="solo-opp-score">0</span></span>
+                        <span>Đích ván: 10</span>
                     </div>
                     <div class="progress-container" style="margin-bottom: 0;">
                         <div id="solo-opp-progress" class="progress-bar" style="background: linear-gradient(90deg, #f43f5e, #fb7185);"></div>
@@ -683,9 +707,9 @@ h1 {
             <div id="solo-app"></div>
         </div>
 
-        <div id="solo-result" style="display: none; text-align: center;">
+        <div id="solo-result" style="display: none; text-align: center; padding: 40px; border-radius: 20px; margin-top: 20px;">
             <div id="solo-result-text" style="font-size: 32px; font-weight: 700; margin-bottom: 30px; line-height: 1.5;"></div>
-            <button onclick="exitSoloRoom()" class="nav-btn back-quiz-btn">Rời phòng</button>
+            <button onclick="exitSoloRoom()" class="nav-btn back-quiz-btn" style="background: #ffffff; color: #334155;">Rời phòng</button>
         </div>
     </div>
 
@@ -920,6 +944,8 @@ let soloQs = [];
 let soloCurrentIdx = 0;
 let soloMyScore = 0;
 let soloUnsubscribe = null;
+let soloRoomData = null;
+let soloRewardGiven = false;
 
 const app = document.getElementById('app');
 const nextBtn = document.getElementById('next-btn');
@@ -1013,6 +1039,7 @@ window.createSoloRoom = async function() {
     if (!currentUser) return window.showSoloError('Đang kết nối hệ thống, vui lòng chờ chút...');
     soloRoomId = Math.random().toString(36).substring(2, 8).toUpperCase();
     isPlayer1 = true;
+    soloRewardGiven = false;
     
     let shuffledQs = [...questions].map((_, i) => i).sort(() => 0.5 - Math.random());
     
@@ -1022,6 +1049,8 @@ window.createSoloRoom = async function() {
         p2: null,
         p1Score: 0,
         p2Score: 0,
+        p1Rounds: 0,
+        p2Rounds: 0,
         status: 'waiting',
         qs: shuffledQs
     });
@@ -1047,6 +1076,7 @@ window.joinSoloRoom = async function() {
             soloRoomId = codeInput;
             isPlayer1 = false;
             soloQs = data.qs;
+            soloRewardGiven = false;
             
             await update(roomRef, {
                 p2: currentUser.uid,
@@ -1055,6 +1085,8 @@ window.joinSoloRoom = async function() {
             
             document.getElementById('solo-lobby').style.display = 'none';
             document.getElementById('solo-playing').style.display = 'block';
+            document.getElementById('solo-result').style.display = 'none';
+            document.getElementById('solo-result').classList.remove('win-animation', 'lose-animation');
             soloCurrentIdx = 0;
             soloMyScore = 0;
             renderSoloQuestion();
@@ -1070,10 +1102,12 @@ window.joinSoloRoom = async function() {
 window.exitSoloRoom = function() {
     if (soloUnsubscribe) soloUnsubscribe();
     soloRoomId = null;
+    soloRoomData = null;
     document.getElementById('solo-lobby').style.display = 'block';
     document.getElementById('solo-waiting').style.display = 'none';
     document.getElementById('solo-playing').style.display = 'none';
     document.getElementById('solo-result').style.display = 'none';
+    document.getElementById('solo-result').classList.remove('win-animation', 'lose-animation');
     hideAllModes();
     quizModeContainer.style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1086,10 +1120,13 @@ function listenSoloRoom() {
     soloUnsubscribe = onValue(roomRef, (snap) => {
         if (!snap.exists()) return;
         const data = snap.val();
+        soloRoomData = data;
         
         if (isPlayer1 && data.status === 'playing' && document.getElementById('solo-waiting').style.display === 'block') {
             document.getElementById('solo-waiting').style.display = 'none';
             document.getElementById('solo-playing').style.display = 'block';
+            document.getElementById('solo-result').style.display = 'none';
+            document.getElementById('solo-result').classList.remove('win-animation', 'lose-animation');
             soloQs = data.qs;
             soloCurrentIdx = 0;
             soloMyScore = 0;
@@ -1098,11 +1135,18 @@ function listenSoloRoom() {
         
         const myScore = isPlayer1 ? data.p1Score : data.p2Score;
         const oppScore = isPlayer1 ? data.p2Score : data.p1Score;
+        const myRounds = isPlayer1 ? (data.p1Rounds || 0) : (data.p2Rounds || 0);
+        const oppRounds = isPlayer1 ? (data.p2Rounds || 0) : (data.p1Rounds || 0);
+        
+        soloMyScore = myScore;
         
         document.getElementById('solo-my-score').textContent = myScore;
         document.getElementById('solo-opp-score').textContent = oppScore;
-        document.getElementById('solo-my-progress').style.width = (myScore * 2.5) + '%';
-        document.getElementById('solo-opp-progress').style.width = (oppScore * 2.5) + '%';
+        document.getElementById('solo-my-rounds').textContent = myRounds;
+        document.getElementById('solo-opp-rounds').textContent = oppRounds;
+        
+        document.getElementById('solo-my-progress').style.width = (myScore * 10) + '%';
+        document.getElementById('solo-opp-progress').style.width = (oppScore * 10) + '%';
         
         if (data.status === 'p1_won' || data.status === 'p2_won') {
             finishSoloGame(data.status);
@@ -1145,10 +1189,26 @@ function renderSoloQuestion() {
                 soloMyScore++;
                 const roomRef = ref(db, 'rooms/' + soloRoomId);
                 
-                const updates = isPlayer1 ? { p1Score: soloMyScore } : { p2Score: soloMyScore };
-                if (soloMyScore >= 40) {
-                    updates.status = isPlayer1 ? 'p1_won' : 'p2_won';
+                let updates = {};
+                let myRounds = isPlayer1 ? (soloRoomData.p1Rounds || 0) : (soloRoomData.p2Rounds || 0);
+                
+                if (soloMyScore >= 10) {
+                    myRounds++;
+                    if (isPlayer1) updates.p1Rounds = myRounds;
+                    else updates.p2Rounds = myRounds;
+                    
+                    if (myRounds >= 2) {
+                        updates.status = isPlayer1 ? 'p1_won' : 'p2_won';
+                        if (isPlayer1) updates.p1Score = soloMyScore; else updates.p2Score = soloMyScore;
+                    } else {
+                        updates.p1Score = 0;
+                        updates.p2Score = 0;
+                    }
+                } else {
+                    if (isPlayer1) updates.p1Score = soloMyScore;
+                    else updates.p2Score = soloMyScore;
                 }
+                
                 await update(roomRef, updates);
             } else {
                 btn.classList.add('wrong-answer');
@@ -1172,19 +1232,27 @@ function finishSoloGame(status) {
     if (soloUnsubscribe) soloUnsubscribe();
     
     document.getElementById('solo-playing').style.display = 'none';
-    document.getElementById('solo-result').style.display = 'block';
+    const resultContainer = document.getElementById('solo-result');
+    resultContainer.style.display = 'block';
     
     const resText = document.getElementById('solo-result-text');
     
+    resultContainer.classList.remove('win-animation', 'lose-animation');
+    
     const iWon = (isPlayer1 && status === 'p1_won') || (!isPlayer1 && status === 'p2_won');
     if (iWon) {
-        resText.textContent = "🏆 Tuyệt vời! Cậu đã thắng ván này!";
-        resText.style.color = '#10b981';
-        userCoins += 100;
-        updateCoinDisplay();
+        resultContainer.classList.add('win-animation');
+        resText.textContent = "Tuyệt vời! Cậu đã vô địch BO3!";
+        resText.style.color = '#ffffff';
+        if (!soloRewardGiven) {
+            userCoins += 100;
+            updateCoinDisplay();
+            soloRewardGiven = true;
+        }
     } else {
-        resText.textContent = "💥 Rất tiếc! Đối thủ đã nhanh tay hơn rồi!";
-        resText.style.color = '#ef4444';
+        resultContainer.classList.add('lose-animation');
+        resText.textContent = "Rất tiếc! Đối thủ đã thắng BO3 rồi!";
+        resText.style.color = '#ffffff';
     }
 }
 
