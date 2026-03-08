@@ -665,7 +665,7 @@ h1 {
     <div id="solo-mode-container">
         <div class="review-title" style="display: block;">THÁCH ĐẤU BO3 (CHẠM 2 VÁN THẮNG)</div>
         <div id="solo-lobby" style="text-align: center;">
-            <p style="margin-bottom: 20px; color: #475569; font-weight: 700; line-height: 1.6;">Thi đấu BO3 cùng bạn bè. Mỗi ván 40 điểm, ai thắng 2 ván trước sẽ ẵm trọn 100 Xu phần thưởng!</p>
+            <p style="margin-bottom: 20px; color: #475569; font-weight: 700; line-height: 1.6;">Thi đấu BO3 cùng bạn bè. Mỗi ván 10 điểm, ai thắng 2 ván trước sẽ nhận phần thưởng!</p>
             <button onclick="createSoloRoom()" class="nav-btn solo-btn" style="margin-bottom: 20px; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);">Tạo phòng mới</button>
             <br>
             <input type="text" id="room-code-input" placeholder="Nhập mã phòng..." style="padding: 15px; border-radius: 12px; border: 2px solid #e2e8f0; font-size: 18px; font-family: inherit; font-weight: bold; text-align: center; text-transform: uppercase; width: 60%; margin-bottom: 10px;">
@@ -687,7 +687,7 @@ h1 {
                 <div style="margin-bottom: 15px;">
                     <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 8px; color: #047857;">
                         <span>Cậu (Thắng: <span id="solo-my-rounds">0</span>) - Điểm: <span id="solo-my-score">0</span></span>
-                        <span>Đích ván: 40</span>
+                        <span>Đích ván: 10</span>
                     </div>
                     <div class="progress-container" style="margin-bottom: 0;">
                         <div id="solo-my-progress" class="progress-bar" style="background: linear-gradient(90deg, #10b981, #34d399);"></div>
@@ -697,7 +697,7 @@ h1 {
                 <div>
                     <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 8px; color: #be123c;">
                         <span>Đối thủ (Thắng: <span id="solo-opp-rounds">0</span>) - Điểm: <span id="solo-opp-score">0</span></span>
-                        <span>Đích ván: 40</span>
+                        <span>Đích ván: 10</span>
                     </div>
                     <div class="progress-container" style="margin-bottom: 0;">
                         <div id="solo-opp-progress" class="progress-bar" style="background: linear-gradient(90deg, #f43f5e, #fb7185);"></div>
@@ -1159,8 +1159,8 @@ function listenSoloRoom() {
         document.getElementById('solo-my-rounds').textContent = myRounds;
         document.getElementById('solo-opp-rounds').textContent = oppRounds;
         
-        document.getElementById('solo-my-progress').style.width = Math.min((myScore * 2.5), 100) + '%';
-        document.getElementById('solo-opp-progress').style.width = Math.min((oppScore * 2.5), 100) + '%';
+        document.getElementById('solo-my-progress').style.width = Math.min((myScore * 10), 100) + '%';
+        document.getElementById('solo-opp-progress').style.width = Math.min((oppScore * 10), 100) + '%';
         
         if (data.status === 'p1_round_won' || data.status === 'p2_round_won') {
             const iWonRound = (isPlayer1 && data.status === 'p1_round_won') || (!isPlayer1 && data.status === 'p2_round_won');
@@ -1195,6 +1195,7 @@ function listenSoloRoom() {
 function renderSoloQuestion() {
     const appDiv = document.getElementById('solo-app');
     appDiv.innerHTML = '';
+    window.isSoloAnswering = false;
     
     if (soloCurrentIdx >= soloQs.length) soloCurrentIdx = 0;
     const qIdx = soloQs[soloCurrentIdx];
@@ -1217,6 +1218,10 @@ function renderSoloQuestion() {
         btn.innerHTML = parseFraction(optText);
         
         btn.onclick = async function() {
+            if (window.isSoloAnswering) return;
+            if (soloRoomData && soloRoomData.status !== 'playing') return;
+            window.isSoloAnswering = true;
+
             const allBtns = optionsGrid.querySelectorAll('.option-btn');
             allBtns.forEach(b => b.disabled = true);
             
@@ -1224,14 +1229,14 @@ function renderSoloQuestion() {
                 btn.classList.add('correct-answer');
                 soloMyScore++;
                 
-                if (soloMyScore > 40) return;
+                if (soloMyScore > 10) soloMyScore = 10;
                 
                 const roomRef = ref(db, 'rooms/' + soloRoomId);
                 
                 let updates = {};
                 let myRounds = isPlayer1 ? (soloRoomData.p1Rounds || 0) : (soloRoomData.p2Rounds || 0);
                 
-                if (soloMyScore === 40) {
+                if (soloMyScore >= 10) {
                     myRounds++;
                     if (isPlayer1) updates.p1Rounds = myRounds;
                     else updates.p2Rounds = myRounds;
