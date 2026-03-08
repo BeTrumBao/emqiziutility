@@ -120,6 +120,17 @@ h1 {
 .match-btn:active {
     transform: translateY(1px);
 }
+.wrong-btn {
+    background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+}
+.wrong-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+}
+.wrong-btn:active {
+    transform: translateY(1px);
+}
 .info-msg {
     margin-bottom: 25px;
     padding: 20px;
@@ -390,7 +401,7 @@ h1 {
     text-align: center;
     display: none;
 }
-#study-mode-container, #shop-mode-container, #solo-mode-container {
+#study-mode-container, #shop-mode-container, #solo-mode-container, #wrong-mode-container {
     display: none;
 }
 .study-item {
@@ -644,10 +655,11 @@ h1 {
     <div class="header-actions">
         <button id="solo-btn" class="action-btn solo-btn">Chế độ Solo</button>
         <button id="shop-btn" class="action-btn shop-btn">Cửa hàng thẻ bài</button>
-        <button id="tips-btn" class="action-btn tips-btn">Bí kíp làm bài</button>
-        <button id="motivate-btn" class="action-btn motivate-btn">Nhận lời động viên</button>
+        <button id="wrong-btn" class="action-btn wrong-btn">Ôn câu sai</button>
         <button id="study-btn" class="action-btn study-btn">Góc Luyện Trí Nhớ</button>
         <button id="match-btn" class="action-btn match-btn">Trò chơi ghép thẻ</button>
+        <button id="tips-btn" class="action-btn tips-btn">Bí kíp làm bài</button>
+        <button id="motivate-btn" class="action-btn motivate-btn">Nhận lời động viên</button>
     </div>
 
     <div id="tips-msg" class="info-msg tips-msg">
@@ -755,6 +767,12 @@ h1 {
         <div class="review-title" style="display: block;">THẺ GHI NHỚ FLASHCARD</div>
         <div id="study-list"></div>
         <button id="back-quiz-from-study-btn" class="nav-btn back-quiz-btn">Quay lại làm bài kiểm tra</button>
+    </div>
+
+    <div id="wrong-mode-container">
+        <div class="review-title" style="display: block;">DANH SÁCH CÂU SAI NHIỀU NHẤT</div>
+        <div id="wrong-list"></div>
+        <button id="back-quiz-from-wrong-btn" class="nav-btn back-quiz-btn">Quay lại làm bài kiểm tra</button>
     </div>
     
     <div id="quiz-mode-container">
@@ -916,10 +934,8 @@ const questions = [
 ];
 
 const TARGET_MASTERY = 2;
-let correctCounts = new Array(questions.length);
-for(let i=0; i<questions.length; i++) {
-    correctCounts[i] = 0;
-}
+let correctCounts = new Array(questions.length).fill(0);
+let wrongCounts = new Array(questions.length).fill(0);
 let totalAttempts = 0;
 let currentQuestionAnswered = false;
 let currentSelection = null;
@@ -951,6 +967,33 @@ let soloUnsubscribe = null;
 let soloRoomData = null;
 let soloRewardGiven = false;
 
+function loadData() {
+    const savedCoins = localStorage.getItem('quiz_coins');
+    if(savedCoins !== null) userCoins = parseInt(savedCoins);
+
+    const savedInv = localStorage.getItem('quiz_inventory');
+    if(savedInv !== null) inventory = JSON.parse(savedInv);
+
+    const savedCorrect = localStorage.getItem('quiz_correct_counts');
+    if(savedCorrect !== null) correctCounts = JSON.parse(savedCorrect);
+
+    const savedAttempts = localStorage.getItem('quiz_total_attempts');
+    if(savedAttempts !== null) totalAttempts = parseInt(savedAttempts);
+
+    const savedWrong = localStorage.getItem('quiz_wrong_counts');
+    if(savedWrong !== null) wrongCounts = JSON.parse(savedWrong);
+}
+
+function saveData() {
+    localStorage.setItem('quiz_coins', userCoins);
+    localStorage.setItem('quiz_inventory', JSON.stringify(inventory));
+    localStorage.setItem('quiz_correct_counts', JSON.stringify(correctCounts));
+    localStorage.setItem('quiz_total_attempts', totalAttempts);
+    localStorage.setItem('quiz_wrong_counts', JSON.stringify(wrongCounts));
+}
+
+loadData();
+
 const app = document.getElementById('app');
 const nextBtn = document.getElementById('next-btn');
 const resultDiv = document.getElementById('result');
@@ -966,6 +1009,11 @@ const studyModeContainer = document.getElementById('study-mode-container');
 const studyList = document.getElementById('study-list');
 const studyBtn = document.getElementById('study-btn');
 const backQuizFromStudyBtn = document.getElementById('back-quiz-from-study-btn');
+
+const wrongModeContainer = document.getElementById('wrong-mode-container');
+const wrongList = document.getElementById('wrong-list');
+const wrongBtn = document.getElementById('wrong-btn');
+const backQuizFromWrongBtn = document.getElementById('back-quiz-from-wrong-btn');
 
 const matchModeContainer = document.getElementById('match-mode-container');
 const matchGrid = document.getElementById('match-grid');
@@ -999,6 +1047,7 @@ function hideAllModes() {
     matchModeContainer.style.display = 'none';
     shopModeContainer.style.display = 'none';
     soloModeContainer.style.display = 'none';
+    wrongModeContainer.style.display = 'none';
 }
 
 function updateCoinDisplay() {
@@ -1017,6 +1066,7 @@ window.buyCard = function(type, price) {
         if (type === 'pass10') inventory.pass10++;
         else if (type === 'help') inventory.help++;
         else if (type === 'protect') inventory.protect++;
+        saveData();
         updateCoinDisplay();
         updateInventoryDisplay();
         showShopMsg('Mua thẻ thành công!', false);
@@ -1407,6 +1457,7 @@ function finishSoloGame(status) {
         resText.style.color = '#ffffff';
         if (!soloRewardGiven) {
             userCoins += 100;
+            saveData();
             updateCoinDisplay();
             soloRewardGiven = true;
         }
@@ -1608,6 +1659,71 @@ backQuizFromStudyBtn.addEventListener('click', function() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
+function renderWrongMode() {
+    wrongList.innerHTML = '';
+    
+    let wrongItems = [];
+    for(let i=0; i<questions.length; i++) {
+        if(wrongCounts[i] > 0) {
+            wrongItems.push({ q: questions[i], count: wrongCounts[i] });
+        }
+    }
+    
+    wrongItems.sort((a,b) => b.count - a.count);
+
+    if(wrongItems.length === 0) {
+        const msg = document.createElement('div');
+        msg.className = 'info-msg tips-msg show-msg';
+        msg.style.textAlign = 'center';
+        msg.textContent = 'Tuyệt vời! Cậu chưa làm sai câu nào cả!';
+        wrongList.appendChild(msg);
+        return;
+    }
+
+    wrongItems.forEach(function(item) {
+        const card = document.createElement('div');
+        card.className = 'study-item';
+
+        const countInfo = document.createElement('div');
+        countInfo.style.textAlign = 'center';
+        countInfo.style.marginBottom = '15px';
+        countInfo.style.color = '#ef4444';
+        countInfo.style.fontWeight = '700';
+        countInfo.textContent = 'Đã sai: ' + item.count + ' lần';
+        card.appendChild(countInfo);
+
+        const qText = document.createElement('div');
+        qText.className = 'study-q';
+        qText.innerHTML = parseFraction(item.q.q);
+        card.appendChild(qText);
+
+        const aText = document.createElement('div');
+        aText.className = 'study-a';
+        aText.innerHTML = 'Đáp án đúng: ' + parseFraction(item.q.o[item.q.a]);
+        card.appendChild(aText);
+
+        const eText = document.createElement('div');
+        eText.className = 'study-e';
+        eText.innerHTML = 'Giải thích: ' + parseFraction(item.q.e);
+        card.appendChild(eText);
+
+        wrongList.appendChild(card);
+    });
+}
+
+wrongBtn.addEventListener('click', function() {
+    hideAllModes();
+    wrongModeContainer.style.display = 'block';
+    renderWrongMode();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+backQuizFromWrongBtn.addEventListener('click', function() {
+    hideAllModes();
+    quizModeContainer.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
 function updateProgress() {
     let currentMastery = 0;
     for(let i=0; i<correctCounts.length; i++) {
@@ -1634,6 +1750,7 @@ function renderQuestion(index) {
         userCoins = 50;
         currentBet = 10;
         selectedBetStr = '10';
+        saveData();
         updateCoinDisplay();
         
         const bailoutMsg = document.createElement('div');
@@ -1698,6 +1815,7 @@ function renderQuestion(index) {
             currentQuestionAnswered = true;
             currentSelection = q.a;
             betWonLost = 0;
+            saveData();
             renderQuestion(index);
         };
         qBlock.appendChild(pass10Btn);
@@ -1763,6 +1881,7 @@ function renderQuestion(index) {
                     betWonLost = currentBet;
                     userCoins += currentBet;
                 } else {
+                    wrongCounts[index]++;
                     if (inventory.protect > 0) {
                         inventory.protect--;
                         updateInventoryDisplay();
@@ -1773,6 +1892,7 @@ function renderQuestion(index) {
                     }
                 }
                 
+                saveData();
                 updateCoinDisplay();
                 renderQuestion(index);
             });
@@ -1796,6 +1916,7 @@ function renderQuestion(index) {
             fiftyBtn.textContent = 'Dùng phao: Gợi ý 50/50 (Miễn phí nhờ Thẻ)';
             fiftyBtn.onclick = function() {
                 inventory.help--;
+                saveData();
                 updateInventoryDisplay();
                 let wrongIndexes = [];
                 for(let i=0; i<4; i++) {
@@ -1817,6 +1938,7 @@ function renderQuestion(index) {
             } else {
                 fiftyBtn.onclick = function() {
                     userCoins -= 20;
+                    saveData();
                     updateCoinDisplay();
                     let wrongIndexes = [];
                     for(let i=0; i<4; i++) {
@@ -1841,8 +1963,9 @@ function renderQuestion(index) {
             currentQuestionAnswered = true;
             totalAttempts++;
             correctCounts[index] = 0;
+            wrongCounts[index]++;
             betWonLost = 0;
-            
+            saveData();
             renderQuestion(index);
         };
 
