@@ -1120,6 +1120,7 @@ window.joinSoloRoom = async function() {
 function forceExitToLobby(msg) {
     if (msg) window.showSoloError(msg);
     if (soloUnsubscribe) soloUnsubscribe();
+    if (window.soloPenaltyTimer) clearInterval(window.soloPenaltyTimer);
     soloRoomId = null;
     soloRoomData = null;
     window.roundResetTriggered = false;
@@ -1254,7 +1255,7 @@ function listenSoloRoom() {
         
         if (data.status === 'p1_round_won' || data.status === 'p2_round_won') {
             const iWonRound = (isPlayer1 && data.status === 'p1_round_won') || (!isPlayer1 && data.status === 'p2_round_won');
-            window.showSoloMatchMsg(iWonRound ? 'Tuyệt đỉnh! Cậu đã thắng ván này! Đang chuẩn bị ván tiếp theo...' : 'Rất tiếc! Đối thủ đã thắng ván này! Điểm số sắp được làm mới...', !iWonRound, true);
+            window.showSoloMatchMsg(iWonRound ? 'Tuyệt đỉnh! Cậu đã thắng ván này! Đang chuẩn bị ván tiếp theo...' : 'Thất bại! Đối thủ đã thắng ván này! Điểm số sắp được làm mới...', !iWonRound, true);
             
             document.getElementById('solo-app').style.opacity = '0.5';
             document.getElementById('solo-app').style.pointerEvents = 'none';
@@ -1286,6 +1287,7 @@ function renderSoloQuestion() {
     const appDiv = document.getElementById('solo-app');
     appDiv.innerHTML = '';
     window.isSoloAnswering = false;
+    if (window.soloPenaltyTimer) clearInterval(window.soloPenaltyTimer);
     
     if (soloCurrentIdx >= soloQs.length) soloCurrentIdx = 0;
     const qIdx = soloQs[soloCurrentIdx];
@@ -1344,15 +1346,36 @@ function renderSoloQuestion() {
                 }
                 
                 await update(roomRef, updates);
+                
+                setTimeout(() => {
+                    soloCurrentIdx++;
+                    renderSoloQuestion();
+                }, 1000);
             } else {
                 btn.classList.add('wrong-answer');
                 allBtns[q.a].classList.add('correct-answer');
+                
+                const penaltyMsg = document.createElement('div');
+                penaltyMsg.style.color = '#ef4444';
+                penaltyMsg.style.fontWeight = '700';
+                penaltyMsg.style.marginTop = '15px';
+                penaltyMsg.style.textAlign = 'center';
+                penaltyMsg.style.fontSize = '18px';
+                qBlock.appendChild(penaltyMsg);
+                
+                let timeLeft = 4;
+                penaltyMsg.textContent = 'Chọn sai! Phạt dừng ' + timeLeft + ' giây!';
+                window.soloPenaltyTimer = setInterval(() => {
+                    timeLeft--;
+                    if (timeLeft <= 0) {
+                        clearInterval(window.soloPenaltyTimer);
+                        soloCurrentIdx++;
+                        renderSoloQuestion();
+                    } else {
+                        penaltyMsg.textContent = 'Chọn sai! Phạt dừng ' + timeLeft + ' giây!';
+                    }
+                }, 1000);
             }
-            
-            setTimeout(() => {
-                soloCurrentIdx++;
-                renderSoloQuestion();
-            }, 1000);
         };
         
         optionsGrid.appendChild(btn);
@@ -1380,7 +1403,7 @@ function finishSoloGame(status) {
     const iWon = (isPlayer1 && status === 'p1_won') || (!isPlayer1 && status === 'p2_won');
     if (iWon) {
         resultContainer.classList.add('win-animation');
-        resText.textContent = "Tuyệt vời! Cậu đã vô địch BO3!";
+        resText.textContent = "Tuyệt đỉnh! Cậu đã vô địch BO3!";
         resText.style.color = '#ffffff';
         if (!soloRewardGiven) {
             userCoins += 100;
@@ -1389,7 +1412,7 @@ function finishSoloGame(status) {
         }
     } else {
         resultContainer.classList.add('lose-animation');
-        resText.textContent = "Rất tiếc! Đối thủ đã thắng BO3 rồi!";
+        resText.textContent = "Thất bại! Đối thủ đã thắng BO3 rồi!";
         resText.style.color = '#ffffff';
     }
 }
@@ -1601,6 +1624,8 @@ function renderQuestion(index) {
     updateProgress();
     updateCoinDisplay();
     updateInventoryDisplay();
+    
+    if (window.quizTimer) clearInterval(window.quizTimer);
 
     const qBlock = document.createElement('div');
     qBlock.className = 'question-block';
@@ -1832,7 +1857,9 @@ function renderQuestion(index) {
         feedbackDiv.style.fontWeight = '700';
         feedbackDiv.style.fontSize = '18px';
         
-        if (isPass10Used) {
+        let wasPass10 = isPass10Used;
+        
+        if (wasPass10) {
             feedbackDiv.style.color = '#8b5cf6';
             feedbackDiv.textContent = 'Quyền năng vĩ đại! Cậu đã dùng thẻ Pass và tự động thông thạo câu này cùng tối đa 9 câu chưa thuộc khác!';
             isPass10Used = false;
@@ -1873,28 +1900,47 @@ function renderQuestion(index) {
         explanationBox.appendChild(expTitle);
         explanationBox.appendChild(expContent);
         qBlock.appendChild(explanationBox);
+        
+        if (wasPass10) {
+            nextBtn.disabled = false;
+            setNormalNextBtnText();
+        } else {
+            let delay = (currentSelection === q.a) ? 1 : 4;
+            nextBtn.disabled = true;
+            nextBtn.textContent = 'Bắt buộc đọc giải thích (' + delay + 's)...';
+            window.quizTimer = setInterval(function() {
+                delay--;
+                if (delay <= 0) {
+                    clearInterval(window.quizTimer);
+                    nextBtn.disabled = false;
+                    setNormalNextBtnText();
+                } else {
+                    nextBtn.textContent = 'Bắt buộc đọc giải thích (' + delay + 's)...';
+                }
+            }, 1000);
+        }
     }
 
     app.appendChild(qBlock);
 
     if (!currentQuestionAnswered) {
         nextBtn.disabled = true;
-    } else {
-        nextBtn.disabled = false;
-    }
-
-    let isDone = true;
-    for(let i=0; i<correctCounts.length; i++) {
-        if(correctCounts[i] < TARGET_MASTERY) {
-            isDone = false;
-            break;
-        }
-    }
-
-    if (isDone) {
-        nextBtn.textContent = 'Hoàn Thành & Xem Kết Quả';
-    } else {
         nextBtn.textContent = 'Câu tiếp theo';
+    }
+
+    function setNormalNextBtnText() {
+        let isDone = true;
+        for(let i=0; i<correctCounts.length; i++) {
+            if(correctCounts[i] < TARGET_MASTERY) {
+                isDone = false;
+                break;
+            }
+        }
+        if (isDone) {
+            nextBtn.textContent = 'Hoàn Thành & Xem Kết Quả';
+        } else {
+            nextBtn.textContent = 'Câu tiếp theo';
+        }
     }
 }
 
