@@ -665,7 +665,7 @@ h1 {
     <div id="solo-mode-container">
         <div class="review-title" style="display: block;">THÁCH ĐẤU BO3 (CHẠM 2 VÁN THẮNG)</div>
         <div id="solo-lobby" style="text-align: center;">
-            <p style="margin-bottom: 20px; color: #475569; font-weight: 700; line-height: 1.6;">Thi đấu BO3 cùng bạn bè. Mỗi ván 10 điểm, ai thắng 2 ván trước sẽ ẵm trọn 100 Xu phần thưởng!</p>
+            <p style="margin-bottom: 20px; color: #475569; font-weight: 700; line-height: 1.6;">Thi đấu BO3 cùng bạn bè. Mỗi ván 40 điểm, ai thắng 2 ván trước sẽ ẵm trọn 100 Xu phần thưởng!</p>
             <button onclick="createSoloRoom()" class="nav-btn solo-btn" style="margin-bottom: 20px; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);">Tạo phòng mới</button>
             <br>
             <input type="text" id="room-code-input" placeholder="Nhập mã phòng..." style="padding: 15px; border-radius: 12px; border: 2px solid #e2e8f0; font-size: 18px; font-family: inherit; font-weight: bold; text-align: center; text-transform: uppercase; width: 60%; margin-bottom: 10px;">
@@ -681,12 +681,13 @@ h1 {
             <button onclick="exitSoloRoom()" class="nav-btn back-quiz-btn" style="margin-top: 30px;">Hủy / Trở về</button>
         </div>
 
-        <div id="solo-playing" style="display: none;">
+        <div id="solo-playing" style="display: none; position: relative;">
+            <div id="solo-match-msg" class="info-msg motivate-msg" style="margin-bottom: 20px; display: none;"></div>
             <div style="background: #f8fafc; padding: 20px; border-radius: 16px; margin-bottom: 30px; border: 2px solid #e2e8f0;">
                 <div style="margin-bottom: 15px;">
                     <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 8px; color: #047857;">
                         <span>Cậu (Thắng: <span id="solo-my-rounds">0</span>) - Điểm: <span id="solo-my-score">0</span></span>
-                        <span>Đích ván: 10</span>
+                        <span>Đích ván: 40</span>
                     </div>
                     <div class="progress-container" style="margin-bottom: 0;">
                         <div id="solo-my-progress" class="progress-bar" style="background: linear-gradient(90deg, #10b981, #34d399);"></div>
@@ -696,7 +697,7 @@ h1 {
                 <div>
                     <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 8px; color: #be123c;">
                         <span>Đối thủ (Thắng: <span id="solo-opp-rounds">0</span>) - Điểm: <span id="solo-opp-score">0</span></span>
-                        <span>Đích ván: 10</span>
+                        <span>Đích ván: 40</span>
                     </div>
                     <div class="progress-container" style="margin-bottom: 0;">
                         <div id="solo-opp-progress" class="progress-bar" style="background: linear-gradient(90deg, #f43f5e, #fb7185);"></div>
@@ -977,6 +978,18 @@ const backQuizFromShopBtn = document.getElementById('back-quiz-from-shop-btn');
 const soloModeContainer = document.getElementById('solo-mode-container');
 const soloBtn = document.getElementById('solo-btn');
 
+window.showSoloMatchMsg = function(msg, isError = false, keepOpen = false) {
+    const el = document.getElementById('solo-match-msg');
+    el.textContent = msg;
+    el.style.backgroundColor = isError ? '#fee2e2' : '#d1fae5';
+    el.style.color = isError ? '#b91c1c' : '#047857';
+    el.style.borderColor = isError ? '#ef4444' : '#10b981';
+    el.style.display = 'block';
+    if (!keepOpen) {
+        setTimeout(() => el.style.display = 'none', 3000);
+    }
+};
+
 function hideAllModes() {
     quizModeContainer.style.display = 'none';
     studyModeContainer.style.display = 'none';
@@ -1103,6 +1116,7 @@ window.exitSoloRoom = function() {
     if (soloUnsubscribe) soloUnsubscribe();
     soloRoomId = null;
     soloRoomData = null;
+    window.roundResetTriggered = false;
     document.getElementById('solo-lobby').style.display = 'block';
     document.getElementById('solo-waiting').style.display = 'none';
     document.getElementById('solo-playing').style.display = 'none';
@@ -1145,10 +1159,32 @@ function listenSoloRoom() {
         document.getElementById('solo-my-rounds').textContent = myRounds;
         document.getElementById('solo-opp-rounds').textContent = oppRounds;
         
-        document.getElementById('solo-my-progress').style.width = (myScore * 10) + '%';
-        document.getElementById('solo-opp-progress').style.width = (oppScore * 10) + '%';
+        document.getElementById('solo-my-progress').style.width = Math.min((myScore * 2.5), 100) + '%';
+        document.getElementById('solo-opp-progress').style.width = Math.min((oppScore * 2.5), 100) + '%';
         
-        if (data.status === 'p1_won' || data.status === 'p2_won') {
+        if (data.status === 'p1_round_won' || data.status === 'p2_round_won') {
+            const iWonRound = (isPlayer1 && data.status === 'p1_round_won') || (!isPlayer1 && data.status === 'p2_round_won');
+            window.showSoloMatchMsg(iWonRound ? 'Tuyệt đỉnh! Cậu đã thắng ván này! Đang chuẩn bị ván tiếp theo...' : 'Rất tiếc! Đối thủ đã thắng ván này! Điểm số sắp được làm mới...', !iWonRound, true);
+            
+            document.getElementById('solo-app').style.opacity = '0.5';
+            document.getElementById('solo-app').style.pointerEvents = 'none';
+            
+            if (iWonRound && !window.roundResetTriggered) {
+                window.roundResetTriggered = true;
+                setTimeout(async () => {
+                    await update(roomRef, {
+                        status: 'playing',
+                        p1Score: 0,
+                        p2Score: 0
+                    });
+                    window.roundResetTriggered = false;
+                }, 3000);
+            }
+        } else if (data.status === 'playing') {
+            document.getElementById('solo-match-msg').style.display = 'none';
+            document.getElementById('solo-app').style.opacity = '1';
+            document.getElementById('solo-app').style.pointerEvents = 'auto';
+        } else if (data.status === 'p1_won' || data.status === 'p2_won') {
             finishSoloGame(data.status);
         }
     }, (err) => {
@@ -1187,12 +1223,15 @@ function renderSoloQuestion() {
             if (optIndex === q.a) {
                 btn.classList.add('correct-answer');
                 soloMyScore++;
+                
+                if (soloMyScore > 40) return;
+                
                 const roomRef = ref(db, 'rooms/' + soloRoomId);
                 
                 let updates = {};
                 let myRounds = isPlayer1 ? (soloRoomData.p1Rounds || 0) : (soloRoomData.p2Rounds || 0);
                 
-                if (soloMyScore >= 10) {
+                if (soloMyScore === 40) {
                     myRounds++;
                     if (isPlayer1) updates.p1Rounds = myRounds;
                     else updates.p2Rounds = myRounds;
@@ -1201,8 +1240,8 @@ function renderSoloQuestion() {
                         updates.status = isPlayer1 ? 'p1_won' : 'p2_won';
                         if (isPlayer1) updates.p1Score = soloMyScore; else updates.p2Score = soloMyScore;
                     } else {
-                        updates.p1Score = 0;
-                        updates.p2Score = 0;
+                        updates.status = isPlayer1 ? 'p1_round_won' : 'p2_round_won';
+                        if (isPlayer1) updates.p1Score = soloMyScore; else updates.p2Score = soloMyScore;
                     }
                 } else {
                     if (isPlayer1) updates.p1Score = soloMyScore;
