@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trắc Nghiệm Đại Số 7</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap');
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: #f0f9ff;
+    margin: 0;
+    padding: 20px 10px;
+    color: #334155;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.container {
+    width: 100%;
+    max-width: 800px;
+    background-color: #ffffff;
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    margin-top: 20px;
+}
+h1 {
+    text-align: center;
+    color: #3b82f6;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.header-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+.action-btn {
+    border: none;
+    padding: 12px 28px;
+    border-radius: 999px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    color: white;
+}
+.tips-btn {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+.tips-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+.tips-btn:active {
+    transform: translateY(1px);
+}
+.motivate-btn {
+    background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+}
+.motivate-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+}
+.motivate-btn:active {
+    transform: translateY(1px);
+}
+.study-btn {
+    background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+.study-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+}
+.study-btn:active {
+    transform: translateY(1px);
+}
+.info-msg {
+    margin-bottom: 25px;
+    padding: 20px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 16px;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    line-height: 1.6;
+}
+.show-msg {
+    display: block;
+    opacity: 1;
+}
+.motivate-msg {
+    background-color: #fffbeb;
+    color: #b45309;
+    border: 2px dashed #fcd34d;
+    text-align: center;
+}
+.tips-msg {
+    background-color: #ecfdf5;
+    color: #047857;
+    border: 2px dashed #6ee7b7;
+}
+.tips-msg ul {
+    margin: 10px 0 0 0;
+    padding-left: 20px;
+}
+.tips-msg li {
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+.progress-container {
+    width: 100%;
+    background-color: #e2e8f0;
+    border-radius: 999px;
+    height: 12px;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    border-radius: 999px;
+    width: 0%;
+    transition: width 0.4s ease;
+}
+.progress-text {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: #64748b;
+    margin-bottom: 30px;
+}
+.question-block {
+    margin-bottom: 30px;
+    animation: fadeIn 0.4s ease;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.mastery-badge {
+    display: inline-block;
+    background: #dbeafe;
+    color: #1e40af;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    border: 2px solid #bfdbfe;
+}
+.question-text {
+    font-weight: 700;
+    margin-bottom: 25px;
+    line-height: 1.6;
+    font-size: 20px;
+    color: #0f172a;
+}
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+.option-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 20px;
+    border: 2px solid #e2e8f0;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 18px;
+    font-weight: 500;
+    color: #334155;
+    background-color: #f8fafc;
+    font-family: inherit;
+}
+.option-btn:hover:not(:disabled) {
+    background-color: #eff6ff;
+    border-color: #93c5fd;
+    transform: translateY(-2px);
+}
+.option-btn:disabled {
+    cursor: default;
+}
+.correct-answer {
+    background-color: #d1fae5 !important;
+    border-color: #10b981 !important;
+    color: #047857 !important;
+    font-weight: 700;
+}
+.wrong-answer {
+    background-color: #fee2e2 !important;
+    border-color: #f43f5e !important;
+    color: #9f1239 !important;
+    opacity: 0.8;
+}
+.neutral-answer {
+    opacity: 0.5;
+}
+.hidden-option {
+    opacity: 0.25 !important;
+    pointer-events: none !important;
+    background-color: #f8fafc !important;
+    border-color: #e2e8f0 !important;
+}
+.explanation-box {
+    margin-top: 25px;
+    background-color: #f8fafc;
+    border-left: 5px solid #3b82f6;
+    padding: 20px;
+    border-radius: 0 12px 12px 0;
+    animation: fadeIn 0.4s ease;
+}
+.explanation-title {
+    font-weight: 700;
+    color: #1e293b;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.explanation-content {
+    font-size: 17px;
+    color: #475569;
+    line-height: 1.6;
+}
+.navigation-buttons {
+    display: flex;
+    margin-top: 40px;
+}
+.nav-btn {
+    width: 100%;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+.next-btn {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+.next-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
+.next-btn:disabled {
+    background: #cbd5e1;
+    color: #94a3b8;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+}
+.result-container {
+    margin-bottom: 40px;
+    padding: 30px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    border-radius: 20px;
+    text-align: center;
+    display: none;
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+}
+.result-text {
+    font-size: 32px;
+    font-weight: 700;
+    color: #ffffff;
+}
+.compliment-text {
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 15px;
+    color: #ecfdf5;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+.review-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    text-align: center;
+    display: none;
+}
+#study-mode-container {
+    display: none;
+}
+.study-item {
+    background: #ffffff;
+    border: 2px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.study-q {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 25px;
+    line-height: 1.5;
+    text-align: center;
+}
+.study-a {
+    background-color: #d1fae5;
+    border: 2px solid #10b981;
+    color: #047857;
+    padding: 20px;
+    border-radius: 12px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    font-size: 18px;
+    text-align: center;
+    animation: fadeIn 0.4s ease;
+}
+.study-e {
+    background-color: #eff6ff;
+    border-left: 4px solid #3b82f6;
+    padding: 20px;
+    color: #1e40af;
+    border-radius: 0 12px 12px 0;
+    line-height: 1.6;
+    font-size: 16px;
+    animation: fadeIn 0.4s ease;
+}
+.back-quiz-btn {
+    background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+    color: white;
+    width: 100%;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+}
+.back-quiz-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+}
+.study-nav-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 25px;
+}
+.flashcard-btn {
+    flex: 1;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #e2e8f0;
+    color: #334155;
+}
+.flashcard-btn:hover {
+    background: #cbd5e1;
+}
+.give-up-btn {
+    background: #e2e8f0;
+    color: #475569;
+}
+.give-up-btn:hover {
+    background: #cbd5e1;
+    transform: translateY(-2px);
+}
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+    h1 {
+        font-size: 22px;
+    }
+    .question-text {
+        font-size: 18px;
+    }
+    .option-btn {
+        font-size: 16px;
+        padding: 15px;
+    }
+    .nav-btn {
+        padding: 15px;
+        font-size: 16px;
+    }
+    .explanation-title {
+        font-size: 16px;
+    }
+    .explanation-content {
+        font-size: 15px;
+    }
+    .header-actions {
+        flex-direction: column;
+    }
+    .action-btn {
+        width: 100%;
+    }
+    .tools-row {
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>TRẮC NGHIỆM ĐẠI SỐ 7</h1>
+    
+    <div class="header-actions">
+        <button id="tips-btn" class="action-btn tips-btn">Bí kíp làm bài</button>
+        <button id="motivate-btn" class="action-btn motivate-btn">Nhận lời động viên</button>
+        <button id="study-btn" class="action-btn study-btn">Góc Luyện Trí Nhớ</button>
+    </div>
+
+    <div id="tips-msg" class="info-msg tips-msg">
+        BÍ KÍP ĐẠI SỐ 7:
+        <ul>
+            <li>Tỉ lệ thuận: Hai đại lượng cùng tăng hoặc cùng giảm. Công thức: y = kx. Tỉ số x/y luôn không đổi.</li>
+            <li>Tỉ lệ nghịch: Đại lượng này tăng thì đại lượng kia giảm. Công thức: y = a/x. Tích x.y luôn không đổi.</li>
+            <li>Tính chất dãy tỉ số: Tử số cộng hay trừ thế nào thì mẫu số cũng phải cộng hay trừ y hệt như thế.</li>
+            <li>Quy tắc nhân chéo: Nếu a/b = c/d thì a.d = b.c (tích ngoại tỉ bằng tích trung tỉ).</li>
+        </ul>
+    </div>
+    
+    <div id="motivate-msg" class="info-msg motivate-msg"></div>
+
+    <div id="study-mode-container">
+        <div class="review-title" style="display: block;">THẺ GHI NHỚ FLASHCARD</div>
+        <div id="study-list"></div>
+        <button id="back-quiz-btn" class="nav-btn back-quiz-btn">Quay lại làm bài kiểm tra</button>
+    </div>
+    
+    <div id="quiz-mode-container">
+        <div id="result" class="result-container">
+            <div id="result-text" class="result-text"></div>
+            <div id="compliment-text" class="compliment-text"></div>
+        </div>
+
+        <div id="progress-container" class="progress-container">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+        <div id="progress-text" class="progress-text"></div>
+
+        <div id="review-title" class="review-title">XEM LẠI ĐÁP ÁN</div>
+
+        <div id="app"></div>
+
+        <div id="navigation" class="navigation-buttons">
+            <button id="next-btn" class="nav-btn next-btn">Câu tiếp theo</button>
+        </div>
+    </div>
+</div>
+
+<script>
+const quotes = [
+    "Cậu đang làm rất tốt, cứ từ từ thôi nhé!",
+    "Mệt thì nghỉ một chút, đừng ép bản thân quá nha!",
+    "Sai một câu không sao cả, học từ cái sai mới nhớ lâu!",
+    "Điểm số không định nghĩa cậu, sự cố gắng mới là quan trọng nhất!",
+    "Hít một hơi thật sâu nào, mọi chuyện rồi sẽ ổn thôi!",
+    "Cố lên cậu ơi, tớ luôn ở đây ủng hộ cậu!",
+    "Hôm nay cậu đã vất vả rồi, tự hào về bản thân nhé!"
+];
+
+const motivateBtn = document.getElementById('motivate-btn');
+const motivateMsg = document.getElementById('motivate-msg');
+let motivateTimeout;
+
+motivateBtn.addEventListener('click', function() {
+    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+    motivateMsg.textContent = randomQuote;
+    motivateMsg.classList.add('show-msg');
+    
+    clearTimeout(motivateTimeout);
+    motivateTimeout = setTimeout(function() {
+        motivateMsg.classList.remove('show-msg');
+    }, 4000);
+});
+
+const tipsBtn = document.getElementById('tips-btn');
+const tipsMsg = document.getElementById('tips-msg');
+let isTipsOpen = false;
+
+tipsBtn.addEventListener('click', function() {
+    isTipsOpen = !isTipsOpen;
+    if(isTipsOpen) {
+        tipsMsg.classList.add('show-msg');
+    } else {
+        tipsMsg.classList.remove('show-msg');
+    }
+});
+
+const questions = [
+  { q: "Câu 1: Cho tỉ lệ thức a/b = c/d, khẳng định đúng là:", o: ["A. ab = cd", "B. a + b = c + d", "C. ad = cb", "D. a + c = b + d"], a: 2, e: "Tính chất cơ bản của tỉ lệ thức: tích trung tỉ luôn bằng tích ngoại tỉ (tức là tính nhân chéo ad = bc)." },
+  { q: "Câu 2: Cho tỉ lệ thức u/g = v/h, khẳng định đúng là:", o: ["A. h/g = v/u", "B. ug = vh", "C. v/h = g/u", "D. u/v = h/g"], a: 0, e: "Từ u/g = v/h, khi ta đổi chỗ hai ngoại tỉ u và h cho nhau, ta sẽ lập được tỉ lệ thức mới là h/g = v/u." },
+  { q: "Câu 3: Từ đẳng thức 25.14 = 7.50, ta có thể lập được tỉ lệ thức nào dưới đây:", o: ["A. 25/50 = 14/7", "B. 7/50 = 25/14", "C. 7/25 = 50/14", "D. 7/25 = 14/50"], a: 3, e: "Từ đẳng thức 25.14 = 7.50, chia cả hai vế cho 25.50 ta sẽ lập được tỉ lệ thức 14/50 = 7/25. Đổi vị trí hai vế ta được đáp án đúng." },
+  { q: "Câu 4: Từ đẳng thức (-8).75 = 24.(-25), ta có thể lập được tỉ lệ thức nào dưới đây:", o: ["A. 75/-25 = 24/-8", "B. (-8).(-25) = 75.24", "C. -8/75 = 24/-25", "D. -25/-8 = 24/75"], a: 0, e: "Chia hai vế của đẳng thức đề bài cho (-25).(-8), ta có thể lập được tỉ lệ thức chuẩn xác là 75/-25 = 24/-8." },
+  { q: "Câu 5: Cho x, y là hai đại lượng tỉ lệ thuận với nhau. Khẳng định nào sau đây là sai?", o: ["A. x1/y1 = x2/y2", "B. x1/x2 = y1/y2", "C. x1/y2 = x2/y1", "D. x2/y2 = x3/y3"], a: 2, e: "Đối với tỉ lệ thuận, tỉ số hai giá trị tương ứng luôn không đổi (x1/y1 = x2/y2), từ đó suy ra x1/x2 = y1/y2. Cách xếp chéo x1/y2 = x2/y1 là hoàn toàn sai." },
+  { q: "Câu 6: Cho x, y là hai đại lượng tỉ lệ nghịch với nhau. Khẳng định nào sau đây là đúng?", o: ["A. x1/y1 = x2/y2", "B. x1/x2 = y1/y2", "C. x1/y2 = x2/y1", "D. x2y3 = x3y2"], a: 2, e: "Từ tính chất tỉ lệ nghịch x1.y1 = x2.y2, ta có thể viết lại thành tỉ lệ thức x1/y2 = x2/y1 (nhân chéo sẽ ra tích ban đầu)." },
+  { q: "Câu 7: Nếu ba số a, b, c tương ứng tỉ lệ với 7; -4; 3 thì ta có dãy tỉ số bằng nhau là", o: ["A. x/7 = y/-4 = z/3", "B. a/-4 = b/7 = c/3", "C. a/7 = b/-4 = c/3", "D. a/3 = b/7 = c/-4"], a: 2, e: "Theo đúng định nghĩa, khi ba số a, b, c tỉ lệ với 7, -4, 3 ta có ngay dãy tỉ số bằng nhau: a/7 = b/-4 = c/3." },
+  { q: "Câu 8: Cho đại lượng y tỉ lệ thuận với đại lượng x theo hệ số tỉ lệ k = 7. Hệ thức liên hệ của y và x là:", o: ["A. xy = 7", "B. y = 7x", "C. y = x/7", "D. y = 7/x"], a: 1, e: "Công thức chung của đại lượng y tỉ lệ thuận với đại lượng x là y = kx. Thay hệ số k = 7 vào, ta có y = 7x." },
+  { q: "Câu 9: Nếu x/y = 6/5 thì:", o: ["A. 5 + x = 6 + y", "B. 6 - x = 5 - y", "C. 6x = 5y", "D. 5x = 6y"], a: 3, e: "Từ tỉ lệ thức x/y = 6/5, ta áp dụng quy tắc nhân chéo hai vế (tích trung tỉ bằng tích ngoại tỉ) sẽ dễ dàng có được 5x = 6y." },
+  { q: "Câu 10: Từ tỉ lệ thức a/-3 = b/7, ta có thể suy ra được:", o: ["A. a/b = 7/-3", "B. b/a = 7/-3", "C. 7x = (-3)y", "D. 7b = (-3)a"], a: 1, e: "Từ tỉ lệ thức a/-3 = b/7, ta tiến hành đổi chỗ trung tỉ a và 7 cho nhau, ta suy ra được tỉ lệ thức mới là b/a = 7/-3." },
+  { q: "Câu 11: Biết x/-9 = -5/3, giá trị của x là:", o: ["A. -5/3", "B. -15", "C. 15", "D. 3/5"], a: 2, e: "Áp dụng quy tắc nhân chéo: x.3 = (-9).(-5) suy ra 3x = 45. Vậy x = 45 / 3 = 15." },
+  { q: "Câu 12: Biết 7/x = 3/-4, giá trị của x là:", o: ["A. -3/28", "B. -28/3", "C. -21/4", "D. -4/21"], a: 1, e: "Áp dụng quy tắc nhân chéo để giải: x.3 = 7.(-4) suy ra 3x = -28. Vậy x = -28/3." },
+  { q: "Câu 13: Cho đại lượng y tỉ lệ nghịch với đại lượng x theo hệ số tỉ lệ a = 4/3. Hệ thức liên hệ của y và x là:", o: ["A. xy = 3/4", "B. y = 4/(3x)", "C. x = 4/(3y)", "D. yx = 4/3"], a: 2, e: "Đại lượng y tỉ lệ nghịch với x theo hệ số a = 4/3 nên ta có y = (4/3) / x, suy ra x.y = 4/3. Từ đó rút x ra ta được x = 4/(3y)." },
+  { q: "Câu 14: Cho x và y là hai đại lượng tỉ lệ nghịch. Biết khi x = 8 thì y = 24. Hệ số tỉ lệ là:", o: ["A. 192", "B. 3", "C. 1/3", "D. 8"], a: 0, e: "Hệ số tỉ lệ của hai đại lượng tỉ lệ nghịch chính là tích của hai giá trị đó: a = x.y = 8 . 24 = 192." },
+  { q: "Câu 15: Cho x và y là hai đại lượng tỉ lệ thuận. Biết khi x = -80 thì y = 20. Hệ số tỉ lệ của đại lượng x đối với đại lượng y là:", o: ["A. 4", "B. -4", "C. -1/4", "D. 1/4"], a: 1, e: "Gọi k là hệ số tỉ lệ của đại lượng x đối với đại lượng y (tức là x = ky). Ta tính được k = x / y = -80 / 20 = -4." },
+  { q: "Câu 16: Cho x và y là hai đại lượng tỉ lệ thuận. Biết khi x = 28 thì y = 42. Hệ số tỉ lệ của đại lượng y đối với đại lượng x là:", o: ["A. 3/4", "B. 3/2", "C. 4/3", "D. 2/3"], a: 1, e: "Gọi k là hệ số tỉ lệ của đại lượng y đối với đại lượng x (tức là y = kx). Ta tính được k = y / x = 42 / 28 = 3/2." },
+  { q: "Câu 17: Chọn khẳng định đúng:", o: ["A. a/b = c/d = (a+b)/(c+d)", "B. a/b = c/d = ab/cd", "C. a/b = c/d = (a-c)/(b+d)", "D. a/b = c/d = (a-c)/(b-d)"], a: 3, e: "Áp dụng chuẩn tính chất dãy tỉ số bằng nhau, nếu lấy hiệu hai tử số thì cũng phải lấy hiệu hai mẫu số: a/b = c/d = (a - c) / (b - d)." },
+  { q: "Câu 18: Chọn khẳng định sai:", o: ["A. a/b = c/d = e/f = (a-c+e)/(b+d-f)", "B. a/b = c/d = e/f = (a+c+e)/(b+d+f)", "C. a/b = c/d = e/f = (a-c+e)/(b-d+f)", "D. a/b = c/d = e/f = (a-c-e)/(b-d-f)"], a: 0, e: "Theo tính chất dãy tỉ số bằng nhau, dấu phép toán trên tử thế nào thì dưới mẫu phải y như vậy. Ở phương án A, tử là a-c+e nhưng mẫu lại là b+d-f (sai dấu ở vị trí c/d) nên đây là khẳng định sai." },
+  { q: "Câu 19: Cho x và y là hai đại lượng tỉ lệ thuận liên hệ với nhau bởi công thức y = 4x. Khi x = -2 thì giá trị của y là:", o: ["A. -8", "B. 8", "C. 6", "D. -6"], a: 0, e: "Ta chỉ cần thay số vào công thức: Thay x = -2 vào y = 4x ta tính ra được y = 4 . (-2) = -8." },
+  { q: "Câu 20: Cho x và y là hai đại lượng tỉ lệ thuận liên hệ với nhau bởi công thức x = -7y. Khi x = -42 thì giá trị của y là:", o: ["A. -294", "B. 294", "C. -6", "D. 6"], a: 3, e: "Thay x = -42 vào công thức x = -7y ta được phương trình -42 = -7y. Suy ra y = -42 / (-7) = 6." },
+  { q: "Câu 21: Cho x y là hai đại lượng tỉ lệ nghịch liên hệ với nhau bởi công thức xy = 20. Khi x = 10 thì giá trị của y là:", o: ["A. 2", "B. -2", "C. 10", "D. 20"], a: 0, e: "Thay x = 10 vào công thức xy = 20 ta lập được 10.y = 20. Từ đó tính được y = 20 / 10 = 2." },
+  { q: "Câu 22: Cho x và y là hai đại lượng tỉ lệ nghịch liên hệ với nhau bởi công thức y = -32/x. Khi y = 8 thì giá trị của x là:", o: ["A. -4", "B. 256", "C. 4", "D. -256"], a: 0, e: "Thay y = 8 vào công thức y = -32/x ta được 8 = -32/x. Nhân chéo tìm x, ta tính được x = -32 / 8 = -4." },
+  { q: "Câu 23: Nếu pha 5 ly nước chanh cần 7 muỗng cà phê đường thì pha 20 ly nước chanh tương tự như vậy cần bao nhiêu muỗng cà phê đường?", o: ["A. 14", "B. 27", "C. 20", "D. 28"], a: 3, e: "Số lượng ly chanh và muỗng đường là hai đại lượng tỉ lệ thuận. Số muỗng đường cần dùng là: (20 . 7) / 5 = 28 muỗng." },
+  { q: "Câu 24: Một lớp học có 39 bạn học sinh và quyên góp được số tiền 195 000 đồng ủng hộ các bạn khó khăn vui Tết. Nếu số học sinh tỉ lệ với số tiền quyên góp được thì một lớp có 43 học sinh sẽ quyên góp được số tiền là:", o: ["A. 250 000 đồng", "B. 240 000 đồng", "C. 215 000 đồng", "D. 270 000 đồng"], a: 2, e: "Số học sinh và số tiền là hai đại lượng tỉ lệ thuận. Số tiền lớp 43 học sinh quyên được là: (43 . 195000) / 39 = 215000 đồng." },
+  { q: "Câu 25: Một người đi xe máy với vận tốc 28 km/h thì tới nơi sau 9 tiếng chạy xe. Hỏi nếu người đó đi với vận tốc 36 km/h thì sau bao lâu sẽ tới nơi?", o: ["A. 16", "B. 12", "C. 7", "D. 6"], a: 2, e: "Trên cùng một quãng đường, vận tốc và thời gian là đại lượng tỉ lệ nghịch. Thời gian đi cần thiết sẽ là: (28 . 9) / 36 = 7 tiếng." },
+  { q: "Câu 26: Cho bảng sau, biết x và y là hai đại lượng tỉ lệ (thuận hay nghịch chưa rõ). x: 10, 30, 50. y: 3, 9, ?. Giá trị ở ô còn trống là:", o: ["A. 15", "B. 12", "C. 20", "D. 5"], a: 0, e: "Kiểm tra tỉ số ta thấy 10/3 = 30/9, nên suy ra x và y là tỉ lệ thuận. Giá trị ô trống y sẽ bằng: (50 . 3) / 10 = 15." },
+  { q: "Câu 27: Cho bảng sau, biết x và y là hai đại lượng tỉ lệ (thuận hay nghịch chưa rõ). x: 45, 15, 9. y: 2, ?, 10. Giá trị ở ô còn trống là:", o: ["A. 15", "B. 12", "C. 20", "D. 6"], a: 3, e: "Kiểm tra tích ta thấy 45.2 = 9.10 = 90, nên suy ra x và y là tỉ lệ nghịch. Giá trị ô trống ở giữa bằng: 90 / 15 = 6." },
+  { q: "Câu 28: Cho bảng sau, biết x và y là hai đại lượng tỉ lệ (thuận hay nghịch chưa rõ). x: 4, 8, 9. y: ?, 6, 16/3. Giá trị ở ô còn trống là:", o: ["A. 3", "B. 6", "C. 12", "D. 18"], a: 2, e: "Kiểm tra các cặp số có sẵn, ta thấy tích 8.6 = 9.(16/3) = 48, vậy x và y tỉ lệ nghịch. Giá trị ô trống đầu tiên y bằng: 48 / 4 = 12." },
+  { q: "Câu 29: Cho bảng sau, biết x và y là hai đại lượng tỉ lệ (thuận hay nghịch chưa rõ). x: 63, 21, 9. y: 51, ?, 51/7. Giá trị ở ô còn trống là:", o: ["A. 17", "B. 16", "C. 15", "D. 14"], a: 0, e: "Kiểm tra tỉ số 63/51 và 9/(51/7) ta thấy đều bằng 21/17, vậy hai đại lượng x và y tỉ lệ thuận. Giá trị ô trống là y = 21 / (21/17) = 17." },
+  { q: "Câu 30: Một chiếc ô tô trong 2 giờ 42 phút đi được quãng đường dài 170,1 km. Nếu tổng thời gian di chuyển của xe là 4 giờ thì quãng đường chiếc xe ấy đã đi là bao nhiêu km?", o: ["A. 250", "B. 252", "C. 301,5", "D. 311,2"], a: 1, e: "Ta đổi 2 giờ 42 phút bằng 2,7 giờ. Quãng đường và thời gian ở đây là đại lượng tỉ lệ thuận. Quãng đường chiếc xe đi được trong 4 giờ là: (4 . 170,1) / 2,7 = 252 km." },
+  { q: "Câu 31: Nhóm công nhân gồm 4 người thực hiện sửa chữa một đoạn đường trong 21 ngày. Nếu muốn công việc hoàn thành sớm chỉ vỏn vẹn trong 7 ngày thì cần thêm:", o: ["A. 12 người", "B. 8 người", "C. 4 người", "D. 3 người"], a: 1, e: "Số lượng người và số ngày hoàn thành công việc là hai đại lượng tỉ lệ nghịch. Để xong trong 7 ngày cần (4 . 21) / 7 = 12 người. Vậy cần điều thêm: 12 - 4 = 8 người nữa." },
+  { q: "Câu 32: Cho đại lượng y tỉ lệ thuận với đại lượng x theo hệ số tỉ lệ k = -8. Khẳng định đúng là:", o: ["A. xy = -8", "B. x = -8y", "C. y/x = -8", "D. y = -8/x"], a: 2, e: "Đại lượng y tỉ lệ thuận với x theo hệ số k = -8 nên ta có công thức y = -8x. Suy ra y/x = -8. Vậy đáp án C là chính xác." },
+  { q: "Câu 33: Cho đại lượng y tỉ lệ nghịch với đại lượng x theo hệ số tỉ lệ a = 24. Khẳng định đúng là:", o: ["A. xy = -24", "B. x = 24y", "C. y/x = 24", "D. y = 24/x"], a: 3, e: "Công thức cơ bản của đại lượng tỉ lệ nghịch là y = a/x. Thay hệ số 24 vào, ta được phương trình y = 24/x (hoặc tích xy = 24)." },
+  { q: "Câu 34: Cho đại lượng y tỉ lệ thuận với đại lượng x theo hệ số tỉ lệ k = 9. Vậy đại lượng x tỉ lệ thuận với đại lượng y theo hệ số tỉ lệ là:", o: ["A. 9", "B. -9", "C. 1/9", "D. -1/9"], a: 2, e: "Ta có công thức ban đầu là y = 9x. Rút x ra, ta suy ra được x = (1/9)y. Như vậy đại lượng x tỉ lệ thuận với đại lượng y theo hệ số là 1/9." },
+  { q: "Câu 35: Cho đại lượng m tỉ lệ nghịch với đại lượng n theo hệ số tỉ lệ a = -21. Vậy đại lượng n tỉ lệ nghịch với đại lượng m theo hệ số tỉ lệ là:", o: ["A. 21", "B. -21", "C. 1/21", "D. -1/21"], a: 3, e: "Định nghĩa của đại lượng tỉ lệ nghịch là tích của hai biến không đổi. Ta có m.n = -21, suy ra đại lượng n cũng tỉ lệ nghịch với đại lượng m theo cùng hệ số đó là -21." },
+  { q: "Câu 36: Bạn Mai đọc được 48 trang của một quyển sách dày 311 trang trong 3 ngày. Nếu giữ nguyên tốc độ đọc này, bạn Mai sẽ đọc xong quyển sách trong bao nhiêu ngày?", o: ["A. 18 ngày", "B. 19 ngày", "C. 20 ngày", "D. 21 ngày"], a: 2, e: "Tốc độ đọc của Mai: 48 / 3 = 16 trang/ngày. Số ngày cần để đọc xong 311 trang là: 311 / 16 = 19,4375 ngày. Vì số ngày thực tế phải làm tròn lên để đọc hết, nên Mai sẽ đọc xong trong 20 ngày." },
+  { q: "Câu 37: Cho đại lượng y tỉ lệ thuận với đại lượng x. Biết khi x = 40 thì y = 24, vậy khi x = 5 thì:", o: ["A. y = 3", "B. y = 4", "C. y = 5", "D. y = 6"], a: 0, e: "Tính hệ số tỉ lệ k = y/x = 24/40 = 3/5. Ta có công thức y = (3/5)x. Khi x = 5 thì giá trị của y sẽ bằng (3/5) . 5 = 3." },
+  { q: "Câu 38: Cho đại lượng y tỉ lệ thuận với đại lượng x. Biết khi x = 15 thì y = 60, vậy khi y = 1 thì:", o: ["A. x = 1", "B. x = 4", "C. x = 1/4", "D. x = 1/8"], a: 2, e: "Tính hệ số tỉ lệ k = y/x = 60/15 = 4. Ta có phương trình y = 4x. Thay y = 1 vào, ta tính ra được x = 1/4." },
+  { q: "Câu 39: Cho đại lượng m tỉ lệ nghịch với đại lượng n. Biết khi m = 9 thì n = 90, vậy khi n = 30 thì:", o: ["A. m = -3", "B. m = 3", "C. m = -27", "D. m = 27"], a: 3, e: "Hệ số tỉ lệ nghịch của bài toán là a = m.n = 9 . 90 = 810. Do đó khi n = 30 thì giá trị của m tính được là: 810 / 30 = 27." },
+  { q: "Câu 40: Ba lớp 7A, 7B, 7C cùng thực hiện chế tác đồ dùng từ vật liệu tái chế. Sau buổi sáng, tổng cộng 21 món đồ được làm ra. Lớp 7A có 36 học sinh, lớp 7B có 42 học sinh và lớp 7C có 48 học sinh. Số học sinh của mỗi lớp tỉ lệ thuận với số món đồ mà lớp đó làm được. Số món đồ lớp 7B làm được là:", o: ["A. 5", "B. 6", "C. 7", "D. 8"], a: 2, e: "Gọi số món đồ lớp 7A, 7B, 7C làm được lần lượt là a, b, c. Dùng tính chất dãy tỉ số bằng nhau: a/36 = b/42 = c/48 = (a+b+c)/(36+42+48) = 21/126 = 1/6. Lớp 7B làm được là: b = 42 . (1/6) = 7 món đồ." }
+];
+
+const TARGET_MASTERY = 2;
+let correctCounts = new Array(questions.length);
+for(let i=0; i<questions.length; i++) {
+    correctCounts[i] = 0;
+}
+let totalAttempts = 0;
+let currentQuestionAnswered = false;
+let currentSelection = null;
+let currentIndex = 0;
+
+let currentStudyIndex = 0;
+let isStudyFlipped = false;
+
+const app = document.getElementById('app');
+const nextBtn = document.getElementById('next-btn');
+const resultDiv = document.getElementById('result');
+const resultText = document.getElementById('result-text');
+const complimentText = document.getElementById('compliment-text');
+const progressText = document.getElementById('progress-text');
+const progressBar = document.getElementById('progress-bar');
+const progressContainer = document.getElementById('progress-container');
+const navigationDiv = document.getElementById('navigation');
+const reviewTitle = document.getElementById('review-title');
+const quizModeContainer = document.getElementById('quiz-mode-container');
+const studyModeContainer = document.getElementById('study-mode-container');
+const studyList = document.getElementById('study-list');
+const studyBtn = document.getElementById('study-btn');
+const backQuizBtn = document.getElementById('back-quiz-btn');
+
+function renderStudyMode() {
+    studyList.innerHTML = '';
+    const q = questions[currentStudyIndex];
+
+    const card = document.createElement('div');
+    card.className = 'study-item';
+
+    const progressInfo = document.createElement('div');
+    progressInfo.style.textAlign = 'center';
+    progressInfo.style.marginBottom = '15px';
+    progressInfo.style.color = '#64748b';
+    progressInfo.style.fontWeight = '700';
+    progressInfo.textContent = 'Thẻ ' + (currentStudyIndex + 1) + ' / ' + questions.length;
+    card.appendChild(progressInfo);
+
+    const qText = document.createElement('div');
+    qText.className = 'study-q';
+    qText.textContent = q.q;
+    card.appendChild(qText);
+
+    if (!isStudyFlipped) {
+        const flipBtn = document.createElement('button');
+        flipBtn.className = 'nav-btn next-btn';
+        flipBtn.style.marginTop = '20px';
+        flipBtn.textContent = 'Lật thẻ xem đáp án & giải thích';
+        flipBtn.onclick = function() {
+            isStudyFlipped = true;
+            renderStudyMode();
+        };
+        card.appendChild(flipBtn);
+    } else {
+        const aText = document.createElement('div');
+        aText.className = 'study-a';
+        aText.textContent = 'Đáp án đúng: ' + q.o[q.a];
+
+        const eText = document.createElement('div');
+        eText.className = 'study-e';
+        eText.textContent = 'Giải thích: ' + q.e;
+
+        card.appendChild(aText);
+        card.appendChild(eText);
+
+        const nextCardBtn = document.createElement('button');
+        nextCardBtn.className = 'nav-btn next-btn';
+        nextCardBtn.style.marginTop = '25px';
+        if (currentStudyIndex < questions.length - 1) {
+            nextCardBtn.textContent = 'Lật sang thẻ tiếp theo';
+            nextCardBtn.onclick = function() {
+                currentStudyIndex++;
+                isStudyFlipped = false;
+                renderStudyMode();
+            };
+        } else {
+            nextCardBtn.textContent = 'Quay lại thẻ đầu tiên';
+            nextCardBtn.onclick = function() {
+                currentStudyIndex = 0;
+                isStudyFlipped = false;
+                renderStudyMode();
+            };
+        }
+        card.appendChild(nextCardBtn);
+    }
+
+    const navRow = document.createElement('div');
+    navRow.className = 'study-nav-row';
+
+    const prevCardBtn = document.createElement('button');
+    prevCardBtn.className = 'flashcard-btn';
+    prevCardBtn.textContent = 'Thẻ trước';
+    if (currentStudyIndex === 0) {
+        prevCardBtn.style.opacity = '0.5';
+        prevCardBtn.style.cursor = 'not-allowed';
+    } else {
+        prevCardBtn.onclick = function() {
+            currentStudyIndex--;
+            isStudyFlipped = false;
+            renderStudyMode();
+        };
+    }
+    navRow.appendChild(prevCardBtn);
+
+    const randomCardBtn = document.createElement('button');
+    randomCardBtn.className = 'flashcard-btn';
+    randomCardBtn.textContent = 'Rút thẻ ngẫu nhiên';
+    randomCardBtn.onclick = function() {
+        currentStudyIndex = Math.floor(Math.random() * questions.length);
+        isStudyFlipped = false;
+        renderStudyMode();
+    };
+    navRow.appendChild(randomCardBtn);
+
+    card.appendChild(navRow);
+    studyList.appendChild(card);
+}
+
+studyBtn.addEventListener('click', function() {
+    quizModeContainer.style.display = 'none';
+    studyModeContainer.style.display = 'block';
+    renderStudyMode();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+backQuizBtn.addEventListener('click', function() {
+    studyModeContainer.style.display = 'none';
+    quizModeContainer.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+function updateProgress() {
+    let currentMastery = 0;
+    for(let i=0; i<correctCounts.length; i++) {
+        currentMastery += correctCounts[i];
+    }
+    const totalMastery = questions.length * TARGET_MASTERY;
+    const percent = (currentMastery / totalMastery) * 100;
+    progressBar.style.width = percent + '%';
+    progressText.textContent = 'Tiến độ thuộc bài: ' + currentMastery + ' / ' + totalMastery;
+}
+
+function renderQuestion(index) {
+    app.innerHTML = '';
+    updateProgress();
+
+    const q = questions[index];
+    const qBlock = document.createElement('div');
+    qBlock.className = 'question-block';
+
+    const masteryBadge = document.createElement('div');
+    masteryBadge.className = 'mastery-badge';
+    masteryBadge.textContent = 'Mức độ thuộc: ' + correctCounts[index] + '/' + TARGET_MASTERY + ' lần';
+    qBlock.appendChild(masteryBadge);
+
+    const qText = document.createElement('div');
+    qText.className = 'question-text';
+    qText.textContent = q.q;
+    qBlock.appendChild(qText);
+
+    const optionsGrid = document.createElement('div');
+    optionsGrid.className = 'options-grid';
+
+    q.o.forEach((optText, optIndex) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.textContent = optText;
+
+        if (currentQuestionAnswered) {
+            btn.disabled = true;
+            if (optIndex === q.a) {
+                btn.classList.add('correct-answer');
+            } else if (currentSelection === optIndex) {
+                btn.classList.add('wrong-answer');
+            } else {
+                btn.classList.add('neutral-answer');
+            }
+        } else {
+            btn.addEventListener('click', function() {
+                currentSelection = optIndex;
+                currentQuestionAnswered = true;
+                totalAttempts++;
+
+                if (currentSelection === q.a) {
+                    correctCounts[index]++;
+                }
+                
+                renderQuestion(index);
+            });
+        }
+
+        optionsGrid.appendChild(btn);
+    });
+
+    qBlock.appendChild(optionsGrid);
+
+    if (!currentQuestionAnswered) {
+        const toolsRow = document.createElement('div');
+        toolsRow.className = 'study-nav-row tools-row';
+        toolsRow.style.marginTop = '25px';
+
+        const fiftyBtn = document.createElement('button');
+        fiftyBtn.className = 'action-btn motivate-btn';
+        fiftyBtn.style.flex = '1';
+        fiftyBtn.textContent = 'Dùng phao: Gợi ý 50/50';
+        fiftyBtn.onclick = function() {
+            let wrongIndexes = [];
+            for(let i=0; i<4; i++) {
+                if(i !== q.a) wrongIndexes.push(i);
+            }
+            wrongIndexes.sort(function() { return Math.random() - 0.5; });
+            
+            const optionBtns = optionsGrid.children;
+            optionBtns[wrongIndexes[0]].classList.add('hidden-option');
+            optionBtns[wrongIndexes[1]].classList.add('hidden-option');
+            fiftyBtn.style.display = 'none';
+        };
+
+        const giveUpBtn = document.createElement('button');
+        giveUpBtn.className = 'action-btn give-up-btn';
+        giveUpBtn.style.flex = '1';
+        giveUpBtn.textContent = 'Tớ quên rồi (Mở đáp án)';
+        giveUpBtn.onclick = function() {
+            currentSelection = -1;
+            currentQuestionAnswered = true;
+            totalAttempts++;
+            
+            renderQuestion(index);
+        };
+
+        toolsRow.appendChild(fiftyBtn);
+        toolsRow.appendChild(giveUpBtn);
+        qBlock.appendChild(toolsRow);
+    }
+
+    if (currentQuestionAnswered) {
+        const feedbackDiv = document.createElement('div');
+        feedbackDiv.style.marginTop = '15px';
+        feedbackDiv.style.fontWeight = '700';
+        feedbackDiv.style.fontSize = '18px';
+        
+        if (currentSelection === q.a) {
+            feedbackDiv.style.color = '#10b981';
+            if (correctCounts[index] >= TARGET_MASTERY) {
+                feedbackDiv.textContent = 'Chính xác! Cậu đã thuộc lòng câu này rồi!';
+            } else {
+                feedbackDiv.textContent = 'Đúng rồi! Cố gắng trả lời đúng ' + (TARGET_MASTERY - correctCounts[index]) + ' lần nữa khi gặp lại để thuộc bài nhé!';
+            }
+        } else if (currentSelection === -1) {
+            feedbackDiv.style.color = '#f59e0b';
+            feedbackDiv.textContent = 'Không sao cả! Tớ đã mở đáp án cho cậu xem. Cứ thong thả đọc giải thích nhé!';
+        } else {
+            feedbackDiv.style.color = '#ef4444';
+            feedbackDiv.textContent = 'Sai rồi! Nhưng điểm thuộc không bị trừ đâu. Hãy đọc thật kỹ giải thích nhé!';
+        }
+        qBlock.appendChild(feedbackDiv);
+
+        const explanationBox = document.createElement('div');
+        explanationBox.className = 'explanation-box';
+
+        const expTitle = document.createElement('div');
+        expTitle.className = 'explanation-title';
+        expTitle.textContent = 'Chi tiết bài giải:';
+        
+        const expContent = document.createElement('div');
+        expContent.className = 'explanation-content';
+        expContent.textContent = q.e;
+
+        explanationBox.appendChild(expTitle);
+        explanationBox.appendChild(expContent);
+        qBlock.appendChild(explanationBox);
+    }
+
+    app.appendChild(qBlock);
+
+    if (!currentQuestionAnswered) {
+        nextBtn.disabled = true;
+    } else {
+        nextBtn.disabled = false;
+    }
+
+    let isDone = true;
+    for(let i=0; i<correctCounts.length; i++) {
+        if(correctCounts[i] < TARGET_MASTERY) {
+            isDone = false;
+            break;
+        }
+    }
+
+    if (isDone) {
+        nextBtn.textContent = 'Hoàn Thành & Xem Kết Quả';
+    } else {
+        nextBtn.textContent = 'Câu tiếp theo';
+    }
+}
+
+function showResults() {
+    app.innerHTML = '';
+    progressContainer.style.display = 'none';
+    progressText.style.display = 'none';
+    navigationDiv.style.display = 'none';
+    reviewTitle.style.display = 'block';
+
+    let accuracy = Math.round((questions.length * TARGET_MASTERY / totalAttempts) * 100);
+
+    resultText.textContent = 'Chúc mừng! Cậu đã thuộc lòng toàn bộ bài!';
+    
+    let compliment = '';
+    if (accuracy >= 90) {
+        compliment = 'Cậu quá xuất sắc! Độ chính xác lên tới ' + accuracy + '%, trí nhớ thật đáng nể!';
+    } else if (accuracy >= 70) {
+        compliment = 'Cậu làm rất tốt! Độ chính xác đạt ' + accuracy + '%, cứ giữ phong độ này nhé!';
+    } else {
+        compliment = 'Hoan hô tinh thần kiên trì của cậu! Độ chính xác ' + accuracy + '%, sai nhiều sẽ giúp cậu nhớ bài sâu hơn rất nhiều đó!';
+    }
+    complimentText.textContent = compliment;
+    
+    resultDiv.style.display = 'block';
+
+    questions.forEach((q, index) => {
+        const qBlock = document.createElement('div');
+        qBlock.className = 'question-block';
+
+        const qText = document.createElement('div');
+        qText.className = 'question-text';
+        qText.textContent = q.q;
+        qBlock.appendChild(qText);
+
+        const explanationBox = document.createElement('div');
+        explanationBox.className = 'explanation-box';
+        
+        const expTitle = document.createElement('div');
+        expTitle.className = 'explanation-title';
+        expTitle.textContent = 'Đáp án đúng: ' + q.o[q.a];
+        
+        const expContent = document.createElement('div');
+        expContent.className = 'explanation-content';
+        expContent.style.marginTop = '10px';
+        expContent.textContent = q.e;
+
+        explanationBox.appendChild(expTitle);
+        explanationBox.appendChild(expContent);
+        qBlock.appendChild(explanationBox);
+
+        app.appendChild(qBlock);
+    });
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+nextBtn.addEventListener('click', function() {
+    if (!currentQuestionAnswered) return;
+    
+    let nextIndex = (currentIndex + 1) % questions.length;
+    let found = false;
+    
+    for (let i = 0; i < questions.length; i++) {
+        if (correctCounts[nextIndex] < TARGET_MASTERY) {
+            currentIndex = nextIndex;
+            found = true;
+            break;
+        }
+        nextIndex = (nextIndex + 1) % questions.length;
+    }
+
+    if (found) {
+        currentQuestionAnswered = false;
+        currentSelection = null;
+        renderQuestion(currentIndex);
+    } else {
+        showResults();
+    }
+});
+
+renderQuestion(currentIndex);
+</script>
+</body>
+</html>
