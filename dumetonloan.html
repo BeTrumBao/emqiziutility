@@ -710,7 +710,10 @@ h1 {
 
         <div id="solo-result" style="display: none; text-align: center; padding: 40px; border-radius: 20px; margin-top: 20px;">
             <div id="solo-result-text" style="font-size: 32px; font-weight: 700; margin-bottom: 30px; line-height: 1.5;"></div>
-            <button onclick="exitSoloRoom()" class="nav-btn back-quiz-btn" style="background: #ffffff; color: #334155;">Rời phòng</button>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <button id="solo-remake-btn" onclick="requestRemake()" class="nav-btn next-btn" style="width: auto; padding: 15px 30px;">Chơi lại ván mới</button>
+                <button onclick="exitSoloRoom()" class="nav-btn back-quiz-btn" style="width: auto; padding: 15px 30px; margin-top: 0; background: #ffffff; color: #334155;">Rời phòng</button>
+            </div>
         </div>
     </div>
 
@@ -1065,6 +1068,8 @@ window.createSoloRoom = async function() {
         p1Rounds: 0,
         p2Rounds: 0,
         status: 'waiting',
+        remake_p1: false,
+        remake_p2: false,
         qs: shuffledQs
     });
     
@@ -1112,20 +1117,66 @@ window.joinSoloRoom = async function() {
     }
 };
 
-window.exitSoloRoom = function() {
+function forceExitToLobby(msg) {
+    if (msg) window.showSoloError(msg);
     if (soloUnsubscribe) soloUnsubscribe();
     soloRoomId = null;
     soloRoomData = null;
     window.roundResetTriggered = false;
+    hideAllModes();
+    soloModeContainer.style.display = 'block';
     document.getElementById('solo-lobby').style.display = 'block';
     document.getElementById('solo-waiting').style.display = 'none';
     document.getElementById('solo-playing').style.display = 'none';
     document.getElementById('solo-result').style.display = 'none';
     document.getElementById('solo-result').classList.remove('win-animation', 'lose-animation');
+}
+
+window.exitSoloRoom = function() {
+    if (soloRoomId) {
+        const roomRef = ref(db, 'rooms/' + soloRoomId);
+        update(roomRef, { status: 'closed' }).catch(e => console.error(e));
+    }
+    forceExitToLobby();
     hideAllModes();
     quizModeContainer.style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+window.requestRemake = async function() {
+    if (!soloRoomId || !soloRoomData) return;
+    
+    const remakeBtn = document.getElementById('solo-remake-btn');
+    if (remakeBtn) {
+        remakeBtn.textContent = 'Đang chờ đối thủ...';
+        remakeBtn.disabled = true;
+    }
+
+    const roomRef = ref(db, 'rooms/' + soloRoomId);
+    
+    let updates = {};
+    if (isPlayer1) {
+        updates.remake_p1 = true;
+    } else {
+        updates.remake_p2 = true;
+    }
+    
+    const oppRemake = isPlayer1 ? soloRoomData.remake_p2 : soloRoomData.remake_p1;
+    
+    if (oppRemake) {
+        let shuffledQs = [...questions].map((_, i) => i).sort(() => 0.5 - Math.random());
+        updates.p1Score = 0;
+        updates.p2Score = 0;
+        updates.p1Rounds = 0;
+        updates.p2Rounds = 0;
+        updates.remake_p1 = false;
+        updates.remake_p2 = false;
+        updates.status = 'playing';
+        updates.qs = shuffledQs;
+    }
+    
+    await update(roomRef, updates);
+};
 
 function listenSoloRoom() {
     if (!currentUser || !soloRoomId) return;
@@ -1135,6 +1186,11 @@ function listenSoloRoom() {
         if (!snap.exists()) return;
         const data = snap.val();
         soloRoomData = data;
+
+        if (data.status === 'closed') {
+            forceExitToLobby('Đối thủ đã rời phòng!');
+            return;
+        }
         
         if (isPlayer1 && data.status === 'playing' && document.getElementById('solo-waiting').style.display === 'block') {
             document.getElementById('solo-waiting').style.display = 'none';
@@ -1145,6 +1201,40 @@ function listenSoloRoom() {
             soloCurrentIdx = 0;
             soloMyScore = 0;
             renderSoloQuestion();
+        }
+
+        if (data.status === 'playing' && document.getElementById('solo-result').style.display === 'block') {
+            document.getElementById('solo-result').style.display = 'none';
+            document.getElementById('solo-playing').style.display = 'block';
+            document.getElementById('solo-result').classList.remove('win-animation', 'lose-animation');
+            soloQs = data.qs;
+            soloCurrentIdx = 0;
+            soloMyScore = 0;
+            soloRewardGiven = false;
+            
+            const remakeBtn = document.getElementById('solo-remake-btn');
+            if(remakeBtn) {
+                remakeBtn.textContent = 'Chơi lại ván mới';
+                remakeBtn.disabled = false;
+            }
+            
+            renderSoloQuestion();
+        }
+        
+        if (document.getElementById('solo-result').style.display === 'block') {
+            const remakeBtn = document.getElementById('solo-remake-btn');
+            if (remakeBtn) {
+                const myRemake = isPlayer1 ? data.remake_p1 : data.remake_p2;
+                const oppRemake = isPlayer1 ? data.remake_p2 : data.remake_p1;
+                
+                if (myRemake && !oppRemake) {
+                    remakeBtn.textContent = 'Đang chờ đối thủ...';
+                    remakeBtn.disabled = true;
+                } else if (!myRemake) {
+                    remakeBtn.textContent = 'Chơi lại ván mới';
+                    remakeBtn.disabled = false;
+                }
+            }
         }
         
         const myScore = isPlayer1 ? data.p1Score : data.p2Score;
@@ -1273,15 +1363,19 @@ function renderSoloQuestion() {
 }
 
 function finishSoloGame(status) {
-    if (soloUnsubscribe) soloUnsubscribe();
-    
     document.getElementById('solo-playing').style.display = 'none';
     const resultContainer = document.getElementById('solo-result');
     resultContainer.style.display = 'block';
     
     const resText = document.getElementById('solo-result-text');
+    const remakeBtn = document.getElementById('solo-remake-btn');
     
     resultContainer.classList.remove('win-animation', 'lose-animation');
+    
+    if (remakeBtn) {
+        remakeBtn.textContent = 'Chơi lại ván mới';
+        remakeBtn.disabled = false;
+    }
     
     const iWon = (isPlayer1 && status === 'p1_won') || (!isPlayer1 && status === 'p2_won');
     if (iWon) {
