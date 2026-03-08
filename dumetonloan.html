@@ -383,6 +383,23 @@ h1 {
     background: #cbd5e1;
     transform: translateY(-2px);
 }
+.frac {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 1.2;
+    margin: 0 4px;
+    font-weight: 700;
+}
+.frac .top {
+    display: block;
+    border-bottom: 2px solid currentColor;
+    padding: 0 2px;
+}
+.frac .bot {
+    display: block;
+    padding: 0 2px;
+}
 @media (max-width: 600px) {
     .container {
         padding: 20px;
@@ -470,6 +487,11 @@ h1 {
 </div>
 
 <script>
+function parseFraction(text) {
+    if (!text) return '';
+    return text.replace(/F\{([^}]+)\}\{([^}]+)\}/g, '<span class="frac"><span class="top">$1</span><span class="bot">$2</span></span>');
+}
+
 const quotes = [
     "Cậu đang làm rất tốt, cứ từ từ thôi nhé!",
     "Mệt thì nghỉ một chút, đừng ép bản thân quá nha!",
@@ -509,46 +531,46 @@ tipsBtn.addEventListener('click', function() {
 });
 
 const questions = [
-  { q: "Câu 1: Cho tỉ lệ thức a/b = c/d, khẳng định đúng là:", o: ["A. ab = cd", "B. a + b = c + d", "C. ad = cb", "D. a + c = b + d"], a: 2, e: "Tính chất cơ bản của tỉ lệ thức: tích trung tỉ luôn bằng tích ngoại tỉ (tức là tính nhân chéo ad = bc)." },
-  { q: "Câu 2: Cho tỉ lệ thức u/g = v/h, khẳng định đúng là:", o: ["A. h/g = v/u", "B. ug = vh", "C. v/h = g/u", "D. u/v = h/g"], a: 0, e: "Từ u/g = v/h, khi ta đổi chỗ hai ngoại tỉ u và h cho nhau, ta sẽ lập được tỉ lệ thức mới là h/g = v/u." },
-  { q: "Câu 3: Từ đẳng thức 25.14 = 7.50, ta có thể lập được tỉ lệ thức nào dưới đây:", o: ["A. 25/50 = 14/7", "B. 7/50 = 25/14", "C. 7/25 = 50/14", "D. 7/25 = 14/50"], a: 3, e: "Từ đẳng thức 25.14 = 7.50, chia cả hai vế cho 25.50 ta sẽ lập được tỉ lệ thức 14/50 = 7/25. Đổi vị trí hai vế ta được đáp án đúng." },
-  { q: "Câu 4: Từ đẳng thức (-8).75 = 24.(-25), ta có thể lập được tỉ lệ thức nào dưới đây:", o: ["A. 75/-25 = 24/-8", "B. (-8).(-25) = 75.24", "C. -8/75 = 24/-25", "D. -25/-8 = 24/75"], a: 0, e: "Chia hai vế của đẳng thức đề bài cho (-25).(-8), ta có thể lập được tỉ lệ thức chuẩn xác là 75/-25 = 24/-8." },
-  { q: "Câu 5: Cho x, y là hai đại lượng tỉ lệ thuận với nhau. Khẳng định nào sau đây là sai?", o: ["A. x1/y1 = x2/y2", "B. x1/x2 = y1/y2", "C. x1/y2 = x2/y1", "D. x2/y2 = x3/y3"], a: 2, e: "Đối với tỉ lệ thuận, tỉ số hai giá trị tương ứng luôn không đổi (x1/y1 = x2/y2), từ đó suy ra x1/x2 = y1/y2. Cách xếp chéo x1/y2 = x2/y1 là hoàn toàn sai." },
-  { q: "Câu 6: Cho x, y là hai đại lượng tỉ lệ nghịch với nhau. Khẳng định nào sau đây là đúng?", o: ["A. x1/y1 = x2/y2", "B. x1/x2 = y1/y2", "C. x1/y2 = x2/y1", "D. x2y3 = x3y2"], a: 2, e: "Từ tính chất tỉ lệ nghịch x1.y1 = x2.y2, ta có thể viết lại thành tỉ lệ thức x1/y2 = x2/y1 (nhân chéo sẽ ra tích ban đầu)." },
-  { q: "Câu 7: Nếu ba số a, b, c tương ứng tỉ lệ với 7; -4; 3 thì ta có dãy tỉ số bằng nhau là", o: ["A. x/7 = y/-4 = z/3", "B. a/-4 = b/7 = c/3", "C. a/7 = b/-4 = c/3", "D. a/3 = b/7 = c/-4"], a: 2, e: "Theo đúng định nghĩa, khi ba số a, b, c tỉ lệ với 7, -4, 3 ta có ngay dãy tỉ số bằng nhau: a/7 = b/-4 = c/3." },
-  { q: "Câu 8: Cho đại lượng y tỉ lệ thuận với đại lượng x theo hệ số tỉ lệ k = 7. Hệ thức liên hệ của y và x là:", o: ["A. xy = 7", "B. y = 7x", "C. y = x/7", "D. y = 7/x"], a: 1, e: "Công thức chung của đại lượng y tỉ lệ thuận với đại lượng x là y = kx. Thay hệ số k = 7 vào, ta có y = 7x." },
-  { q: "Câu 9: Nếu x/y = 6/5 thì:", o: ["A. 5 + x = 6 + y", "B. 6 - x = 5 - y", "C. 6x = 5y", "D. 5x = 6y"], a: 3, e: "Từ tỉ lệ thức x/y = 6/5, ta áp dụng quy tắc nhân chéo hai vế (tích trung tỉ bằng tích ngoại tỉ) sẽ dễ dàng có được 5x = 6y." },
-  { q: "Câu 10: Từ tỉ lệ thức a/-3 = b/7, ta có thể suy ra được:", o: ["A. a/b = 7/-3", "B. b/a = 7/-3", "C. 7x = (-3)y", "D. 7b = (-3)a"], a: 1, e: "Từ tỉ lệ thức a/-3 = b/7, ta tiến hành đổi chỗ trung tỉ a và 7 cho nhau, ta suy ra được tỉ lệ thức mới là b/a = 7/-3." },
-  { q: "Câu 11: Biết x/-9 = -5/3, giá trị của x là:", o: ["A. -5/3", "B. -15", "C. 15", "D. 3/5"], a: 2, e: "Áp dụng quy tắc nhân chéo: x.3 = (-9).(-5) suy ra 3x = 45. Vậy x = 45 / 3 = 15." },
-  { q: "Câu 12: Biết 7/x = 3/-4, giá trị của x là:", o: ["A. -3/28", "B. -28/3", "C. -21/4", "D. -4/21"], a: 1, e: "Áp dụng quy tắc nhân chéo để giải: x.3 = 7.(-4) suy ra 3x = -28. Vậy x = -28/3." },
-  { q: "Câu 13: Cho đại lượng y tỉ lệ nghịch với đại lượng x theo hệ số tỉ lệ a = 4/3. Hệ thức liên hệ của y và x là:", o: ["A. xy = 3/4", "B. y = 4/(3x)", "C. x = 4/(3y)", "D. yx = 4/3"], a: 2, e: "Đại lượng y tỉ lệ nghịch với x theo hệ số a = 4/3 nên ta có y = (4/3) / x, suy ra x.y = 4/3. Từ đó rút x ra ta được x = 4/(3y)." },
-  { q: "Câu 14: Cho x và y là hai đại lượng tỉ lệ nghịch. Biết khi x = 8 thì y = 24. Hệ số tỉ lệ là:", o: ["A. 192", "B. 3", "C. 1/3", "D. 8"], a: 0, e: "Hệ số tỉ lệ của hai đại lượng tỉ lệ nghịch chính là tích của hai giá trị đó: a = x.y = 8 . 24 = 192." },
-  { q: "Câu 15: Cho x và y là hai đại lượng tỉ lệ thuận. Biết khi x = -80 thì y = 20. Hệ số tỉ lệ của đại lượng x đối với đại lượng y là:", o: ["A. 4", "B. -4", "C. -1/4", "D. 1/4"], a: 1, e: "Gọi k là hệ số tỉ lệ của đại lượng x đối với đại lượng y (tức là x = ky). Ta tính được k = x / y = -80 / 20 = -4." },
-  { q: "Câu 16: Cho x và y là hai đại lượng tỉ lệ thuận. Biết khi x = 28 thì y = 42. Hệ số tỉ lệ của đại lượng y đối với đại lượng x là:", o: ["A. 3/4", "B. 3/2", "C. 4/3", "D. 2/3"], a: 1, e: "Gọi k là hệ số tỉ lệ của đại lượng y đối với đại lượng x (tức là y = kx). Ta tính được k = y / x = 42 / 28 = 3/2." },
-  { q: "Câu 17: Chọn khẳng định đúng:", o: ["A. a/b = c/d = (a+b)/(c+d)", "B. a/b = c/d = ab/cd", "C. a/b = c/d = (a-c)/(b+d)", "D. a/b = c/d = (a-c)/(b-d)"], a: 3, e: "Áp dụng chuẩn tính chất dãy tỉ số bằng nhau, nếu lấy hiệu hai tử số thì cũng phải lấy hiệu hai mẫu số: a/b = c/d = (a - c) / (b - d)." },
-  { q: "Câu 18: Chọn khẳng định sai:", o: ["A. a/b = c/d = e/f = (a-c+e)/(b+d-f)", "B. a/b = c/d = e/f = (a+c+e)/(b+d+f)", "C. a/b = c/d = e/f = (a-c+e)/(b-d+f)", "D. a/b = c/d = e/f = (a-c-e)/(b-d-f)"], a: 0, e: "Theo tính chất dãy tỉ số bằng nhau, dấu phép toán trên tử thế nào thì dưới mẫu phải y như vậy. Ở phương án A, tử là a-c+e nhưng mẫu lại là b+d-f (sai dấu ở vị trí c/d) nên đây là khẳng định sai." },
+  { q: "Câu 1: Cho tỉ lệ thức F{a}{b} = F{c}{d}, khẳng định đúng là:", o: ["A. ab = cd", "B. a + b = c + d", "C. ad = cb", "D. a + c = b + d"], a: 2, e: "Tính chất cơ bản của tỉ lệ thức: tích trung tỉ luôn bằng tích ngoại tỉ (tức là tính nhân chéo ad = bc)." },
+  { q: "Câu 2: Cho tỉ lệ thức F{u}{g} = F{v}{h}, khẳng định đúng là:", o: ["A. F{h}{g} = F{v}{u}", "B. ug = vh", "C. F{v}{h} = F{g}{u}", "D. F{u}{v} = F{h}{g}"], a: 0, e: "Từ F{u}{g} = F{v}{h}, khi ta đổi chỗ hai ngoại tỉ u và h cho nhau, ta sẽ lập được tỉ lệ thức mới là F{h}{g} = F{v}{u}." },
+  { q: "Câu 3: Từ đẳng thức 25.14 = 7.50, ta có thể lập được tỉ lệ thức nào dưới đây:", o: ["A. F{25}{50} = F{14}{7}", "B. F{7}{50} = F{25}{14}", "C. F{7}{25} = F{50}{14}", "D. F{7}{25} = F{14}{50}"], a: 3, e: "Từ đẳng thức 25.14 = 7.50, chia cả hai vế cho 25.50 ta sẽ lập được tỉ lệ thức F{14}{50} = F{7}{25}. Đổi vị trí hai vế ta được đáp án đúng." },
+  { q: "Câu 4: Từ đẳng thức (-8).75 = 24.(-25), ta có thể lập được tỉ lệ thức nào dưới đây:", o: ["A. F{75}{-25} = F{24}{-8}", "B. (-8).(-25) = 75.24", "C. F{-8}{75} = F{24}{-25}", "D. F{-25}{-8} = F{24}{75}"], a: 0, e: "Chia hai vế của đẳng thức đề bài cho (-25).(-8), ta có thể lập được tỉ lệ thức chuẩn xác là F{75}{-25} = F{24}{-8}." },
+  { q: "Câu 5: Cho x, y là hai đại lượng tỉ lệ thuận với nhau. Khẳng định nào sau đây là sai?", o: ["A. F{x1}{y1} = F{x2}{y2}", "B. F{x1}{x2} = F{y1}{y2}", "C. F{x1}{y2} = F{x2}{y1}", "D. F{x2}{y2} = F{x3}{y3}"], a: 2, e: "Đối với tỉ lệ thuận, tỉ số hai giá trị tương ứng luôn không đổi (F{x1}{y1} = F{x2}{y2}), từ đó suy ra F{x1}{x2} = F{y1}{y2}. Cách xếp chéo F{x1}{y2} = F{x2}{y1} là hoàn toàn sai." },
+  { q: "Câu 6: Cho x, y là hai đại lượng tỉ lệ nghịch với nhau. Khẳng định nào sau đây là đúng?", o: ["A. F{x1}{y1} = F{x2}{y2}", "B. F{x1}{x2} = F{y1}{y2}", "C. F{x1}{y2} = F{x2}{y1}", "D. x2y3 = x3y2"], a: 2, e: "Từ tính chất tỉ lệ nghịch x1.y1 = x2.y2, ta có thể viết lại thành tỉ lệ thức F{x1}{y2} = F{x2}{y1} (nhân chéo sẽ ra tích ban đầu)." },
+  { q: "Câu 7: Nếu ba số a, b, c tương ứng tỉ lệ với 7; -4; 3 thì ta có dãy tỉ số bằng nhau là", o: ["A. F{x}{7} = F{y}{-4} = F{z}{3}", "B. F{a}{-4} = F{b}{7} = F{c}{3}", "C. F{a}{7} = F{b}{-4} = F{c}{3}", "D. F{a}{3} = F{b}{7} = F{c}{-4}"], a: 2, e: "Theo đúng định nghĩa, khi ba số a, b, c tỉ lệ với 7, -4, 3 ta có ngay dãy tỉ số bằng nhau: F{a}{7} = F{b}{-4} = F{c}{3}." },
+  { q: "Câu 8: Cho đại lượng y tỉ lệ thuận với đại lượng x theo hệ số tỉ lệ k = 7. Hệ thức liên hệ của y và x là:", o: ["A. xy = 7", "B. y = 7x", "C. y = F{x}{7}", "D. y = F{7}{x}"], a: 1, e: "Công thức chung của đại lượng y tỉ lệ thuận với đại lượng x là y = kx. Thay hệ số k = 7 vào, ta có y = 7x." },
+  { q: "Câu 9: Nếu F{x}{y} = F{6}{5} thì:", o: ["A. 5 + x = 6 + y", "B. 6 - x = 5 - y", "C. 6x = 5y", "D. 5x = 6y"], a: 3, e: "Từ tỉ lệ thức F{x}{y} = F{6}{5}, ta áp dụng quy tắc nhân chéo hai vế (tích trung tỉ bằng tích ngoại tỉ) sẽ dễ dàng có được 5x = 6y." },
+  { q: "Câu 10: Từ tỉ lệ thức F{a}{-3} = F{b}{7}, ta có thể suy ra được:", o: ["A. F{a}{b} = F{7}{-3}", "B. F{b}{a} = F{7}{-3}", "C. 7x = (-3)y", "D. 7b = (-3)a"], a: 1, e: "Từ tỉ lệ thức F{a}{-3} = F{b}{7}, ta tiến hành đổi chỗ trung tỉ a và 7 cho nhau, ta suy ra được tỉ lệ thức mới là F{b}{a} = F{7}{-3}." },
+  { q: "Câu 11: Biết F{x}{-9} = F{-5}{3}, giá trị của x là:", o: ["A. F{-5}{3}", "B. -15", "C. 15", "D. F{3}{5}"], a: 2, e: "Áp dụng quy tắc nhân chéo: x.3 = (-9).(-5) suy ra 3x = 45. Vậy x = F{45}{3} = 15." },
+  { q: "Câu 12: Biết F{7}{x} = F{3}{-4}, giá trị của x là:", o: ["A. F{-3}{28}", "B. F{-28}{3}", "C. F{-21}{4}", "D. F{-4}{21}"], a: 1, e: "Áp dụng quy tắc nhân chéo để giải: x.3 = 7.(-4) suy ra 3x = -28. Vậy x = F{-28}{3}." },
+  { q: "Câu 13: Cho đại lượng y tỉ lệ nghịch với đại lượng x theo hệ số tỉ lệ a = F{4}{3}. Hệ thức liên hệ của y và x là:", o: ["A. xy = F{3}{4}", "B. y = F{4}{3x}", "C. x = F{4}{3y}", "D. yx = F{4}{3}"], a: 2, e: "Đại lượng y tỉ lệ nghịch với x theo hệ số a = F{4}{3} nên ta có y = (F{4}{3}) / x, suy ra x.y = F{4}{3}. Từ đó rút x ra ta được x = F{4}{3y}." },
+  { q: "Câu 14: Cho x và y là hai đại lượng tỉ lệ nghịch. Biết khi x = 8 thì y = 24. Hệ số tỉ lệ là:", o: ["A. 192", "B. 3", "C. F{1}{3}", "D. 8"], a: 0, e: "Hệ số tỉ lệ của hai đại lượng tỉ lệ nghịch chính là tích của hai giá trị đó: a = x.y = 8 . 24 = 192." },
+  { q: "Câu 15: Cho x và y là hai đại lượng tỉ lệ thuận. Biết khi x = -80 thì y = 20. Hệ số tỉ lệ của đại lượng x đối với đại lượng y là:", o: ["A. 4", "B. -4", "C. F{-1}{4}", "D. F{1}{4}"], a: 1, e: "Gọi k là hệ số tỉ lệ của đại lượng x đối với đại lượng y (tức là x = ky). Ta tính được k = F{x}{y} = F{-80}{20} = -4." },
+  { q: "Câu 16: Cho x và y là hai đại lượng tỉ lệ thuận. Biết khi x = 28 thì y = 42. Hệ số tỉ lệ của đại lượng y đối với đại lượng x là:", o: ["A. F{3}{4}", "B. F{3}{2}", "C. F{4}{3}", "D. F{2}{3}"], a: 1, e: "Gọi k là hệ số tỉ lệ của đại lượng y đối với đại lượng x (tức là y = kx). Ta tính được k = F{y}{x} = F{42}{28} = F{3}{2}." },
+  { q: "Câu 17: Chọn khẳng định đúng:", o: ["A. F{a}{b} = F{c}{d} = F{a+b}{c+d}", "B. F{a}{b} = F{c}{d} = F{ab}{cd}", "C. F{a}{b} = F{c}{d} = F{a-c}{b+d}", "D. F{a}{b} = F{c}{d} = F{a-c}{b-d}"], a: 3, e: "Áp dụng chuẩn tính chất dãy tỉ số bằng nhau, nếu lấy hiệu hai tử số thì cũng phải lấy hiệu hai mẫu số: F{a}{b} = F{c}{d} = F{a - c}{b - d}." },
+  { q: "Câu 18: Chọn khẳng định sai:", o: ["A. F{a}{b} = F{c}{d} = F{e}{f} = F{a-c+e}{b+d-f}", "B. F{a}{b} = F{c}{d} = F{e}{f} = F{a+c+e}{b+d+f}", "C. F{a}{b} = F{c}{d} = F{e}{f} = F{a-c+e}{b-d+f}", "D. F{a}{b} = F{c}{d} = F{e}{f} = F{a-c-e}{b-d-f}"], a: 0, e: "Theo tính chất dãy tỉ số bằng nhau, dấu phép toán trên tử thế nào thì dưới mẫu phải y như vậy. Ở phương án A, tử là a-c+e nhưng mẫu lại là b+d-f (sai dấu ở vị trí F{c}{d}) nên đây là khẳng định sai." },
   { q: "Câu 19: Cho x và y là hai đại lượng tỉ lệ thuận liên hệ với nhau bởi công thức y = 4x. Khi x = -2 thì giá trị của y là:", o: ["A. -8", "B. 8", "C. 6", "D. -6"], a: 0, e: "Ta chỉ cần thay số vào công thức: Thay x = -2 vào y = 4x ta tính ra được y = 4 . (-2) = -8." },
-  { q: "Câu 20: Cho x và y là hai đại lượng tỉ lệ thuận liên hệ với nhau bởi công thức x = -7y. Khi x = -42 thì giá trị của y là:", o: ["A. -294", "B. 294", "C. -6", "D. 6"], a: 3, e: "Thay x = -42 vào công thức x = -7y ta được phương trình -42 = -7y. Suy ra y = -42 / (-7) = 6." },
-  { q: "Câu 21: Cho x y là hai đại lượng tỉ lệ nghịch liên hệ với nhau bởi công thức xy = 20. Khi x = 10 thì giá trị của y là:", o: ["A. 2", "B. -2", "C. 10", "D. 20"], a: 0, e: "Thay x = 10 vào công thức xy = 20 ta lập được 10.y = 20. Từ đó tính được y = 20 / 10 = 2." },
-  { q: "Câu 22: Cho x và y là hai đại lượng tỉ lệ nghịch liên hệ với nhau bởi công thức y = -32/x. Khi y = 8 thì giá trị của x là:", o: ["A. -4", "B. 256", "C. 4", "D. -256"], a: 0, e: "Thay y = 8 vào công thức y = -32/x ta được 8 = -32/x. Nhân chéo tìm x, ta tính được x = -32 / 8 = -4." },
-  { q: "Câu 23: Nếu pha 5 ly nước chanh cần 7 muỗng cà phê đường thì pha 20 ly nước chanh tương tự như vậy cần bao nhiêu muỗng cà phê đường?", o: ["A. 14", "B. 27", "C. 20", "D. 28"], a: 3, e: "Số lượng ly chanh và muỗng đường là hai đại lượng tỉ lệ thuận. Số muỗng đường cần dùng là: (20 . 7) / 5 = 28 muỗng." },
-  { q: "Câu 24: Một lớp học có 39 bạn học sinh và quyên góp được số tiền 195 000 đồng ủng hộ các bạn khó khăn vui Tết. Nếu số học sinh tỉ lệ với số tiền quyên góp được thì một lớp có 43 học sinh sẽ quyên góp được số tiền là:", o: ["A. 250 000 đồng", "B. 240 000 đồng", "C. 215 000 đồng", "D. 270 000 đồng"], a: 2, e: "Số học sinh và số tiền là hai đại lượng tỉ lệ thuận. Số tiền lớp 43 học sinh quyên được là: (43 . 195000) / 39 = 215000 đồng." },
-  { q: "Câu 25: Một người đi xe máy với vận tốc 28 km/h thì tới nơi sau 9 tiếng chạy xe. Hỏi nếu người đó đi với vận tốc 36 km/h thì sau bao lâu sẽ tới nơi?", o: ["A. 16", "B. 12", "C. 7", "D. 6"], a: 2, e: "Trên cùng một quãng đường, vận tốc và thời gian là đại lượng tỉ lệ nghịch. Thời gian đi cần thiết sẽ là: (28 . 9) / 36 = 7 tiếng." },
-  { q: "Câu 26: Cho bảng sau, biết x và y là hai đại lượng tỉ lệ (thuận hay nghịch chưa rõ). x: 10, 30, 50. y: 3, 9, ?. Giá trị ở ô còn trống là:", o: ["A. 15", "B. 12", "C. 20", "D. 5"], a: 0, e: "Kiểm tra tỉ số ta thấy 10/3 = 30/9, nên suy ra x và y là tỉ lệ thuận. Giá trị ô trống y sẽ bằng: (50 . 3) / 10 = 15." },
-  { q: "Câu 27: Cho bảng sau, biết x và y là hai đại lượng tỉ lệ (thuận hay nghịch chưa rõ). x: 45, 15, 9. y: 2, ?, 10. Giá trị ở ô còn trống là:", o: ["A. 15", "B. 12", "C. 20", "D. 6"], a: 3, e: "Kiểm tra tích ta thấy 45.2 = 9.10 = 90, nên suy ra x và y là tỉ lệ nghịch. Giá trị ô trống ở giữa bằng: 90 / 15 = 6." },
-  { q: "Câu 28: Cho bảng sau, biết x và y là hai đại lượng tỉ lệ (thuận hay nghịch chưa rõ). x: 4, 8, 9. y: ?, 6, 16/3. Giá trị ở ô còn trống là:", o: ["A. 3", "B. 6", "C. 12", "D. 18"], a: 2, e: "Kiểm tra các cặp số có sẵn, ta thấy tích 8.6 = 9.(16/3) = 48, vậy x và y tỉ lệ nghịch. Giá trị ô trống đầu tiên y bằng: 48 / 4 = 12." },
-  { q: "Câu 29: Cho bảng sau, biết x và y là hai đại lượng tỉ lệ (thuận hay nghịch chưa rõ). x: 63, 21, 9. y: 51, ?, 51/7. Giá trị ở ô còn trống là:", o: ["A. 17", "B. 16", "C. 15", "D. 14"], a: 0, e: "Kiểm tra tỉ số 63/51 và 9/(51/7) ta thấy đều bằng 21/17, vậy hai đại lượng x và y tỉ lệ thuận. Giá trị ô trống là y = 21 / (21/17) = 17." },
-  { q: "Câu 30: Một chiếc ô tô trong 2 giờ 42 phút đi được quãng đường dài 170,1 km. Nếu tổng thời gian di chuyển của xe là 4 giờ thì quãng đường chiếc xe ấy đã đi là bao nhiêu km?", o: ["A. 250", "B. 252", "C. 301,5", "D. 311,2"], a: 1, e: "Ta đổi 2 giờ 42 phút bằng 2,7 giờ. Quãng đường và thời gian ở đây là đại lượng tỉ lệ thuận. Quãng đường chiếc xe đi được trong 4 giờ là: (4 . 170,1) / 2,7 = 252 km." },
-  { q: "Câu 31: Nhóm công nhân gồm 4 người thực hiện sửa chữa một đoạn đường trong 21 ngày. Nếu muốn công việc hoàn thành sớm chỉ vỏn vẹn trong 7 ngày thì cần thêm:", o: ["A. 12 người", "B. 8 người", "C. 4 người", "D. 3 người"], a: 1, e: "Số lượng người và số ngày hoàn thành công việc là hai đại lượng tỉ lệ nghịch. Để xong trong 7 ngày cần (4 . 21) / 7 = 12 người. Vậy cần điều thêm: 12 - 4 = 8 người nữa." },
-  { q: "Câu 32: Cho đại lượng y tỉ lệ thuận với đại lượng x theo hệ số tỉ lệ k = -8. Khẳng định đúng là:", o: ["A. xy = -8", "B. x = -8y", "C. y/x = -8", "D. y = -8/x"], a: 2, e: "Đại lượng y tỉ lệ thuận với x theo hệ số k = -8 nên ta có công thức y = -8x. Suy ra y/x = -8. Vậy đáp án C là chính xác." },
-  { q: "Câu 33: Cho đại lượng y tỉ lệ nghịch với đại lượng x theo hệ số tỉ lệ a = 24. Khẳng định đúng là:", o: ["A. xy = -24", "B. x = 24y", "C. y/x = 24", "D. y = 24/x"], a: 3, e: "Công thức cơ bản của đại lượng tỉ lệ nghịch là y = a/x. Thay hệ số 24 vào, ta được phương trình y = 24/x (hoặc tích xy = 24)." },
-  { q: "Câu 34: Cho đại lượng y tỉ lệ thuận với đại lượng x theo hệ số tỉ lệ k = 9. Vậy đại lượng x tỉ lệ thuận với đại lượng y theo hệ số tỉ lệ là:", o: ["A. 9", "B. -9", "C. 1/9", "D. -1/9"], a: 2, e: "Ta có công thức ban đầu là y = 9x. Rút x ra, ta suy ra được x = (1/9)y. Như vậy đại lượng x tỉ lệ thuận với đại lượng y theo hệ số là 1/9." },
-  { q: "Câu 35: Cho đại lượng m tỉ lệ nghịch với đại lượng n theo hệ số tỉ lệ a = -21. Vậy đại lượng n tỉ lệ nghịch với đại lượng m theo hệ số tỉ lệ là:", o: ["A. 21", "B. -21", "C. 1/21", "D. -1/21"], a: 3, e: "Định nghĩa của đại lượng tỉ lệ nghịch là tích của hai biến không đổi. Ta có m.n = -21, suy ra đại lượng n cũng tỉ lệ nghịch với đại lượng m theo cùng hệ số đó là -21." },
-  { q: "Câu 36: Bạn Mai đọc được 48 trang của một quyển sách dày 311 trang trong 3 ngày. Nếu giữ nguyên tốc độ đọc này, bạn Mai sẽ đọc xong quyển sách trong bao nhiêu ngày?", o: ["A. 18 ngày", "B. 19 ngày", "C. 20 ngày", "D. 21 ngày"], a: 2, e: "Tốc độ đọc của Mai: 48 / 3 = 16 trang/ngày. Số ngày cần để đọc xong 311 trang là: 311 / 16 = 19,4375 ngày. Vì số ngày thực tế phải làm tròn lên để đọc hết, nên Mai sẽ đọc xong trong 20 ngày." },
-  { q: "Câu 37: Cho đại lượng y tỉ lệ thuận với đại lượng x. Biết khi x = 40 thì y = 24, vậy khi x = 5 thì:", o: ["A. y = 3", "B. y = 4", "C. y = 5", "D. y = 6"], a: 0, e: "Tính hệ số tỉ lệ k = y/x = 24/40 = 3/5. Ta có công thức y = (3/5)x. Khi x = 5 thì giá trị của y sẽ bằng (3/5) . 5 = 3." },
-  { q: "Câu 38: Cho đại lượng y tỉ lệ thuận với đại lượng x. Biết khi x = 15 thì y = 60, vậy khi y = 1 thì:", o: ["A. x = 1", "B. x = 4", "C. x = 1/4", "D. x = 1/8"], a: 2, e: "Tính hệ số tỉ lệ k = y/x = 60/15 = 4. Ta có phương trình y = 4x. Thay y = 1 vào, ta tính ra được x = 1/4." },
-  { q: "Câu 39: Cho đại lượng m tỉ lệ nghịch với đại lượng n. Biết khi m = 9 thì n = 90, vậy khi n = 30 thì:", o: ["A. m = -3", "B. m = 3", "C. m = -27", "D. m = 27"], a: 3, e: "Hệ số tỉ lệ nghịch của bài toán là a = m.n = 9 . 90 = 810. Do đó khi n = 30 thì giá trị của m tính được là: 810 / 30 = 27." },
-  { q: "Câu 40: Ba lớp 7A, 7B, 7C cùng thực hiện chế tác đồ dùng từ vật liệu tái chế. Sau buổi sáng, tổng cộng 21 món đồ được làm ra. Lớp 7A có 36 học sinh, lớp 7B có 42 học sinh và lớp 7C có 48 học sinh. Số học sinh của mỗi lớp tỉ lệ thuận với số món đồ mà lớp đó làm được. Số món đồ lớp 7B làm được là:", o: ["A. 5", "B. 6", "C. 7", "D. 8"], a: 2, e: "Gọi số món đồ lớp 7A, 7B, 7C làm được lần lượt là a, b, c. Dùng tính chất dãy tỉ số bằng nhau: a/36 = b/42 = c/48 = (a+b+c)/(36+42+48) = 21/126 = 1/6. Lớp 7B làm được là: b = 42 . (1/6) = 7 món đồ." }
+  { q: "Câu 20: Cho x và y là hai đại lượng tỉ lệ thuận liên hệ với nhau bởi công thức x = -7y. Khi x = -42 thì giá trị của y là:", o: ["A. -294", "B. 294", "C. -6", "D. 6"], a: 3, e: "Thay x = -42 vào công thức x = -7y ta được phương trình -42 = -7y. Suy ra y = F{-42}{-7} = 6." },
+  { q: "Câu 21: Cho x y là hai đại lượng tỉ lệ nghịch liên hệ với nhau bởi công thức xy = 20. Khi x = 10 thì giá trị của y là:", o: ["A. 2", "B. -2", "C. 10", "D. 20"], a: 0, e: "Thay x = 10 vào công thức xy = 20 ta lập được 10.y = 20. Từ đó tính được y = F{20}{10} = 2." },
+  { q: "Câu 22: Cho x và y là hai đại lượng tỉ lệ nghịch liên hệ với nhau bởi công thức y = F{-32}{x}. Khi y = 8 thì giá trị của x là:", o: ["A. -4", "B. 256", "C. 4", "D. -256"], a: 0, e: "Thay y = 8 vào công thức y = F{-32}{x} ta được 8 = F{-32}{x}. Nhân chéo tìm x, ta tính được x = F{-32}{8} = -4." },
+  { q: "Câu 23: Nếu pha 5 ly nước chanh cần 7 muỗng cà phê đường thì pha 20 ly nước chanh tương tự như vậy cần bao nhiêu muỗng cà phê đường?", o: ["A. 14", "B. 27", "C. 20", "D. 28"], a: 3, e: "Số lượng ly chanh và muỗng đường là hai đại lượng tỉ lệ thuận. Số muỗng đường cần dùng là: F{20 . 7}{5} = 28 muỗng." },
+  { q: "Câu 24: Một lớp học có 39 bạn học sinh và quyên góp được số tiền 195 000 đồng ủng hộ các bạn khó khăn vui Tết. Nếu số học sinh tỉ lệ với số tiền quyên góp được thì một lớp có 43 học sinh sẽ quyên góp được số tiền là:", o: ["A. 250 000 đồng", "B. 240 000 đồng", "C. 215 000 đồng", "D. 270 000 đồng"], a: 2, e: "Số học sinh và số tiền là hai đại lượng tỉ lệ thuận. Số tiền lớp 43 học sinh quyên được là: F{43 . 195000}{39} = 215000 đồng." },
+  { q: "Câu 25: Một người đi xe máy với vận tốc 28 km/h thì tới nơi sau 9 tiếng chạy xe. Hỏi nếu người đó đi với vận tốc 36 km/h thì sau bao lâu sẽ tới nơi?", o: ["A. 16", "B. 12", "C. 7", "D. 6"], a: 2, e: "Trên cùng một quãng đường, vận tốc và thời gian là đại lượng tỉ lệ nghịch. Thời gian đi cần thiết sẽ là: F{28 . 9}{36} = 7 tiếng." },
+  { q: "Câu 26: Cho bảng sau, biết x và y là hai đại lượng tỉ lệ (thuận hay nghịch chưa rõ). x: 10, 30, 50. y: 3, 9, ?. Giá trị ở ô còn trống là:", o: ["A. 15", "B. 12", "C. 20", "D. 5"], a: 0, e: "Kiểm tra tỉ số ta thấy F{10}{3} = F{30}{9}, nên suy ra x và y là tỉ lệ thuận. Giá trị ô trống y sẽ bằng: F{50 . 3}{10} = 15." },
+  { q: "Câu 27: Cho bảng sau, biết x và y là hai đại lượng tỉ lệ (thuận hay nghịch chưa rõ). x: 45, 15, 9. y: 2, ?, 10. Giá trị ở ô còn trống là:", o: ["A. 15", "B. 12", "C. 20", "D. 6"], a: 3, e: "Kiểm tra tích ta thấy 45.2 = 9.10 = 90, nên suy ra x và y là tỉ lệ nghịch. Giá trị ô trống ở giữa bằng: F{90}{15} = 6." },
+  { q: "Câu 28: Cho bảng sau, biết x và y là hai đại lượng tỉ lệ (thuận hay nghịch chưa rõ). x: 4, 8, 9. y: ?, 6, F{16}{3}. Giá trị ở ô còn trống là:", o: ["A. 3", "B. 6", "C. 12", "D. 18"], a: 2, e: "Kiểm tra các cặp số có sẵn, ta thấy tích 8.6 = 9.(F{16}{3}) = 48, vậy x và y tỉ lệ nghịch. Giá trị ô trống đầu tiên y bằng: F{48}{4} = 12." },
+  { q: "Câu 29: Cho bảng sau, biết x và y là hai đại lượng tỉ lệ (thuận hay nghịch chưa rõ). x: 63, 21, 9. y: 51, ?, F{51}{7}. Giá trị ở ô còn trống là:", o: ["A. 17", "B. 16", "C. 15", "D. 14"], a: 0, e: "Kiểm tra tỉ số F{63}{51} và 9 : F{51}{7} ta thấy đều bằng F{21}{17}, vậy hai đại lượng x và y tỉ lệ thuận. Giá trị ô trống là y = 21 : F{21}{17} = 17." },
+  { q: "Câu 30: Một chiếc ô tô trong 2 giờ 42 phút đi được quãng đường dài 170,1 km. Nếu tổng thời gian di chuyển của xe là 4 giờ thì quãng đường chiếc xe ấy đã đi là bao nhiêu km?", o: ["A. 250", "B. 252", "C. 301,5", "D. 311,2"], a: 1, e: "Ta đổi 2 giờ 42 phút bằng 2,7 giờ. Quãng đường và thời gian ở đây là đại lượng tỉ lệ thuận. Quãng đường chiếc xe đi được trong 4 giờ là: F{4 . 170,1}{2,7} = 252 km." },
+  { q: "Câu 31: Nhóm công nhân gồm 4 người thực hiện sửa chữa một đoạn đường trong 21 ngày. Nếu muốn công việc hoàn thành sớm chỉ vỏn vẹn trong 7 ngày thì cần thêm:", o: ["A. 12 người", "B. 8 người", "C. 4 người", "D. 3 người"], a: 1, e: "Số lượng người và số ngày hoàn thành công việc là hai đại lượng tỉ lệ nghịch. Để xong trong 7 ngày cần F{4 . 21}{7} = 12 người. Vậy cần điều thêm: 12 - 4 = 8 người nữa." },
+  { q: "Câu 32: Cho đại lượng y tỉ lệ thuận với đại lượng x theo hệ số tỉ lệ k = -8. Khẳng định đúng là:", o: ["A. xy = -8", "B. x = -8y", "C. F{y}{x} = -8", "D. y = F{-8}{x}"], a: 2, e: "Đại lượng y tỉ lệ thuận với x theo hệ số k = -8 nên ta có công thức y = -8x. Suy ra F{y}{x} = -8. Vậy đáp án C là chính xác." },
+  { q: "Câu 33: Cho đại lượng y tỉ lệ nghịch với đại lượng x theo hệ số tỉ lệ a = 24. Khẳng định đúng là:", o: ["A. xy = -24", "B. x = 24y", "C. F{y}{x} = 24", "D. y = F{24}{x}"], a: 3, e: "Công thức cơ bản của đại lượng tỉ lệ nghịch là y = F{a}{x}. Thay hệ số 24 vào, ta được phương trình y = F{24}{x} (hoặc tích xy = 24)." },
+  { q: "Câu 34: Cho đại lượng y tỉ lệ thuận với đại lượng x theo hệ số tỉ lệ k = 9. Vậy đại lượng x tỉ lệ thuận với đại lượng y theo hệ số tỉ lệ là:", o: ["A. 9", "B. -9", "C. F{1}{9}", "D. F{-1}{9}"], a: 2, e: "Ta có công thức ban đầu là y = 9x. Rút x ra, ta suy ra được x = (F{1}{9})y. Như vậy đại lượng x tỉ lệ thuận với đại lượng y theo hệ số là F{1}{9}." },
+  { q: "Câu 35: Cho đại lượng m tỉ lệ nghịch với đại lượng n theo hệ số tỉ lệ a = -21. Vậy đại lượng n tỉ lệ nghịch với đại lượng m theo hệ số tỉ lệ là:", o: ["A. 21", "B. -21", "C. F{1}{21}", "D. F{-1}{21}"], a: 3, e: "Định nghĩa của đại lượng tỉ lệ nghịch là tích của hai biến không đổi. Ta có m.n = -21, suy ra đại lượng n cũng tỉ lệ nghịch với đại lượng m theo cùng hệ số đó là -21." },
+  { q: "Câu 36: Bạn Mai đọc được 48 trang của một quyển sách dày 311 trang trong 3 ngày. Nếu giữ nguyên tốc độ đọc này, bạn Mai sẽ đọc xong quyển sách trong bao nhiêu ngày?", o: ["A. 18 ngày", "B. 19 ngày", "C. 20 ngày", "D. 21 ngày"], a: 2, e: "Tốc độ đọc của Mai: F{48}{3} = 16 trang/ngày. Số ngày cần để đọc xong 311 trang là: F{311}{16} = 19,4375 ngày. Vì số ngày thực tế phải làm tròn lên để đọc hết, nên Mai sẽ đọc xong trong 20 ngày." },
+  { q: "Câu 37: Cho đại lượng y tỉ lệ thuận với đại lượng x. Biết khi x = 40 thì y = 24, vậy khi x = 5 thì:", o: ["A. y = 3", "B. y = 4", "C. y = 5", "D. y = 6"], a: 0, e: "Tính hệ số tỉ lệ k = F{y}{x} = F{24}{40} = F{3}{5}. Ta có công thức y = (F{3}{5})x. Khi x = 5 thì giá trị của y sẽ bằng (F{3}{5}) . 5 = 3." },
+  { q: "Câu 38: Cho đại lượng y tỉ lệ thuận với đại lượng x. Biết khi x = 15 thì y = 60, vậy khi y = 1 thì:", o: ["A. x = 1", "B. x = 4", "C. x = F{1}{4}", "D. x = F{1}{8}"], a: 2, e: "Tính hệ số tỉ lệ k = F{y}{x} = F{60}{15} = 4. Ta có phương trình y = 4x. Thay y = 1 vào, ta tính ra được x = F{1}{4}." },
+  { q: "Câu 39: Cho đại lượng m tỉ lệ nghịch với đại lượng n. Biết khi m = 9 thì n = 90, vậy khi n = 30 thì:", o: ["A. m = -3", "B. m = 3", "C. m = -27", "D. m = 27"], a: 3, e: "Hệ số tỉ lệ nghịch của bài toán là a = m.n = 9 . 90 = 810. Do đó khi n = 30 thì giá trị của m tính được là: F{810}{30} = 27." },
+  { q: "Câu 40: Ba lớp 7A, 7B, 7C cùng thực hiện chế tác đồ dùng từ vật liệu tái chế. Sau buổi sáng, tổng cộng 21 món đồ được làm ra. Lớp 7A có 36 học sinh, lớp 7B có 42 học sinh và lớp 7C có 48 học sinh. Số học sinh của mỗi lớp tỉ lệ thuận với số món đồ mà lớp đó làm được. Số món đồ lớp 7B làm được là:", o: ["A. 5", "B. 6", "C. 7", "D. 8"], a: 2, e: "Gọi số món đồ lớp 7A, 7B, 7C làm được lần lượt là a, b, c. Dùng tính chất dãy tỉ số bằng nhau: F{a}{36} = F{b}{42} = F{c}{48} = F{a+b+c}{36+42+48} = F{21}{126} = F{1}{6}. Lớp 7B làm được là: b = 42 . (F{1}{6}) = 7 món đồ." }
 ];
 
 const TARGET_MASTERY = 2;
@@ -597,7 +619,7 @@ function renderStudyMode() {
 
     const qText = document.createElement('div');
     qText.className = 'study-q';
-    qText.textContent = q.q;
+    qText.innerHTML = parseFraction(q.q);
     card.appendChild(qText);
 
     if (!isStudyFlipped) {
@@ -613,11 +635,11 @@ function renderStudyMode() {
     } else {
         const aText = document.createElement('div');
         aText.className = 'study-a';
-        aText.textContent = 'Đáp án đúng: ' + q.o[q.a];
+        aText.innerHTML = 'Đáp án đúng: ' + parseFraction(q.o[q.a]);
 
         const eText = document.createElement('div');
         eText.className = 'study-e';
-        eText.textContent = 'Giải thích: ' + q.e;
+        eText.innerHTML = 'Giải thích: ' + parseFraction(q.e);
 
         card.appendChild(aText);
         card.appendChild(eText);
@@ -714,7 +736,7 @@ function renderQuestion(index) {
 
     const qText = document.createElement('div');
     qText.className = 'question-text';
-    qText.textContent = q.q;
+    qText.innerHTML = parseFraction(q.q);
     qBlock.appendChild(qText);
 
     const optionsGrid = document.createElement('div');
@@ -723,7 +745,7 @@ function renderQuestion(index) {
     q.o.forEach((optText, optIndex) => {
         const btn = document.createElement('button');
         btn.className = 'option-btn';
-        btn.textContent = optText;
+        btn.innerHTML = parseFraction(optText);
 
         if (currentQuestionAnswered) {
             btn.disabled = true;
@@ -823,7 +845,7 @@ function renderQuestion(index) {
         
         const expContent = document.createElement('div');
         expContent.className = 'explanation-content';
-        expContent.textContent = q.e;
+        expContent.innerHTML = parseFraction(q.e);
 
         explanationBox.appendChild(expTitle);
         explanationBox.appendChild(expContent);
@@ -882,7 +904,7 @@ function showResults() {
 
         const qText = document.createElement('div');
         qText.className = 'question-text';
-        qText.textContent = q.q;
+        qText.innerHTML = parseFraction(q.q);
         qBlock.appendChild(qText);
 
         const explanationBox = document.createElement('div');
@@ -890,12 +912,12 @@ function showResults() {
         
         const expTitle = document.createElement('div');
         expTitle.className = 'explanation-title';
-        expTitle.textContent = 'Đáp án đúng: ' + q.o[q.a];
+        expTitle.innerHTML = 'Đáp án đúng: ' + parseFraction(q.o[q.a]);
         
         const expContent = document.createElement('div');
         expContent.className = 'explanation-content';
         expContent.style.marginTop = '10px';
-        expContent.textContent = q.e;
+        expContent.innerHTML = parseFraction(q.e);
 
         explanationBox.appendChild(expTitle);
         explanationBox.appendChild(expContent);
