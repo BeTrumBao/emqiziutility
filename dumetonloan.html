@@ -48,62 +48,27 @@ h1 {
     border: none;
     padding: 12px 24px;
     border-radius: 999px;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     font-family: inherit;
     color: white;
 }
-.solo-btn {
-    background: #dc2626;
-}
-.solo-btn:hover {
-    background: #ef4444;
-    transform: translateY(-2px);
-}
-.shop-btn {
-    background: #0d9488;
-}
-.shop-btn:hover {
-    background: #14b8a6;
-    transform: translateY(-2px);
-}
-.tips-btn {
-    background: #059669;
-}
-.tips-btn:hover {
-    background: #10b981;
-    transform: translateY(-2px);
-}
-.motivate-btn {
-    background: #ea580c;
-}
-.motivate-btn:hover {
-    background: #f97316;
-    transform: translateY(-2px);
-}
-.study-btn {
-    background: #4f46e5;
-}
-.study-btn:hover {
-    background: #6366f1;
-    transform: translateY(-2px);
-}
-.match-btn {
-    background: #c026d3;
-}
-.match-btn:hover {
-    background: #d946ef;
-    transform: translateY(-2px);
-}
-.wrong-btn {
-    background: #7c3aed;
-}
-.wrong-btn:hover {
-    background: #8b5cf6;
-    transform: translateY(-2px);
-}
+.solo-btn { background: #dc2626; }
+.solo-btn:hover { background: #ef4444; transform: translateY(-2px); }
+.shop-btn { background: #0d9488; }
+.shop-btn:hover { background: #14b8a6; transform: translateY(-2px); }
+.tips-btn { background: #059669; }
+.tips-btn:hover { background: #10b981; transform: translateY(-2px); }
+.motivate-btn { background: #ea580c; }
+.motivate-btn:hover { background: #f97316; transform: translateY(-2px); }
+.study-btn { background: #4f46e5; }
+.study-btn:hover { background: #6366f1; transform: translateY(-2px); }
+.match-btn { background: #c026d3; }
+.match-btn:hover { background: #d946ef; transform: translateY(-2px); }
+.wrong-btn { background: #7c3aed; }
+.wrong-btn:hover { background: #8b5cf6; transform: translateY(-2px); }
 .info-msg {
     margin-bottom: 25px;
     padding: 20px;
@@ -159,6 +124,38 @@ h1 {
     border-radius: 16px;
     border: 1px solid #1e293b;
 }
+.filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #1e293b;
+    border-radius: 16px;
+    border: 1px solid #334155;
+    justify-content: center;
+}
+.filter-btn {
+    background: #0f172a;
+    color: #94a3b8;
+    border: 1px solid #334155;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+.filter-btn:hover {
+    background: #334155;
+    color: #f8fafc;
+}
+.filter-active {
+    background: #3b82f6;
+    color: white;
+    border-color: #3b82f6;
+}
 .bet-container {
     display: flex;
     align-items: center;
@@ -167,10 +164,10 @@ h1 {
     flex-wrap: wrap;
     font-weight: 500;
     color: #cbd5e1;
-    font-size: 16px;
+    font-size: 15px;
 }
 .bet-btn {
-    padding: 10px 18px;
+    padding: 8px 16px;
     border-radius: 999px;
     border: 1px solid #334155;
     background: #1e293b;
@@ -179,7 +176,7 @@ h1 {
     color: #94a3b8;
     transition: all 0.2s ease;
     font-family: inherit;
-    font-size: 15px;
+    font-size: 14px;
 }
 .bet-btn:hover:not(:disabled) {
     background: #334155;
@@ -416,7 +413,7 @@ h1 {
 .study-nav-row {
     display: flex;
     justify-content: space-between;
-    gap: 15px;
+    gap: 10px;
     margin-top: 25px;
 }
 .flashcard-btn {
@@ -440,6 +437,13 @@ h1 {
 }
 .give-up-btn:hover {
     background: #475569;
+}
+.pass-btn {
+    background: #c026d3;
+    color: white;
+}
+.pass-btn:hover {
+    background: #d946ef;
 }
 .match-grid {
     display: grid;
@@ -483,7 +487,7 @@ h1 {
 .match-wrong {
     background-color: #7f1d1d;
     border-color: #ef4444;
-    animation: shake 0.4s ease;
+    animation: matchShake 0.4s ease;
 }
 .match-win-msg {
     text-align: center;
@@ -508,12 +512,14 @@ h1 {
     color: white;
     padding: 40px;
     border-radius: 28px;
+    animation: winPulseBg 2s infinite alternate;
 }
 .lose-animation {
     background: #1e293b;
     color: #94a3b8;
     padding: 40px;
     border-radius: 28px;
+    animation: loseShake 0.5s ease;
 }
 .arrange-pool {
     display: flex;
@@ -555,46 +561,134 @@ h1 {
 .word-btn:active {
     transform: scale(0.95);
 }
+#bo3-intro-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(2, 6, 23, 0.98);
+    z-index: 9999;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.vs-text {
+    font-size: 80px;
+    font-weight: 700;
+    color: #ef4444;
+    text-shadow: 0 0 40px rgba(239, 68, 68, 0.8);
+    animation: vsZoom 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.player-text {
+    font-size: 35px;
+    font-weight: 700;
+    color: #60a5fa;
+    margin: 30px;
+    animation: fadeIn 1s ease forwards;
+    text-transform: uppercase;
+}
+#bo3-round-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9998;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+.round-win-bg {
+    background: rgba(6, 78, 59, 0.9);
+    animation: flashWin 0.6s ease forwards;
+}
+.round-lose-bg {
+    background: rgba(127, 29, 29, 0.9);
+    animation: flashLose 0.6s ease forwards;
+}
+.round-text {
+    font-size: 55px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-shadow: 0 5px 25px rgba(0,0,0,0.6);
+}
+.round-text-win {
+    color: #34d399;
+    animation: winPulseText 1s infinite alternate;
+}
+.round-text-lose {
+    color: #fca5a5;
+    animation: textShake 0.4s infinite;
+}
+@keyframes vsZoom {
+    0% { transform: scale(0) rotate(-10deg); opacity: 0; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+@keyframes flashWin {
+    0% { background: rgba(16, 185, 129, 1); }
+    100% { background: rgba(6, 78, 59, 0.85); }
+}
+@keyframes flashLose {
+    0% { background: rgba(239, 68, 68, 1); }
+    100% { background: rgba(127, 29, 29, 0.85); }
+}
+@keyframes winPulseText {
+    0% { transform: scale(1); text-shadow: 0 5px 25px rgba(52, 211, 153, 0.4); }
+    100% { transform: scale(1.1); text-shadow: 0 5px 40px rgba(52, 211, 153, 0.8); }
+}
+@keyframes textShake {
+    0%, 100% { transform: translateX(0) rotate(0deg); }
+    25% { transform: translateX(-8px) rotate(-2deg); }
+    75% { transform: translateX(8px) rotate(2deg); }
+}
+@keyframes winPulseBg {
+    0% { box-shadow: 0 0 20px rgba(6, 78, 59, 0.5); }
+    100% { box-shadow: 0 0 50px rgba(16, 185, 129, 0.8); transform: scale(1.02); }
+}
+@keyframes loseShake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-10px); }
+    40%, 80% { transform: translateX(10px); }
+}
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-@keyframes shake {
+@keyframes matchShake {
     0%, 100% {transform: translateX(0);}
     25% {transform: translateX(-5px);}
     75% {transform: translateX(5px);}
 }
 @media (max-width: 600px) {
-    .container {
-        padding: 20px;
-    }
-    h1 {
-        font-size: 22px;
-    }
-    .question-text {
-        font-size: 16px;
-    }
-    .option-btn {
-        font-size: 15px;
-        padding: 15px;
-    }
-    .nav-btn {
-        padding: 15px;
-        font-size: 15px;
-    }
-    .header-actions {
-        flex-direction: column;
-    }
-    .action-btn {
-        width: 100%;
-    }
-    .match-grid {
-        grid-template-columns: 1fr;
-    }
+    .container { padding: 20px; }
+    h1 { font-size: 22px; }
+    .question-text { font-size: 16px; }
+    .option-btn { font-size: 15px; padding: 15px; }
+    .nav-btn { padding: 15px; font-size: 15px; }
+    .header-actions { flex-direction: column; }
+    .action-btn { width: 100%; }
+    .match-grid { grid-template-columns: 1fr; }
+    .vs-text { font-size: 50px; }
+    .player-text { font-size: 24px; }
+    .round-text { font-size: 35px; text-align: center; }
+    .study-nav-row { flex-direction: column; }
 }
 </style>
 </head>
 <body>
+
+<div id="bo3-intro-overlay">
+    <div class="player-text">CẬU</div>
+    <div class="vs-text">VS</div>
+    <div class="player-text">ĐỐI THỦ</div>
+</div>
+
+<div id="bo3-round-overlay">
+    <div id="bo3-round-text" class="round-text"></div>
+</div>
 
 <div class="container">
     <h1>KHTN 7 - QUANG HỢP & HÔ HẤP</h1>
@@ -726,6 +820,14 @@ h1 {
         <div id="coin-display" class="coin-display">Tài sản hiện tại: 1000 Xu</div>
         <div id="inventory-display" class="inventory-display">Kho đồ: 0 Thẻ Pass | 0 Thẻ 50/50 | 0 Thẻ Bảo Vệ</div>
 
+        <div class="filter-container">
+            <button class="filter-btn filter-active" onclick="setFilter('all')">Tất cả bài học</button>
+            <button class="filter-btn" onclick="setFilter('mc')">Chỉ Trắc nghiệm</button>
+            <button class="filter-btn" onclick="setFilter('arrange')">Chỉ Tự luận</button>
+            <button class="filter-btn" onclick="setFilter('quanghop')">Chủ đề: Quang hợp</button>
+            <button class="filter-btn" onclick="setFilter('hohap')">Chủ đề: Hô hấp</button>
+        </div>
+
         <div id="result" class="result-container">
             <div id="result-text" class="result-text"></div>
             <div id="compliment-text" class="compliment-text"></div>
@@ -832,26 +934,27 @@ tipsBtn.addEventListener('click', function() {
     }
 });
 
-const questions = [
-    { type: 'mc', q: "Quá trình quang hợp có ở?", o: ["A. Động vật có xương sống", "B. Bò sát", "C. Thực vật", "D. Côn trùng"], a: 2, e: "Quang hợp là quá trình đặc trưng xảy ra ở thực vật, tảo và một số vi khuẩn." },
-    { type: 'mc', q: "Khi nhiệt độ môi trường quá cao (trên 40 độ C), cường độ quang hợp thường:", o: ["A. Tăng mạnh", "B. Không thay đổi", "C. Giảm hoặc dừng lại", "D. Đạt mức tối ưu"], a: 2, e: "Nhiệt độ quá cao sẽ làm biến tính enzyme, khiến khí khổng đóng lại để chống mất nước, làm giảm hoặc ngừng quang hợp." },
-    { type: 'mc', q: "Quá trình quang hợp diễn ra chủ yếu ở đâu?", o: ["A. Lá cây", "B. Thân cây", "C. Rễ cây", "D. Quả"], a: 0, e: "Lá cây có diện tích bề mặt lớn và chứa nhiều lục lạp, là cơ quan thực hiện quang hợp chủ yếu của cây." },
-    { type: 'mc', q: "Vì sao lá cây thường có màu xanh lục?", o: ["A. Vì lá cây chứa nhiều sắc tố diệp lục", "B. Vì lá hấp thụ toàn bộ ánh sáng xanh", "C. Vì lá chứa nhiều anthocyanin", "D. Cần màu xanh để xua đuổi côn trùng"], a: 0, e: "Lá có màu xanh do chứa nhiều sắc tố diệp lục (chlorophyll). Diệp lục không hấp thụ ánh sáng màu xanh lục mà phản xạ lại mắt chúng ta." },
-    { type: 'mc', q: "Khí khổng tập trung chủ yếu ở mặt dưới của lá có tác dụng chính là:", o: ["A. Ngăn cản ánh sáng mặt trời", "B. Hạn chế thoát hơi nước quá mức và trao đổi khí", "C. Hút nước từ môi trường không khí", "D. Bảo vệ lá khỏi sâu bệnh"], a: 1, e: "Khí khổng ở mặt dưới giúp tránh ánh sáng trực tiếp, hạn chế sự mất nước do bay hơi nhưng vẫn đảm bảo sự trao đổi khí." },
-    { type: 'mc', q: "Nhóm cây nào sau đây có phiến lá biến đổi để thích nghi với môi trường khô hạn nhưng vẫn quang hợp bằng thân?", o: ["A. Cây lúa, cây ngô", "B. Cây xương rồng, cây cành giao", "C. Cây hoa hồng, mai", "D. Cây bàng, phượng"], a: 1, e: "Xương rồng, cành giao biến lá thành gai để giảm thoát hơi nước, thân có màu xanh chứa diệp lục để quang hợp." },
-    { type: 'mc', q: "Tại sao khi trời nắng, đứng dưới bóng cây thường mát mẻ dễ chịu hơn dùng ô che?", o: ["A. Do cây thoát hơi nước làm giảm nhiệt độ", "B. Do bóng mát to rộng hơn ô", "C. Do cây tạo ra oxygen", "D. Đáp án khác"], a: 0, e: "Cây thoát hơi nước (chiếm 99% lượng nước hút vào), quá trình bay hơi thu nhiệt làm môi trường xung quanh mát mẻ." },
-    { type: 'mc', q: "Trong phương trình quang hợp, yếu tố nào đóng vai trò là điều kiện (không phải nguyên liệu)?", o: ["A. Nước", "B. Carbon dioxide", "C. Ánh sáng và diệp lục", "D. Glucose"], a: 2, e: "Ánh sáng cung cấp năng lượng, diệp lục hấp thụ năng lượng đó. Chúng là điều kiện để phản ứng xảy ra." },
-    { type: 'mc', q: "Hô hấp tế bào là:", o: ["A. Quá trình tổng hợp chất hữu cơ", "B. Quá trình phân giải chất hữu cơ bên ngoài tế bào", "C. Là quá trình phân giải chất hữu cơ diễn ra bên trong tế bào, giải phóng năng lượng", "D. Phân giải chất hữu cơ chủ yếu là tinh bột ở ngoài tế bào"], a: 2, e: "Hô hấp tế bào là quá trình tế bào phân giải chất hữu cơ (chủ yếu là glucose) để tạo ra năng lượng (ATP) cung cấp cho hoạt động sống." },
-    { type: 'mc', q: "Bào quan thực hiện chức năng hô hấp tế bào ở sinh vật nhân thực là:", o: ["A. Lục lạp", "B. Nhân tế bào", "C. Ti thể", "D. Không bào"], a: 2, e: "Ti thể được ví như nhà máy năng lượng của tế bào, là nơi diễn ra các giai đoạn chính của hô hấp tế bào." },
-    { type: 'mc', q: "Trong quá trình hô hấp tế bào, chất hữu cơ bị phân giải thành sản phẩm cuối cùng là:", o: ["A. Carbon dioxide và nước", "B. Carbon dioxide và oxygen", "C. Oxygen và nitrogen", "D. Oxygen và nước"], a: 0, e: "Sản phẩm của hô hấp tế bào là Carbon dioxide (CO2), nước (H2O) và năng lượng (ATP + nhiệt)." },
-    { type: 'mc', q: "Cơ sở khoa học của các biện pháp bảo quản nông sản là:", o: ["A. Tăng nhẹ cường độ hô hấp", "B. Giảm cường độ hô hấp tế bào tới mức tối thiểu", "C. Tiêu diệt hoàn toàn tế bào nông sản", "D. Tăng tới mức tối đa"], a: 1, e: "Bảo quản nhằm mục đích giữ nông sản tươi lâu bằng cách hãm quá trình hô hấp lại ở mức thấp nhất để không tiêu hao nhiều chất hữu cơ." },
-    { type: 'arrange', q: "Sắp xếp các từ sau để tạo thành Phương trình quang hợp dạng chữ:", words: ["Oxygen", "Nước", "Chất hữu cơ", "+", "+", "Carbon dioxide", "->"], a: "Nước + Carbon dioxide -> Chất hữu cơ + Oxygen", e: "Phương trình quang hợp: Nước + Carbon dioxide (dưới tác dụng của ánh sáng, diệp lục) -> Chất hữu cơ + Oxygen." },
-    { type: 'arrange', q: "Sắp xếp các từ sau để tạo thành Phương trình hô hấp tế bào dạng chữ:", words: ["Oxygen", "Nước", "Chất hữu cơ", "+", "+", "Carbon dioxide", "->", "Năng lượng", "+"], a: "Chất hữu cơ + Oxygen -> Carbon dioxide + Nước + Năng lượng", e: "Phương trình hô hấp: Chất hữu cơ (Glucose) + Oxygen -> Carbon dioxide + Nước + Năng lượng (ATP và nhiệt năng)." }
+const allQuestions = [
+    { type: 'mc', topic: 'quanghop', q: "Quá trình quang hợp có ở?", o: ["A. Động vật có xương sống", "B. Bò sát", "C. Thực vật", "D. Côn trùng"], a: 2, e: "Quang hợp là quá trình đặc trưng xảy ra ở thực vật, tảo và một số vi khuẩn." },
+    { type: 'mc', topic: 'quanghop', q: "Khi nhiệt độ môi trường quá cao (trên 40 độ C), cường độ quang hợp thường:", o: ["A. Tăng mạnh", "B. Không thay đổi", "C. Giảm hoặc dừng lại", "D. Đạt mức tối ưu"], a: 2, e: "Nhiệt độ quá cao sẽ làm biến tính enzyme, khiến khí khổng đóng lại để chống mất nước, làm giảm hoặc ngừng quang hợp." },
+    { type: 'mc', topic: 'quanghop', q: "Quá trình quang hợp diễn ra chủ yếu ở đâu?", o: ["A. Lá cây", "B. Thân cây", "C. Rễ cây", "D. Quả"], a: 0, e: "Lá cây có diện tích bề mặt lớn và chứa nhiều lục lạp, là cơ quan thực hiện quang hợp chủ yếu của cây." },
+    { type: 'mc', topic: 'quanghop', q: "Vì sao lá cây thường có màu xanh lục?", o: ["A. Vì lá cây chứa nhiều sắc tố diệp lục", "B. Vì lá hấp thụ toàn bộ ánh sáng xanh", "C. Vì lá chứa nhiều anthocyanin", "D. Cần màu xanh để xua đuổi côn trùng"], a: 0, e: "Lá có màu xanh do chứa nhiều sắc tố diệp lục. Diệp lục không hấp thụ ánh sáng màu xanh lục mà phản xạ lại mắt chúng ta." },
+    { type: 'mc', topic: 'quanghop', q: "Khí khổng tập trung chủ yếu ở mặt dưới của lá có tác dụng chính là:", o: ["A. Ngăn cản ánh sáng mặt trời", "B. Hạn chế thoát hơi nước quá mức và trao đổi khí", "C. Hút nước từ môi trường không khí", "D. Bảo vệ lá khỏi sâu bệnh"], a: 1, e: "Khí khổng ở mặt dưới giúp tránh ánh sáng trực tiếp, hạn chế sự mất nước do bay hơi nhưng vẫn đảm bảo sự trao đổi khí." },
+    { type: 'mc', topic: 'quanghop', q: "Nhóm cây nào sau đây có phiến lá biến đổi để thích nghi với môi trường khô hạn nhưng vẫn quang hợp bằng thân?", o: ["A. Cây lúa, cây ngô", "B. Cây xương rồng, cây cành giao", "C. Cây hoa hồng, mai", "D. Cây bàng, phượng"], a: 1, e: "Xương rồng, cành giao biến lá thành gai để giảm thoát hơi nước, thân có màu xanh chứa diệp lục để quang hợp." },
+    { type: 'mc', topic: 'quanghop', q: "Tại sao khi trời nắng, đứng dưới bóng cây thường mát mẻ dễ chịu hơn dùng ô che?", o: ["A. Do cây thoát hơi nước làm giảm nhiệt độ", "B. Do bóng mát to rộng hơn ô", "C. Do cây tạo ra oxygen", "D. Đáp án khác"], a: 0, e: "Cây thoát hơi nước, quá trình bay hơi thu nhiệt làm môi trường xung quanh mát mẻ." },
+    { type: 'mc', topic: 'quanghop', q: "Trong phương trình quang hợp, yếu tố nào đóng vai trò là điều kiện (không phải nguyên liệu)?", o: ["A. Nước", "B. Carbon dioxide", "C. Ánh sáng và diệp lục", "D. Glucose"], a: 2, e: "Ánh sáng cung cấp năng lượng, diệp lục hấp thụ năng lượng đó. Chúng là điều kiện để phản ứng xảy ra." },
+    { type: 'mc', topic: 'hohap', q: "Hô hấp tế bào là:", o: ["A. Quá trình tổng hợp chất hữu cơ", "B. Quá trình phân giải chất hữu cơ bên ngoài tế bào", "C. Là quá trình phân giải chất hữu cơ diễn ra bên trong tế bào, giải phóng năng lượng", "D. Phân giải chất hữu cơ chủ yếu là tinh bột ở ngoài tế bào"], a: 2, e: "Hô hấp tế bào là quá trình tế bào phân giải chất hữu cơ để tạo ra năng lượng cung cấp cho hoạt động sống." },
+    { type: 'mc', topic: 'hohap', q: "Bào quan thực hiện chức năng hô hấp tế bào ở sinh vật nhân thực là:", o: ["A. Lục lạp", "B. Nhân tế bào", "C. Ti thể", "D. Không bào"], a: 2, e: "Ti thể được ví như nhà máy năng lượng của tế bào, là nơi diễn ra các giai đoạn chính của hô hấp tế bào." },
+    { type: 'mc', topic: 'hohap', q: "Trong quá trình hô hấp tế bào, chất hữu cơ bị phân giải thành sản phẩm cuối cùng là:", o: ["A. Carbon dioxide và nước", "B. Carbon dioxide và oxygen", "C. Oxygen và nitrogen", "D. Oxygen và nước"], a: 0, e: "Sản phẩm của hô hấp tế bào là Carbon dioxide, nước và năng lượng." },
+    { type: 'mc', topic: 'hohap', q: "Cơ sở khoa học của các biện pháp bảo quản nông sản là:", o: ["A. Tăng nhẹ cường độ hô hấp", "B. Giảm cường độ hô hấp tế bào tới mức tối thiểu", "C. Tiêu diệt hoàn toàn tế bào nông sản", "D. Tăng tới mức tối đa"], a: 1, e: "Bảo quản nhằm mục đích giữ nông sản tươi lâu bằng cách hãm quá trình hô hấp lại ở mức thấp nhất để không tiêu hao nhiều chất hữu cơ." },
+    { type: 'arrange', topic: 'quanghop', q: "Sắp xếp các từ sau để tạo thành Phương trình quang hợp dạng chữ:", words: ["Oxygen", "Nước", "Chất hữu cơ", "+", "+", "Carbon dioxide", "->"], a: "Nước + Carbon dioxide -> Chất hữu cơ + Oxygen", e: "Phương trình quang hợp: Nước + Carbon dioxide -> Chất hữu cơ + Oxygen." },
+    { type: 'arrange', topic: 'hohap', q: "Sắp xếp các từ sau để tạo thành Phương trình hô hấp tế bào dạng chữ:", words: ["Oxygen", "Nước", "Chất hữu cơ", "+", "+", "Carbon dioxide", "->", "Năng lượng", "+"], a: "Chất hữu cơ + Oxygen -> Carbon dioxide + Nước + Năng lượng", e: "Phương trình hô hấp: Chất hữu cơ + Oxygen -> Carbon dioxide + Nước + Năng lượng." }
 ];
 
+let activeQuestions = [...allQuestions];
 const TARGET_MASTERY = 2;
-let correctCounts = new Array(questions.length).fill(0);
-let wrongCounts = new Array(questions.length).fill(0);
+let correctCounts = new Array(activeQuestions.length).fill(0);
+let wrongCounts = new Array(activeQuestions.length).fill(0);
 let totalAttempts = 0;
 let currentQuestionAnswered = false;
 let currentSelection = null;
@@ -919,16 +1022,68 @@ const backQuizFromShopBtn = document.getElementById('back-quiz-from-shop-btn');
 const soloModeContainer = document.getElementById('solo-mode-container');
 const soloBtn = document.getElementById('solo-btn');
 
-window.showSoloMatchMsg = function(msg, isError = false, keepOpen = false) {
-    const el = document.getElementById('solo-match-msg');
-    el.textContent = msg;
-    el.style.backgroundColor = isError ? '#7f1d1d' : '#064e3b';
-    el.style.color = isError ? '#fecaca' : '#a7f3d0';
-    el.style.borderColor = isError ? '#dc2626' : '#059669';
-    el.style.display = 'block';
-    if (!keepOpen) {
-        setTimeout(() => el.style.display = 'none', 3000);
+window.setFilter = function(filterType) {
+    const btns = document.querySelectorAll('.filter-btn');
+    btns.forEach(btn => btn.classList.remove('filter-active'));
+    event.target.classList.add('filter-active');
+
+    if(filterType === 'all') activeQuestions = [...allQuestions];
+    else if(filterType === 'mc') activeQuestions = allQuestions.filter(q => q.type === 'mc');
+    else if(filterType === 'arrange') activeQuestions = allQuestions.filter(q => q.type === 'arrange');
+    else if(filterType === 'quanghop') activeQuestions = allQuestions.filter(q => q.topic === 'quanghop');
+    else if(filterType === 'hohap') activeQuestions = allQuestions.filter(q => q.topic === 'hohap');
+
+    correctCounts = new Array(activeQuestions.length).fill(0);
+    wrongCounts = new Array(activeQuestions.length).fill(0);
+    totalAttempts = 0;
+    currentIndex = 0;
+    currentQuestionAnswered = false;
+    currentSelection = null;
+    selectedArrangeWords = [];
+    poolArrangeWords = [];
+    
+    resultDiv.style.display = 'none';
+    progressContainer.style.display = 'block';
+    progressText.style.display = 'block';
+    navigationDiv.style.display = 'flex';
+    reviewTitle.style.display = 'none';
+    
+    renderQuestion(currentIndex);
+};
+
+function playBo3Intro(callback) {
+    const overlay = document.getElementById('bo3-intro-overlay');
+    overlay.style.display = 'flex';
+    setTimeout(function() {
+        overlay.style.display = 'none';
+        if(callback) callback();
+    }, 2000);
+}
+
+function showRoundEffect(isWin) {
+    const overlay = document.getElementById('bo3-round-overlay');
+    const text = document.getElementById('bo3-round-text');
+    overlay.style.display = 'flex';
+    if (isWin) {
+        overlay.className = 'round-win-bg';
+        text.className = 'round-text round-text-win';
+        text.textContent = 'THẮNG VÁN NÀY!';
+    } else {
+        overlay.className = 'round-lose-bg';
+        text.className = 'round-text round-text-lose';
+        text.textContent = 'THUA VÁN NÀY!';
     }
+}
+
+function hideRoundEffect() {
+    document.getElementById('bo3-round-overlay').style.display = 'none';
+}
+
+window.showSoloError = function(msg) {
+    const el = document.getElementById('solo-error-msg');
+    el.textContent = msg;
+    el.style.display = 'block';
+    setTimeout(() => el.style.display = 'none', 3000);
 };
 
 function hideAllModes() {
@@ -981,13 +1136,6 @@ soloBtn.addEventListener('click', function() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-window.showSoloError = function(msg) {
-    const el = document.getElementById('solo-error-msg');
-    el.textContent = msg;
-    el.style.display = 'block';
-    setTimeout(() => el.style.display = 'none', 3000);
-};
-
 window.createSoloRoom = async function() {
     if (!currentUser) return window.showSoloError('Đang kết nối hệ thống, chờ tớ xíu...');
     soloRoomId = Math.random().toString(36).substring(2, 8).toUpperCase();
@@ -995,7 +1143,7 @@ window.createSoloRoom = async function() {
     soloRewardGiven = false;
     
     let mcQs = [];
-    questions.forEach((q, i) => {
+    allQuestions.forEach((q, i) => {
         if(q.type === 'mc') mcQs.push(i);
     });
     let shuffledQs = mcQs.sort(() => 0.5 - Math.random());
@@ -1043,12 +1191,14 @@ window.joinSoloRoom = async function() {
             });
             
             document.getElementById('solo-lobby').style.display = 'none';
-            document.getElementById('solo-playing').style.display = 'block';
-            document.getElementById('solo-result').style.display = 'none';
-            document.getElementById('solo-result').classList.remove('win-animation', 'lose-animation');
-            soloCurrentIdx = 0;
-            soloMyScore = 0;
-            renderSoloQuestion();
+            playBo3Intro(function() {
+                document.getElementById('solo-playing').style.display = 'block';
+                document.getElementById('solo-result').style.display = 'none';
+                document.getElementById('solo-result').classList.remove('win-animation', 'lose-animation');
+                soloCurrentIdx = 0;
+                soloMyScore = 0;
+                renderSoloQuestion();
+            });
             listenSoloRoom();
         } else {
             window.showSoloError('Phòng này đang chơi hoặc đóng rồi cậu ạ!');
@@ -1062,6 +1212,7 @@ function forceExitToLobby(msg) {
     if (msg) window.showSoloError(msg);
     if (soloUnsubscribe) soloUnsubscribe();
     if (window.soloPenaltyTimer) clearInterval(window.soloPenaltyTimer);
+    hideRoundEffect();
     soloRoomId = null;
     soloRoomData = null;
     window.roundResetTriggered = false;
@@ -1100,7 +1251,7 @@ window.requestRemake = async function() {
     
     if (oppRemake) {
         let mcQs = [];
-        questions.forEach((q, i) => { if(q.type === 'mc') mcQs.push(i); });
+        allQuestions.forEach((q, i) => { if(q.type === 'mc') mcQs.push(i); });
         let shuffledQs = mcQs.sort(() => 0.5 - Math.random());
         
         updates.p1Score = 0;
@@ -1131,30 +1282,34 @@ function listenSoloRoom() {
         
         if (isPlayer1 && data.status === 'playing' && document.getElementById('solo-waiting').style.display === 'block') {
             document.getElementById('solo-waiting').style.display = 'none';
-            document.getElementById('solo-playing').style.display = 'block';
-            document.getElementById('solo-result').style.display = 'none';
-            document.getElementById('solo-result').classList.remove('win-animation', 'lose-animation');
-            soloQs = data.qs;
-            soloCurrentIdx = 0;
-            soloMyScore = 0;
-            renderSoloQuestion();
+            playBo3Intro(function() {
+                document.getElementById('solo-playing').style.display = 'block';
+                document.getElementById('solo-result').style.display = 'none';
+                document.getElementById('solo-result').classList.remove('win-animation', 'lose-animation');
+                soloQs = data.qs;
+                soloCurrentIdx = 0;
+                soloMyScore = 0;
+                renderSoloQuestion();
+            });
         }
 
         if (data.status === 'playing' && document.getElementById('solo-result').style.display === 'block') {
             document.getElementById('solo-result').style.display = 'none';
-            document.getElementById('solo-playing').style.display = 'block';
-            document.getElementById('solo-result').classList.remove('win-animation', 'lose-animation');
-            soloQs = data.qs;
-            soloCurrentIdx = 0;
-            soloMyScore = 0;
-            soloRewardGiven = false;
-            
-            const remakeBtn = document.getElementById('solo-remake-btn');
-            if(remakeBtn) {
-                remakeBtn.textContent = 'Chơi lại ván mới';
-                remakeBtn.disabled = false;
-            }
-            renderSoloQuestion();
+            playBo3Intro(function() {
+                document.getElementById('solo-playing').style.display = 'block';
+                document.getElementById('solo-result').classList.remove('win-animation', 'lose-animation');
+                soloQs = data.qs;
+                soloCurrentIdx = 0;
+                soloMyScore = 0;
+                soloRewardGiven = false;
+                
+                const remakeBtn = document.getElementById('solo-remake-btn');
+                if(remakeBtn) {
+                    remakeBtn.textContent = 'Chơi lại ván mới';
+                    remakeBtn.disabled = false;
+                }
+                renderSoloQuestion();
+            });
         }
         
         if (document.getElementById('solo-result').style.display === 'block') {
@@ -1190,9 +1345,8 @@ function listenSoloRoom() {
         
         if (data.status === 'p1_round_won' || data.status === 'p2_round_won') {
             const iWonRound = (isPlayer1 && data.status === 'p1_round_won') || (!isPlayer1 && data.status === 'p2_round_won');
-            window.showSoloMatchMsg(iWonRound ? 'Tuyệt quá tớ ơi! Cậu đã thắng ván này! Đang chuyển ván...' : 'Xui quá! Đối thủ đã thắng ván này! Đang làm mới...', !iWonRound, true);
-            
-            document.getElementById('solo-app').style.opacity = '0.5';
+            showRoundEffect(iWonRound);
+            document.getElementById('solo-app').style.opacity = '0';
             document.getElementById('solo-app').style.pointerEvents = 'none';
             
             if (iWonRound && !window.roundResetTriggered) {
@@ -1207,10 +1361,11 @@ function listenSoloRoom() {
                 }, 3000);
             }
         } else if (data.status === 'playing') {
-            document.getElementById('solo-match-msg').style.display = 'none';
+            hideRoundEffect();
             document.getElementById('solo-app').style.opacity = '1';
             document.getElementById('solo-app').style.pointerEvents = 'auto';
         } else if (data.status === 'p1_won' || data.status === 'p2_won') {
+            hideRoundEffect();
             finishSoloGame(data.status);
         }
     }, (err) => {
@@ -1226,7 +1381,7 @@ function renderSoloQuestion() {
     
     if (soloCurrentIdx >= soloQs.length) soloCurrentIdx = 0;
     const qIdx = soloQs[soloCurrentIdx];
-    const q = questions[qIdx];
+    const q = allQuestions[qIdx];
     
     const qBlock = document.createElement('div');
     qBlock.className = 'question-block';
@@ -1356,7 +1511,7 @@ function initMatchGame() {
     isMatchingCards = false;
 
     let mcQs = [];
-    questions.forEach(q => { if(q.type === 'mc') mcQs.push(q); });
+    allQuestions.forEach(q => { if(q.type === 'mc') mcQs.push(q); });
     let shuffledQs = mcQs.sort(() => 0.5 - Math.random()).slice(0, 5);
     matchCards = [];
     
@@ -1431,7 +1586,7 @@ backQuizFromMatchBtn.addEventListener('click', function() {
 
 function renderStudyMode() {
     studyList.innerHTML = '';
-    const q = questions[currentStudyIndex];
+    const q = allQuestions[currentStudyIndex];
 
     const card = document.createElement('div');
     card.className = 'study-item';
@@ -1441,7 +1596,7 @@ function renderStudyMode() {
     progressInfo.style.marginBottom = '15px';
     progressInfo.style.color = '#94a3b8';
     progressInfo.style.fontWeight = '700';
-    progressInfo.textContent = 'Thẻ ' + (currentStudyIndex + 1) + ' / ' + questions.length;
+    progressInfo.textContent = 'Thẻ ' + (currentStudyIndex + 1) + ' / ' + allQuestions.length;
     card.appendChild(progressInfo);
 
     const qText = document.createElement('div');
@@ -1474,7 +1629,7 @@ function renderStudyMode() {
         const nextCardBtn = document.createElement('button');
         nextCardBtn.className = 'nav-btn next-btn';
         nextCardBtn.style.marginTop = '25px';
-        if (currentStudyIndex < questions.length - 1) {
+        if (currentStudyIndex < allQuestions.length - 1) {
             nextCardBtn.textContent = 'Thẻ tiếp theo';
             nextCardBtn.onclick = function() {
                 currentStudyIndex++;
@@ -1514,7 +1669,7 @@ function renderStudyMode() {
     randomCardBtn.className = 'flashcard-btn';
     randomCardBtn.textContent = 'Rút ngẫu nhiên';
     randomCardBtn.onclick = function() {
-        currentStudyIndex = Math.floor(Math.random() * questions.length);
+        currentStudyIndex = Math.floor(Math.random() * allQuestions.length);
         isStudyFlipped = false;
         renderStudyMode();
     };
@@ -1541,9 +1696,9 @@ function renderWrongMode() {
     wrongList.innerHTML = '';
     
     let wrongItems = [];
-    for(let i=0; i<questions.length; i++) {
+    for(let i=0; i<activeQuestions.length; i++) {
         if(wrongCounts[i] > 0) {
-            wrongItems.push({ q: questions[i], count: wrongCounts[i] });
+            wrongItems.push({ q: activeQuestions[i], count: wrongCounts[i] });
         }
     }
     
@@ -1553,7 +1708,7 @@ function renderWrongMode() {
         const msg = document.createElement('div');
         msg.className = 'info-msg tips-msg show-msg';
         msg.style.textAlign = 'center';
-        msg.textContent = 'Giỏi quá! Cậu chưa sai câu nào cả!';
+        msg.textContent = 'Giỏi quá! Cậu chưa sai câu nào cả trong phần này!';
         wrongList.appendChild(msg);
         return;
     }
@@ -1607,8 +1762,9 @@ function updateProgress() {
     for(let i=0; i<correctCounts.length; i++) {
         currentMastery += correctCounts[i];
     }
-    const totalMastery = questions.length * TARGET_MASTERY;
-    const percent = (currentMastery / totalMastery) * 100;
+    const totalMastery = activeQuestions.length * TARGET_MASTERY;
+    let percent = 0;
+    if(totalMastery > 0) percent = (currentMastery / totalMastery) * 100;
     progressBar.style.width = percent + '%';
     progressText.textContent = 'Tiến độ thuộc bài: ' + currentMastery + ' / ' + totalMastery;
 }
@@ -1717,6 +1873,12 @@ function renderArrangeUI(qBlock, index, q) {
 
 function renderQuestion(index) {
     app.innerHTML = '';
+    
+    if(activeQuestions.length === 0) {
+        app.innerHTML = '<div style="text-align:center; padding: 40px; color: #94a3b8; font-weight: 700; font-size: 18px;">Không có câu hỏi nào trong phần này cậu ơi!</div>';
+        return;
+    }
+
     updateProgress();
     updateCoinDisplay();
     updateInventoryDisplay();
@@ -1750,7 +1912,7 @@ function renderQuestion(index) {
         selectedBetStr = 'Tất tay';
     }
 
-    const q = questions[index];
+    const q = activeQuestions[index];
 
     const masteryBadge = document.createElement('div');
     masteryBadge.className = 'mastery-badge';
@@ -1761,20 +1923,6 @@ function renderQuestion(index) {
     qText.className = 'question-text';
     qText.innerHTML = q.q;
     qBlock.appendChild(qText);
-
-    if (!currentQuestionAnswered && inventory.pass1 > 0) {
-        const pass1Btn = document.createElement('button');
-        pass1Btn.className = 'action-btn study-btn';
-        pass1Btn.style.width = '100%';
-        pass1Btn.style.marginBottom = '20px';
-        pass1Btn.textContent = 'Dùng Thẻ Pass (Tự động hoàn thành câu này)';
-        pass1Btn.onclick = function() {
-            inventory.pass1--;
-            isPassUsed = true;
-            processAnswer(index, true, false, true);
-        };
-        qBlock.appendChild(pass1Btn);
-    }
 
     if (!currentQuestionAnswered) {
         const betContainer = document.createElement('div');
@@ -1844,13 +1992,26 @@ function renderQuestion(index) {
         toolsRow.className = 'study-nav-row tools-row';
         toolsRow.style.marginTop = '25px';
 
+        if (inventory.pass1 > 0) {
+            const passBtn = document.createElement('button');
+            passBtn.className = 'action-btn pass-btn';
+            passBtn.style.flex = '1';
+            passBtn.textContent = 'Dùng Thẻ Pass';
+            passBtn.onclick = function() {
+                inventory.pass1--;
+                isPassUsed = true;
+                processAnswer(index, true, false, true);
+            };
+            toolsRow.appendChild(passBtn);
+        }
+
         if(q.type === 'mc') {
             const fiftyBtn = document.createElement('button');
             fiftyBtn.className = 'action-btn motivate-btn';
             fiftyBtn.style.flex = '1';
             
             if (inventory.help > 0) {
-                fiftyBtn.textContent = 'Dùng phao: Gợi ý 50/50 (Thẻ)';
+                fiftyBtn.textContent = '50/50 (Thẻ)';
                 fiftyBtn.onclick = function() {
                     inventory.help--;
                     updateInventoryDisplay();
@@ -1863,7 +2024,7 @@ function renderQuestion(index) {
                     fiftyBtn.style.display = 'none';
                 };
             } else {
-                fiftyBtn.textContent = 'Gợi ý 50/50 (20 Xu)';
+                fiftyBtn.textContent = '50/50 (20 Xu)';
                 if (userCoins < 20) {
                     fiftyBtn.disabled = true;
                     fiftyBtn.style.opacity = '0.5';
@@ -1887,7 +2048,7 @@ function renderQuestion(index) {
         const giveUpBtn = document.createElement('button');
         giveUpBtn.className = 'action-btn give-up-btn';
         giveUpBtn.style.flex = '1';
-        giveUpBtn.textContent = 'Tớ quên rồi (Mở đáp án)';
+        giveUpBtn.textContent = 'Mở đáp án';
         giveUpBtn.onclick = function() {
             currentSelection = -1;
             currentQuestionAnswered = true;
@@ -1910,8 +2071,8 @@ function renderQuestion(index) {
         let isRight = (q.type === 'mc' && currentSelection === q.a) || (q.type === 'arrange' && selectedArrangeWords.join(' ') === q.a);
         
         if (isPassUsed) {
-            feedbackDiv.style.color = '#c026d3';
-            feedbackDiv.textContent = 'Cậu đã dùng thẻ Pass! Câu này coi như cậu làm đúng luôn nha!';
+            feedbackDiv.style.color = '#d946ef';
+            feedbackDiv.textContent = 'Cậu đã dùng thẻ Pass! Vượt qua cái rụp luôn nha!';
             isPassUsed = false;
         } else if (isRight) {
             feedbackDiv.style.color = '#34d399';
@@ -2001,9 +2162,9 @@ function showResults() {
     navigationDiv.style.display = 'none';
     reviewTitle.style.display = 'block';
 
-    let accuracy = Math.round((questions.length * TARGET_MASTERY / totalAttempts) * 100);
+    let accuracy = Math.round((activeQuestions.length * TARGET_MASTERY / totalAttempts) * 100);
 
-    resultText.textContent = 'Đỉnh quá! Cậu đã thuộc toàn bộ bài!';
+    resultText.textContent = 'Đỉnh quá! Cậu đã thuộc phần này rồi!';
     
     let compliment = '';
     if (accuracy >= 90) {
@@ -2016,7 +2177,7 @@ function showResults() {
     complimentText.textContent = compliment;
     resultDiv.style.display = 'block';
 
-    questions.forEach((q) => {
+    activeQuestions.forEach((q) => {
         const qBlock = document.createElement('div');
         qBlock.className = 'question-block';
 
@@ -2050,16 +2211,16 @@ function showResults() {
 nextBtn.addEventListener('click', function() {
     if (!currentQuestionAnswered) return;
     
-    let nextIndex = (currentIndex + 1) % questions.length;
+    let nextIndex = (currentIndex + 1) % activeQuestions.length;
     let found = false;
     
-    for (let i = 0; i < questions.length; i++) {
+    for (let i = 0; i < activeQuestions.length; i++) {
         if (correctCounts[nextIndex] < TARGET_MASTERY) {
             currentIndex = nextIndex;
             found = true;
             break;
         }
-        nextIndex = (nextIndex + 1) % questions.length;
+        nextIndex = (nextIndex + 1) % activeQuestions.length;
     }
 
     if (found) {
