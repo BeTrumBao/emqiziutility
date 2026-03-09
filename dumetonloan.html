@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trắc Nghiệm Đại Số 7</title>
+<title>KHTN 7 - Quang Hợp & Hô Hấp</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 body {
-    font-family: 'Quicksand', sans-serif;
-    background-color: #f0f9ff;
+    font-family: 'Roboto', sans-serif;
+    background-color: #020617;
     margin: 0;
     padding: 20px 10px;
-    color: #334155;
+    color: #e2e8f0;
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -20,17 +20,18 @@ body {
 .container {
     width: 100%;
     max-width: 800px;
-    background-color: #ffffff;
-    border-radius: 24px;
+    background-color: #0f172a;
+    border-radius: 28px;
     padding: 40px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
     margin-top: 20px;
+    border: 1px solid #1e293b;
 }
 h1 {
     text-align: center;
-    color: #3b82f6;
+    color: #60a5fa;
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     font-size: 28px;
     font-weight: 700;
     text-transform: uppercase;
@@ -40,103 +41,75 @@ h1 {
     display: flex;
     justify-content: center;
     gap: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     flex-wrap: wrap;
 }
 .action-btn {
     border: none;
-    padding: 12px 28px;
+    padding: 12px 24px;
     border-radius: 999px;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     font-family: inherit;
     color: white;
 }
 .solo-btn {
-    background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
-    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+    background: #dc2626;
 }
 .solo-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
-}
-.solo-btn:active {
-    transform: translateY(1px);
+    background: #ef4444;
+    transform: translateY(-2px);
 }
 .shop-btn {
-    background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
-    box-shadow: 0 4px 15px rgba(20, 184, 166, 0.3);
+    background: #0d9488;
 }
 .shop-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(20, 184, 166, 0.4);
-}
-.shop-btn:active {
-    transform: translateY(1px);
+    background: #14b8a6;
+    transform: translateY(-2px);
 }
 .tips-btn {
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    background: #059669;
 }
 .tips-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
-}
-.tips-btn:active {
-    transform: translateY(1px);
+    background: #10b981;
+    transform: translateY(-2px);
 }
 .motivate-btn {
-    background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
-    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+    background: #ea580c;
 }
 .motivate-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
-}
-.motivate-btn:active {
-    transform: translateY(1px);
+    background: #f97316;
+    transform: translateY(-2px);
 }
 .study-btn {
-    background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
-    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+    background: #4f46e5;
 }
 .study-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
-}
-.study-btn:active {
-    transform: translateY(1px);
+    background: #6366f1;
+    transform: translateY(-2px);
 }
 .match-btn {
-    background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
-    box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+    background: #c026d3;
 }
 .match-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4);
-}
-.match-btn:active {
-    transform: translateY(1px);
+    background: #d946ef;
+    transform: translateY(-2px);
 }
 .wrong-btn {
-    background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
-    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+    background: #7c3aed;
 }
 .wrong-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
-}
-.wrong-btn:active {
-    transform: translateY(1px);
+    background: #8b5cf6;
+    transform: translateY(-2px);
 }
 .info-msg {
     margin-bottom: 25px;
     padding: 20px;
-    border-radius: 12px;
-    font-weight: 700;
-    font-size: 16px;
+    border-radius: 16px;
+    font-weight: 500;
+    font-size: 15px;
     display: none;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -147,15 +120,15 @@ h1 {
     opacity: 1;
 }
 .motivate-msg {
-    background-color: #fffbeb;
-    color: #b45309;
-    border: 2px dashed #fcd34d;
+    background-color: #1e293b;
+    color: #fbbf24;
+    border: 1px solid #475569;
     text-align: center;
 }
 .tips-msg {
-    background-color: #ecfdf5;
-    color: #047857;
-    border: 2px dashed #6ee7b7;
+    background-color: #1e293b;
+    color: #6ee7b7;
+    border: 1px solid #475569;
 }
 .tips-msg ul {
     margin: 10px 0 0 0;
@@ -163,30 +136,28 @@ h1 {
 }
 .tips-msg li {
     margin-bottom: 8px;
-    font-weight: 500;
 }
 .coin-display {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
-    color: #b45309;
+    color: #fbbf24;
     text-align: center;
     margin-bottom: 10px;
     padding: 15px;
-    background-color: #fef3c7;
-    border: 2px dashed #f59e0b;
+    background-color: #1e293b;
     border-radius: 16px;
-    box-shadow: 0 4px 10px rgba(245, 158, 11, 0.1);
+    border: 1px solid #334155;
 }
 .inventory-display {
-    font-size: 16px;
-    font-weight: 700;
-    color: #475569;
+    font-size: 15px;
+    font-weight: 500;
+    color: #94a3b8;
     text-align: center;
     margin-bottom: 20px;
     padding: 12px;
-    background-color: #f8fafc;
-    border: 2px dashed #cbd5e1;
+    background-color: #0f172a;
     border-radius: 16px;
+    border: 1px solid #1e293b;
 }
 .bet-container {
     display: flex;
@@ -194,55 +165,53 @@ h1 {
     gap: 10px;
     margin-bottom: 20px;
     flex-wrap: wrap;
-    font-weight: 700;
-    color: #475569;
-    font-size: 18px;
+    font-weight: 500;
+    color: #cbd5e1;
+    font-size: 16px;
 }
 .bet-btn {
     padding: 10px 18px;
-    border-radius: 12px;
-    border: 2px solid #e2e8f0;
-    background: #ffffff;
+    border-radius: 999px;
+    border: 1px solid #334155;
+    background: #1e293b;
     cursor: pointer;
     font-weight: 700;
-    color: #334155;
+    color: #94a3b8;
     transition: all 0.2s ease;
     font-family: inherit;
-    font-size: 16px;
+    font-size: 15px;
 }
 .bet-btn:hover:not(:disabled) {
-    border-color: #f59e0b;
-    color: #d97706;
+    background: #334155;
+    color: #f8fafc;
 }
 .bet-selected {
-    background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
-    border-color: transparent;
+    background: #ea580c;
+    border-color: #ea580c;
     color: white;
-    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
 }
 .bet-selected:hover:not(:disabled) {
-    color: white;
-    border-color: transparent;
+    background: #f97316;
 }
 .progress-container {
     width: 100%;
-    background-color: #e2e8f0;
+    background-color: #1e293b;
     border-radius: 999px;
-    height: 12px;
+    height: 8px;
     margin-bottom: 15px;
     overflow: hidden;
 }
 .progress-bar {
     height: 100%;
-    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    background: #3b82f6;
     border-radius: 999px;
     width: 0%;
     transition: width 0.4s ease;
 }
 .progress-text {
     text-align: center;
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 14px;
+    font-weight: 500;
     color: #64748b;
     margin-bottom: 30px;
 }
@@ -256,88 +225,83 @@ h1 {
 }
 .mastery-badge {
     display: inline-block;
-    background: #dbeafe;
-    color: #1e40af;
+    background: #1e3a8a;
+    color: #bfdbfe;
     padding: 6px 14px;
     border-radius: 999px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     margin-bottom: 15px;
-    border: 2px solid #bfdbfe;
 }
 .question-text {
     font-weight: 700;
     margin-bottom: 25px;
     line-height: 1.6;
-    font-size: 20px;
-    color: #0f172a;
+    font-size: 18px;
+    color: #f8fafc;
 }
 .options-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
+    grid-template-columns: 1fr;
+    gap: 12px;
 }
 .option-btn {
     display: block;
     width: 100%;
     text-align: left;
-    padding: 20px;
-    border: 2px solid #e2e8f0;
-    border-radius: 16px;
+    padding: 18px 24px;
+    border: 1px solid #334155;
+    border-radius: 20px;
     cursor: pointer;
     transition: all 0.2s ease;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
-    color: #334155;
-    background-color: #f8fafc;
+    color: #e2e8f0;
+    background-color: #1e293b;
     font-family: inherit;
 }
 .option-btn:hover:not(:disabled) {
-    background-color: #eff6ff;
-    border-color: #93c5fd;
+    background-color: #334155;
     transform: translateY(-2px);
 }
 .option-btn:disabled {
     cursor: default;
 }
 .correct-answer {
-    background-color: #d1fae5 !important;
-    border-color: #10b981 !important;
-    color: #047857 !important;
-    font-weight: 700;
+    background-color: #064e3b !important;
+    border-color: #059669 !important;
+    color: #a7f3d0 !important;
 }
 .wrong-answer {
-    background-color: #fee2e2 !important;
-    border-color: #f43f5e !important;
-    color: #9f1239 !important;
-    opacity: 0.8;
+    background-color: #7f1d1d !important;
+    border-color: #dc2626 !important;
+    color: #fecaca !important;
 }
 .neutral-answer {
-    opacity: 0.5;
+    opacity: 0.4;
 }
 .hidden-option {
-    opacity: 0.25 !important;
-    pointer-events: none !important;
-    background-color: #f8fafc !important;
-    border-color: #e2e8f0 !important;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
 }
 .explanation-box {
     margin-top: 25px;
-    background-color: #f8fafc;
-    border-left: 5px solid #3b82f6;
+    background-color: #1e293b;
     padding: 20px;
-    border-radius: 0 12px 12px 0;
+    border-radius: 16px;
+    border-left: 4px solid #3b82f6;
     animation: fadeIn 0.4s ease;
 }
 .explanation-title {
     font-weight: 700;
-    color: #1e293b;
-    font-size: 18px;
-    margin-bottom: 10px;
+    color: #93c5fd;
+    font-size: 16px;
+    margin-bottom: 8px;
 }
 .explanation-content {
-    font-size: 17px;
-    color: #475569;
+    font-size: 15px;
+    color: #cbd5e1;
     line-height: 1.6;
 }
 .navigation-buttons {
@@ -346,116 +310,108 @@ h1 {
 }
 .nav-btn {
     width: 100%;
-    padding: 20px;
-    font-size: 18px;
+    padding: 18px;
+    font-size: 16px;
     font-weight: 700;
     border: none;
-    border-radius: 16px;
+    border-radius: 999px;
     cursor: pointer;
     transition: all 0.2s ease;
     font-family: inherit;
 }
 .next-btn {
-    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    background: #2563eb;
     color: white;
-    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
 }
 .next-btn:hover:not(:disabled) {
+    background: #3b82f6;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
 }
 .next-btn:disabled {
-    background: #cbd5e1;
-    color: #94a3b8;
-    box-shadow: none;
+    background: #334155;
+    color: #64748b;
     cursor: not-allowed;
     transform: none;
 }
 .result-container {
     margin-bottom: 40px;
-    padding: 30px;
-    background: linear-gradient(135deg, #10b981, #059669);
-    border-radius: 20px;
+    padding: 40px;
+    background: #064e3b;
+    border-radius: 28px;
     text-align: center;
     display: none;
-    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
 }
 .result-text {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 700;
-    color: #ffffff;
+    color: #a7f3d0;
 }
 .compliment-text {
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 16px;
+    font-weight: 500;
     margin-top: 15px;
     color: #ecfdf5;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 .review-title {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
-    color: #1e293b;
+    color: #60a5fa;
     margin-top: 40px;
     margin-bottom: 20px;
     text-align: center;
     display: none;
+    text-transform: uppercase;
 }
-#study-mode-container, #shop-mode-container, #solo-mode-container, #wrong-mode-container {
+#study-mode-container, #shop-mode-container, #solo-mode-container, #wrong-mode-container, #match-mode-container {
     display: none;
 }
 .study-item {
-    background: #ffffff;
-    border: 2px solid #e2e8f0;
-    border-radius: 16px;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 24px;
     padding: 30px;
     margin-bottom: 25px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.04);
     min-height: 250px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 .study-q {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
-    color: #0f172a;
+    color: #f8fafc;
     margin-bottom: 25px;
     line-height: 1.5;
     text-align: center;
 }
 .study-a {
-    background-color: #d1fae5;
-    border: 2px solid #10b981;
-    color: #047857;
+    background-color: #064e3b;
+    color: #a7f3d0;
     padding: 20px;
-    border-radius: 12px;
+    border-radius: 16px;
     font-weight: 700;
     margin-bottom: 15px;
-    font-size: 18px;
+    font-size: 16px;
     text-align: center;
     animation: fadeIn 0.4s ease;
 }
 .study-e {
-    background-color: #eff6ff;
-    border-left: 4px solid #3b82f6;
+    background-color: #0f172a;
     padding: 20px;
-    color: #1e40af;
-    border-radius: 0 12px 12px 0;
+    color: #93c5fd;
+    border-radius: 16px;
     line-height: 1.6;
-    font-size: 16px;
+    font-size: 15px;
     animation: fadeIn 0.4s ease;
 }
 .back-quiz-btn {
-    background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
-    color: white;
+    background: #334155;
+    color: #f8fafc;
     width: 100%;
     margin-top: 20px;
-    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
 }
 .back-quiz-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+    background: #475569;
 }
 .study-nav-row {
     display: flex;
@@ -466,45 +422,24 @@ h1 {
 .flashcard-btn {
     flex: 1;
     padding: 15px;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
     border: none;
-    border-radius: 12px;
+    border-radius: 999px;
     cursor: pointer;
     transition: all 0.2s ease;
-    background: #e2e8f0;
-    color: #334155;
+    background: #334155;
+    color: #f8fafc;
 }
 .flashcard-btn:hover {
-    background: #cbd5e1;
+    background: #475569;
 }
 .give-up-btn {
-    background: #e2e8f0;
-    color: #475569;
+    background: #334155;
+    color: #f8fafc;
 }
 .give-up-btn:hover {
-    background: #cbd5e1;
-    transform: translateY(-2px);
-}
-.frac {
-    display: inline-block;
-    vertical-align: middle;
-    text-align: center;
-    line-height: 1.2;
-    margin: 0 4px;
-    font-weight: 700;
-}
-.frac .top {
-    display: block;
-    border-bottom: 2px solid currentColor;
-    padding: 0 2px;
-}
-.frac .bot {
-    display: block;
-    padding: 0 2px;
-}
-#match-mode-container {
-    display: none;
+    background: #475569;
 }
 .match-grid {
     display: grid;
@@ -514,58 +449,54 @@ h1 {
     margin-bottom: 30px;
 }
 .match-card {
-    background: #ffffff;
-    border: 2px solid #e2e8f0;
-    border-radius: 16px;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 20px;
     padding: 20px;
     cursor: pointer;
     text-align: center;
-    font-weight: 700;
-    font-size: 16px;
-    color: #334155;
+    font-weight: 500;
+    font-size: 15px;
+    color: #e2e8f0;
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 120px;
     transition: all 0.2s ease;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
 }
 .match-card:hover:not(.match-matched) {
-    border-color: #ec4899;
-    background-color: #fdf2f8;
+    background-color: #334155;
     transform: translateY(-2px);
 }
 .match-selected {
-    border-color: #ec4899;
-    background-color: #fdf2f8;
-    box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.2);
+    background-color: #4c1d95;
+    border-color: #8b5cf6;
     transform: translateY(-2px);
 }
 .match-matched {
-    background-color: #d1fae5;
-    border-color: #10b981;
-    color: #047857;
+    background-color: #064e3b;
+    border-color: #059669;
+    color: #6ee7b7;
     pointer-events: none;
-    opacity: 0.6;
+    opacity: 0.5;
 }
 .match-wrong {
-    background-color: #fee2e2;
+    background-color: #7f1d1d;
     border-color: #ef4444;
-    color: #b91c1c;
     animation: shake 0.4s ease;
 }
 .match-win-msg {
     text-align: center;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
-    color: #10b981;
+    color: #34d399;
     margin-bottom: 25px;
     display: none;
     animation: fadeIn 0.4s ease;
 }
 .loader {
-    border: 5px solid #f3f3f3;
-    border-top: 5px solid #ef4444;
+    border: 4px solid #1e293b;
+    border-top: 4px solid #3b82f6;
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -573,28 +504,56 @@ h1 {
     margin: 20px auto;
 }
 .win-animation {
-    animation: winPulse 1.5s infinite alternate;
-    background: linear-gradient(135deg, #10b981, #059669);
+    background: #064e3b;
     color: white;
     padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 0 30px rgba(16, 185, 129, 0.6);
-}
-@keyframes winPulse {
-    0% { transform: scale(1); box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); }
-    100% { transform: scale(1.05); box-shadow: 0 0 40px rgba(16, 185, 129, 0.8); }
+    border-radius: 28px;
 }
 .lose-animation {
-    animation: loseFade 2s forwards;
-    background: linear-gradient(135deg, #64748b, #334155);
-    color: #f1f5f9;
+    background: #1e293b;
+    color: #94a3b8;
     padding: 40px;
-    border-radius: 20px;
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+    border-radius: 28px;
 }
-@keyframes loseFade {
-    0% { filter: grayscale(0%); transform: translateY(-10px); }
-    100% { filter: grayscale(100%); transform: translateY(0); }
+.arrange-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    min-height: 60px;
+    padding: 15px;
+    background: #0f172a;
+    border-radius: 16px;
+    border: 1px dashed #475569;
+}
+.arrange-answer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    min-height: 60px;
+    padding: 15px;
+    background: #1e293b;
+    border-radius: 16px;
+    border: 1px solid #3b82f6;
+    margin-bottom: 20px;
+}
+.word-btn {
+    background: #334155;
+    color: #f8fafc;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 0.1s;
+}
+.word-btn:hover {
+    background: #475569;
+}
+.word-btn:active {
+    transform: scale(0.95);
 }
 @keyframes spin {
     0% { transform: rotate(0deg); }
@@ -613,20 +572,14 @@ h1 {
         font-size: 22px;
     }
     .question-text {
-        font-size: 18px;
+        font-size: 16px;
     }
     .option-btn {
-        font-size: 16px;
+        font-size: 15px;
         padding: 15px;
     }
     .nav-btn {
         padding: 15px;
-        font-size: 16px;
-    }
-    .explanation-title {
-        font-size: 16px;
-    }
-    .explanation-content {
         font-size: 15px;
     }
     .header-actions {
@@ -635,13 +588,7 @@ h1 {
     .action-btn {
         width: 100%;
     }
-    .tools-row {
-        flex-direction: column;
-    }
     .match-grid {
-        grid-template-columns: 1fr;
-    }
-    .options-grid {
         grid-template-columns: 1fr;
     }
 }
@@ -650,10 +597,10 @@ h1 {
 <body>
 
 <div class="container">
-    <h1>TRẮC NGHIỆM ĐẠI SỐ 7</h1>
+    <h1>KHTN 7 - QUANG HỢP & HÔ HẤP</h1>
     
     <div class="header-actions">
-        <button id="solo-btn" class="action-btn solo-btn">Chế độ Solo</button>
+        <button id="solo-btn" class="action-btn solo-btn">Chế độ Solo BO3</button>
         <button id="shop-btn" class="action-btn shop-btn">Cửa hàng thẻ bài</button>
         <button id="wrong-btn" class="action-btn wrong-btn">Ôn câu sai</button>
         <button id="study-btn" class="action-btn study-btn">Góc Luyện Trí Nhớ</button>
@@ -663,12 +610,12 @@ h1 {
     </div>
 
     <div id="tips-msg" class="info-msg tips-msg">
-        BÍ KÍP ĐẠI SỐ 7:
+        BÍ KÍP MÔN KHTN 7:
         <ul>
-            <li>Tỉ lệ thuận: Hai đại lượng cùng tăng hoặc cùng giảm. Công thức: y = kx. Tỉ số x/y luôn không đổi.</li>
-            <li>Tỉ lệ nghịch: Đại lượng này tăng thì đại lượng kia giảm. Công thức: y = a/x. Tích x.y luôn không đổi.</li>
-            <li>Tính chất dãy tỉ số: Tử số cộng hay trừ thế nào thì mẫu số cũng phải cộng hay trừ y hệt như thế.</li>
-            <li>Quy tắc nhân chéo: Nếu a/b = c/d thì a.d = b.c (tích ngoại tỉ bằng tích trung tỉ).</li>
+            <li>Quang hợp: Nước + Carbon dioxide -> Chất hữu cơ + Oxygen (Điều kiện: ánh sáng, diệp lục).</li>
+            <li>Hô hấp tế bào: Chất hữu cơ + Oxygen -> Carbon dioxide + Nước + Năng lượng (ATP + Nhiệt).</li>
+            <li>Quang hợp diễn ra ở lục lạp (thực vật), hô hấp diễn ra ở ti thể (mọi tế bào).</li>
+            <li>Bảo quản thực phẩm: Làm lạnh, phơi khô, hút chân không, ướp muối... nhằm giảm cường độ hô hấp tế bào xuống mức tối thiểu.</li>
         </ul>
     </div>
     
@@ -677,42 +624,42 @@ h1 {
     <div id="solo-mode-container">
         <div class="review-title" style="display: block;">THÁCH ĐẤU BO3 (CHẠM 2 VÁN THẮNG)</div>
         <div id="solo-lobby" style="text-align: center;">
-            <p style="margin-bottom: 20px; color: #475569; font-weight: 700; line-height: 1.6;">Thi đấu BO3 cùng bạn bè. Mỗi ván 10 điểm, ai thắng 2 ván trước sẽ nhận phần thưởng!</p>
-            <button onclick="createSoloRoom()" class="nav-btn solo-btn" style="margin-bottom: 20px; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);">Tạo phòng mới</button>
+            <p style="margin-bottom: 20px; color: #94a3b8; font-weight: 500; line-height: 1.6;">Thi đấu trắc nghiệm BO3 cùng bạn bè. Mỗi ván 10 điểm, ai thắng 2 ván trước sẽ nhận thưởng!</p>
+            <button onclick="createSoloRoom()" class="nav-btn solo-btn" style="margin-bottom: 20px;">Tạo phòng mới</button>
             <br>
-            <input type="text" id="room-code-input" placeholder="Nhập mã phòng..." style="padding: 15px; border-radius: 12px; border: 2px solid #e2e8f0; font-size: 18px; font-family: inherit; font-weight: bold; text-align: center; text-transform: uppercase; width: 60%; margin-bottom: 10px;">
+            <input type="text" id="room-code-input" placeholder="Nhập mã phòng..." style="padding: 15px; border-radius: 999px; border: 1px solid #334155; background: #0f172a; color: white; font-size: 16px; font-family: inherit; font-weight: 700; text-align: center; text-transform: uppercase; width: 60%; margin-bottom: 15px;">
             <button onclick="joinSoloRoom()" class="nav-btn shop-btn">Vào phòng</button>
             <div id="solo-error-msg" class="info-msg motivate-msg" style="margin-top: 15px; display: none;"></div>
             <button onclick="exitSoloRoom()" class="nav-btn back-quiz-btn" style="margin-top: 30px;">Quay lại</button>
         </div>
 
         <div id="solo-waiting" style="display: none; text-align: center;">
-            <h3 style="color: #334155;">Mã phòng của cậu: <span id="display-room-code" style="color: #ef4444; font-size: 32px; letter-spacing: 2px;"></span></h3>
-            <p style="font-weight: bold; color: #64748b;">Hãy gửi mã này cho bạn bè để bắt đầu nhé!</p>
+            <h3 style="color: #cbd5e1;">Mã phòng của cậu: <span id="display-room-code" style="color: #ef4444; font-size: 32px; letter-spacing: 2px;"></span></h3>
+            <p style="font-weight: 500; color: #94a3b8;">Hãy gửi mã này cho bạn bè để bắt đầu nhé!</p>
             <div class="loader"></div>
             <button onclick="exitSoloRoom()" class="nav-btn back-quiz-btn" style="margin-top: 30px;">Hủy / Trở về</button>
         </div>
 
         <div id="solo-playing" style="display: none; position: relative;">
             <div id="solo-match-msg" class="info-msg motivate-msg" style="margin-bottom: 20px; display: none;"></div>
-            <div style="background: #f8fafc; padding: 20px; border-radius: 16px; margin-bottom: 30px; border: 2px solid #e2e8f0;">
+            <div style="background: #1e293b; padding: 20px; border-radius: 20px; margin-bottom: 30px; border: 1px solid #334155;">
                 <div style="margin-bottom: 15px;">
-                    <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 8px; color: #047857;">
+                    <div style="display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 8px; color: #34d399;">
                         <span>Cậu (Thắng: <span id="solo-my-rounds">0</span>) - Điểm: <span id="solo-my-score">0</span></span>
-                        <span>Đích ván: 10</span>
+                        <span>Đích: 10</span>
                     </div>
                     <div class="progress-container" style="margin-bottom: 0;">
-                        <div id="solo-my-progress" class="progress-bar" style="background: linear-gradient(90deg, #10b981, #34d399);"></div>
+                        <div id="solo-my-progress" class="progress-bar" style="background: #10b981;"></div>
                     </div>
                 </div>
                 
                 <div>
-                    <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 8px; color: #be123c;">
+                    <div style="display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 8px; color: #f43f5e;">
                         <span>Đối thủ (Thắng: <span id="solo-opp-rounds">0</span>) - Điểm: <span id="solo-opp-score">0</span></span>
-                        <span>Đích ván: 10</span>
+                        <span>Đích: 10</span>
                     </div>
                     <div class="progress-container" style="margin-bottom: 0;">
-                        <div id="solo-opp-progress" class="progress-bar" style="background: linear-gradient(90deg, #f43f5e, #fb7185);"></div>
+                        <div id="solo-opp-progress" class="progress-bar" style="background: #e11d48;"></div>
                     </div>
                 </div>
             </div>
@@ -720,11 +667,11 @@ h1 {
             <div id="solo-app"></div>
         </div>
 
-        <div id="solo-result" style="display: none; text-align: center; padding: 40px; border-radius: 20px; margin-top: 20px;">
-            <div id="solo-result-text" style="font-size: 32px; font-weight: 700; margin-bottom: 30px; line-height: 1.5;"></div>
+        <div id="solo-result" style="display: none; text-align: center; padding: 40px; border-radius: 28px; margin-top: 20px;">
+            <div id="solo-result-text" style="font-size: 28px; font-weight: 700; margin-bottom: 30px; line-height: 1.5;"></div>
             <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
                 <button id="solo-remake-btn" onclick="requestRemake()" class="nav-btn next-btn" style="width: auto; padding: 15px 30px;">Chơi lại ván mới</button>
-                <button onclick="exitSoloRoom()" class="nav-btn back-quiz-btn" style="width: auto; padding: 15px 30px; margin-top: 0; background: #ffffff; color: #334155;">Rời phòng</button>
+                <button onclick="exitSoloRoom()" class="nav-btn back-quiz-btn" style="width: auto; padding: 15px 30px; margin-top: 0; background: #334155;">Rời phòng</button>
             </div>
         </div>
     </div>
@@ -734,50 +681,50 @@ h1 {
         <div id="shop-message" class="info-msg motivate-msg"></div>
         <div class="match-grid">
             <div class="study-item" style="text-align: center;">
-                <div class="study-q">Thẻ Bài Pass 10 Câu</div>
-                <div class="study-e" style="border-left:none; border-radius:12px; margin-bottom:15px; color:#1e40af;">Tự động thông thạo ngay lập tức câu hiện tại và thêm 9 câu hỏi ngẫu nhiên chưa thuộc.</div>
+                <div class="study-q">Thẻ Bài Pass 1 Câu</div>
+                <div class="study-e" style="margin-bottom:15px; color:#93c5fd;">Tự động vượt qua câu hiện tại (được tính là đúng).</div>
                 <div class="study-a">Giá: 500 Xu</div>
-                <button onclick="buyCard('pass10', 500)" class="nav-btn next-btn" style="margin-top: 10px;">Mua ngay</button>
+                <button onclick="buyCard('pass1', 500)" class="nav-btn next-btn" style="margin-top: 10px;">Mua ngay</button>
             </div>
             <div class="study-item" style="text-align: center;">
                 <div class="study-q">Thẻ Trợ Giúp 50/50</div>
-                <div class="study-e" style="border-left:none; border-radius:12px; margin-bottom:15px; color:#1e40af;">Miễn phí sử dụng quyền trợ giúp loại bỏ 2 đáp án sai trong bài làm mà không tốn Xu.</div>
+                <div class="study-e" style="margin-bottom:15px; color:#93c5fd;">Loại bỏ 2 đáp án sai đối với câu trắc nghiệm.</div>
                 <div class="study-a">Giá: 50 Xu</div>
                 <button onclick="buyCard('help', 50)" class="nav-btn next-btn" style="margin-top: 10px;">Mua ngay</button>
             </div>
             <div class="study-item" style="text-align: center; grid-column: 1 / -1;">
                 <div class="study-q">Thẻ Bảo Vệ Tiền</div>
-                <div class="study-e" style="border-left:none; border-radius:12px; margin-bottom:15px; color:#1e40af;">Tự động kích hoạt khi trả lời sai. Bảo toàn nguyên vẹn số Xu đã cược trong lượt đó!</div>
+                <div class="study-e" style="margin-bottom:15px; color:#93c5fd;">Tự động kích hoạt khi trả lời sai. Bảo toàn số Xu đã cược!</div>
                 <div class="study-a">Giá: 150 Xu</div>
                 <button onclick="buyCard('protect', 150)" class="nav-btn next-btn" style="margin-top: 10px;">Mua ngay</button>
             </div>
         </div>
-        <button id="back-quiz-from-shop-btn" class="nav-btn back-quiz-btn">Quay lại làm bài kiểm tra</button>
+        <button id="back-quiz-from-shop-btn" class="nav-btn back-quiz-btn">Quay lại</button>
     </div>
 
     <div id="match-mode-container">
         <div class="review-title" style="display: block;">GHÉP THẺ TÌM ĐÁP ÁN</div>
         <div id="match-win-msg" class="match-win-msg">Chúc mừng! Cậu đã ghép đúng toàn bộ!</div>
         <div id="match-grid" class="match-grid"></div>
-        <button id="play-match-again-btn" class="nav-btn next-btn" style="display: none; margin-bottom: 15px;">Chơi ván mới ngẫu nhiên</button>
-        <button id="back-quiz-from-match-btn" class="nav-btn back-quiz-btn" style="margin-top: 0;">Quay lại làm bài kiểm tra</button>
+        <button id="play-match-again-btn" class="nav-btn next-btn" style="display: none; margin-bottom: 15px;">Chơi ván mới</button>
+        <button id="back-quiz-from-match-btn" class="nav-btn back-quiz-btn" style="margin-top: 0;">Quay lại</button>
     </div>
 
     <div id="study-mode-container">
         <div class="review-title" style="display: block;">THẺ GHI NHỚ FLASHCARD</div>
         <div id="study-list"></div>
-        <button id="back-quiz-from-study-btn" class="nav-btn back-quiz-btn">Quay lại làm bài kiểm tra</button>
+        <button id="back-quiz-from-study-btn" class="nav-btn back-quiz-btn">Quay lại</button>
     </div>
 
     <div id="wrong-mode-container">
-        <div class="review-title" style="display: block;">DANH SÁCH CÂU SAI NHIỀU NHẤT</div>
+        <div class="review-title" style="display: block;">DANH SÁCH CÂU SAI</div>
         <div id="wrong-list"></div>
-        <button id="back-quiz-from-wrong-btn" class="nav-btn back-quiz-btn">Quay lại làm bài kiểm tra</button>
+        <button id="back-quiz-from-wrong-btn" class="nav-btn back-quiz-btn">Quay lại</button>
     </div>
     
     <div id="quiz-mode-container">
         <div id="coin-display" class="coin-display">Tài sản hiện tại: 1000 Xu</div>
-        <div id="inventory-display" class="inventory-display">Kho đồ: 0 Thẻ Pass | 0 Thẻ Trợ Giúp | 0 Thẻ Bảo Vệ</div>
+        <div id="inventory-display" class="inventory-display">Kho đồ: 0 Thẻ Pass | 0 Thẻ 50/50 | 0 Thẻ Bảo Vệ</div>
 
         <div id="result" class="result-container">
             <div id="result-text" class="result-text"></div>
@@ -833,15 +780,10 @@ onAuthStateChanged(auth, user => {
     currentUser = user;
 });
 
-function parseFraction(text) {
-    if (!text) return '';
-    return text.replace(/F\{([^}]+)\}\{([^}]+)\}/g, '<span class="frac"><span class="top">$1</span><span class="bot">$2</span></span>');
-}
-
 const quotes = [
     "Cậu đang làm rất tốt, cứ từ từ thôi nhé!",
-    "Mệt thì nghỉ một chút, đừng ép bản thân quá nha!",
-    "Sai một câu không sao cả, học từ cái sai mới nhớ lâu!",
+    "Mệt thì nghỉ một chút, đừng ép bản thân quá nha tớ xót!",
+    "Sai một câu không sao cả, học từ cái sai mới nhớ lâu cậu ạ!",
     "Điểm số không định nghĩa cậu, sự cố gắng mới là quan trọng nhất!",
     "Hít một hơi thật sâu nào, mọi chuyện rồi sẽ ổn thôi!",
     "Cố lên cậu ơi, tớ luôn ở đây ủng hộ cậu!",
@@ -852,9 +794,9 @@ let shopMsgTimeout;
 function showShopMsg(text, isError) {
     const msg = document.getElementById('shop-message');
     msg.textContent = text;
-    msg.style.color = isError ? '#b91c1c' : '#047857';
-    msg.style.backgroundColor = isError ? '#fee2e2' : '#d1fae5';
-    msg.style.borderColor = isError ? '#ef4444' : '#10b981';
+    msg.style.color = isError ? '#fecaca' : '#a7f3d0';
+    msg.style.backgroundColor = isError ? '#7f1d1d' : '#064e3b';
+    msg.style.borderColor = isError ? '#dc2626' : '#059669';
     msg.classList.add('show-msg');
     clearTimeout(shopMsgTimeout);
     shopMsgTimeout = setTimeout(function() {
@@ -891,46 +833,20 @@ tipsBtn.addEventListener('click', function() {
 });
 
 const questions = [
-  { q: "Câu 1: Cho tỉ lệ thức F{a}{b} = F{c}{d}, khẳng định đúng là:", o: ["A. ab = cd", "B. a + b = c + d", "C. ad = cb", "D. a + c = b + d"], a: 2, e: "Tính chất cơ bản của tỉ lệ thức: tích trung tỉ luôn bằng tích ngoại tỉ (tức là tính nhân chéo ad = bc)." },
-  { q: "Câu 2: Cho tỉ lệ thức F{u}{g} = F{v}{h}, khẳng định đúng là:", o: ["A. F{h}{g} = F{v}{u}", "B. ug = vh", "C. F{v}{h} = F{g}{u}", "D. F{u}{v} = F{h}{g}"], a: 0, e: "Từ F{u}{g} = F{v}{h}, khi ta đổi chỗ hai ngoại tỉ u và h cho nhau, ta sẽ lập được tỉ lệ thức mới là F{h}{g} = F{v}{u}." },
-  { q: "Câu 3: Từ đẳng thức 25.14 = 7.50, ta có thể lập được tỉ lệ thức nào dưới đây:", o: ["A. F{25}{50} = F{14}{7}", "B. F{7}{50} = F{25}{14}", "C. F{7}{25} = F{50}{14}", "D. F{7}{25} = F{14}{50}"], a: 3, e: "Từ đẳng thức 25.14 = 7.50, chia cả hai vế cho 25.50 ta sẽ lập được tỉ lệ thức F{14}{50} = F{7}{25}. Đổi vị trí hai vế ta được đáp án đúng." },
-  { q: "Câu 4: Từ đẳng thức (-8).75 = 24.(-25), ta có thể lập được tỉ lệ thức nào dưới đây:", o: ["A. F{75}{-25} = F{24}{-8}", "B. (-8).(-25) = 75.24", "C. F{-8}{75} = F{24}{-25}", "D. F{-25}{-8} = F{24}{75}"], a: 0, e: "Chia hai vế của đẳng thức đề bài cho (-25).(-8), ta có thể lập được tỉ lệ thức chuẩn xác là F{75}{-25} = F{24}{-8}." },
-  { q: "Câu 5: Cho x, y là hai đại lượng tỉ lệ thuận với nhau. Khẳng định nào sau đây là sai?", o: ["A. F{x1}{y1} = F{x2}{y2}", "B. F{x1}{x2} = F{y1}{y2}", "C. F{x1}{y2} = F{x2}{y1}", "D. F{x2}{y2} = F{x3}{y3}"], a: 2, e: "Đối với tỉ lệ thuận, tỉ số hai giá trị tương ứng luôn không đổi (F{x1}{y1} = F{x2}{y2}), từ đó suy ra F{x1}{x2} = F{y1}{y2}. Cách xếp chéo F{x1}{y2} = F{x2}{y1} là hoàn toàn sai." },
-  { q: "Câu 6: Cho x, y là hai đại lượng tỉ lệ nghịch với nhau. Khẳng định nào sau đây là đúng?", o: ["A. F{x1}{y1} = F{x2}{y2}", "B. F{x1}{x2} = F{y1}{y2}", "C. F{x1}{y2} = F{x2}{y1}", "D. x2y3 = x3y2"], a: 2, e: "Từ tính chất tỉ lệ nghịch x1.y1 = x2.y2, ta có thể viết lại thành tỉ lệ thức F{x1}{y2} = F{x2}{y1} (nhân chéo sẽ ra tích ban đầu)." },
-  { q: "Câu 7: Nếu ba số a, b, c tương ứng tỉ lệ với 7; -4; 3 thì ta có dãy tỉ số bằng nhau là", o: ["A. F{x}{7} = F{y}{-4} = F{z}{3}", "B. F{a}{-4} = F{b}{7} = F{c}{3}", "C. F{a}{7} = F{b}{-4} = F{c}{3}", "D. F{a}{3} = F{b}{7} = F{c}{-4}"], a: 2, e: "Theo đúng định nghĩa, khi ba số a, b, c tỉ lệ với 7, -4, 3 ta có ngay dãy tỉ số bằng nhau: F{a}{7} = F{b}{-4} = F{c}{3}." },
-  { q: "Câu 8: Cho đại lượng y tỉ lệ thuận với đại lượng x theo hệ số tỉ lệ k = 7. Hệ thức liên hệ của y và x là:", o: ["A. xy = 7", "B. y = 7x", "C. y = F{x}{7}", "D. y = F{7}{x}"], a: 1, e: "Công thức chung của đại lượng y tỉ lệ thuận với đại lượng x là y = kx. Thay hệ số k = 7 vào, ta có y = 7x." },
-  { q: "Câu 9: Nếu F{x}{y} = F{6}{5} thì:", o: ["A. 5 + x = 6 + y", "B. 6 - x = 5 - y", "C. 6x = 5y", "D. 5x = 6y"], a: 3, e: "Từ tỉ lệ thức F{x}{y} = F{6}{5}, ta áp dụng quy tắc nhân chéo hai vế (tích trung tỉ bằng tích ngoại tỉ) sẽ dễ dàng có được 5x = 6y." },
-  { q: "Câu 10: Từ tỉ lệ thức F{a}{-3} = F{b}{7}, ta có thể suy ra được:", o: ["A. F{a}{b} = F{7}{-3}", "B. F{b}{a} = F{7}{-3}", "C. 7x = (-3)y", "D. 7b = (-3)a"], a: 1, e: "Từ tỉ lệ thức F{a}{-3} = F{b}{7}, ta tiến hành đổi chỗ trung tỉ a và 7 cho nhau, ta suy ra được tỉ lệ thức mới là F{b}{a} = F{7}{-3}." },
-  { q: "Câu 11: Biết F{x}{-9} = F{-5}{3}, giá trị của x là:", o: ["A. F{-5}{3}", "B. -15", "C. 15", "D. F{3}{5}"], a: 2, e: "Áp dụng quy tắc nhân chéo: x.3 = (-9).(-5) suy ra 3x = 45. Vậy x = F{45}{3} = 15." },
-  { q: "Câu 12: Biết F{7}{x} = F{3}{-4}, giá trị của x là:", o: ["A. F{-3}{28}", "B. F{-28}{3}", "C. F{-21}{4}", "D. F{-4}{21}"], a: 1, e: "Áp dụng quy tắc nhân chéo để giải: x.3 = 7.(-4) suy ra 3x = -28. Vậy x = F{-28}{3}." },
-  { q: "Câu 13: Cho đại lượng y tỉ lệ nghịch với đại lượng x theo hệ số tỉ lệ a = F{4}{3}. Hệ thức liên hệ của y và x là:", o: ["A. xy = F{3}{4}", "B. y = F{4}{3x}", "C. x = F{4}{3y}", "D. yx = F{4}{3}"], a: 2, e: "Đại lượng y tỉ lệ nghịch với x theo hệ số a = F{4}{3} nên ta có y = (F{4}{3}) / x, suy ra x.y = F{4}{3}. Từ đó rút x ra ta được x = F{4}{3y}." },
-  { q: "Câu 14: Cho x và y là hai đại lượng tỉ lệ nghịch. Biết khi x = 8 thì y = 24. Hệ số tỉ lệ là:", o: ["A. 192", "B. 3", "C. F{1}{3}", "D. 8"], a: 0, e: "Hệ số tỉ lệ của hai đại lượng tỉ lệ nghịch chính là tích của hai giá trị đó: a = x.y = 8 . 24 = 192." },
-  { q: "Câu 15: Cho x và y là hai đại lượng tỉ lệ thuận. Biết khi x = -80 thì y = 20. Hệ số tỉ lệ của đại lượng x đối với đại lượng y là:", o: ["A. 4", "B. -4", "C. F{-1}{4}", "D. F{1}{4}"], a: 1, e: "Gọi k là hệ số tỉ lệ của đại lượng x đối với đại lượng y (tức là x = ky). Ta tính được k = F{x}{y} = F{-80}{20} = -4." },
-  { q: "Câu 16: Cho x và y là hai đại lượng tỉ lệ thuận. Biết khi x = 28 thì y = 42. Hệ số tỉ lệ của đại lượng y đối với đại lượng x là:", o: ["A. F{3}{4}", "B. F{3}{2}", "C. F{4}{3}", "D. F{2}{3}"], a: 1, e: "Gọi k là hệ số tỉ lệ của đại lượng y đối với đại lượng x (tức là y = kx). Ta tính được k = F{y}{x} = F{42}{28} = F{3}{2}." },
-  { q: "Câu 17: Chọn khẳng định đúng:", o: ["A. F{a}{b} = F{c}{d} = F{a+b}{c+d}", "B. F{a}{b} = F{c}{d} = F{ab}{cd}", "C. F{a}{b} = F{c}{d} = F{a-c}{b+d}", "D. F{a}{b} = F{c}{d} = F{a-c}{b-d}"], a: 3, e: "Áp dụng chuẩn tính chất dãy tỉ số bằng nhau, nếu lấy hiệu hai tử số thì cũng phải lấy hiệu hai mẫu số: F{a}{b} = F{c}{d} = F{a - c}{b - d}." },
-  { q: "Câu 18: Chọn khẳng định sai:", o: ["A. F{a}{b} = F{c}{d} = F{e}{f} = F{a-c+e}{b+d-f}", "B. F{a}{b} = F{c}{d} = F{e}{f} = F{a+c+e}{b+d+f}", "C. F{a}{b} = F{c}{d} = F{e}{f} = F{a-c+e}{b-d+f}", "D. F{a}{b} = F{c}{d} = F{e}{f} = F{a-c-e}{b-d-f}"], a: 0, e: "Theo tính chất dãy tỉ số bằng nhau, dấu phép toán trên tử thế nào thì dưới mẫu phải y như vậy. Ở phương án A, tử là a-c+e nhưng mẫu lại là b+d-f (sai dấu ở vị trí F{c}{d}) nên đây là khẳng định sai." },
-  { q: "Câu 19: Cho x và y là hai đại lượng tỉ lệ thuận liên hệ với nhau bởi công thức y = 4x. Khi x = -2 thì giá trị của y là:", o: ["A. -8", "B. 8", "C. 6", "D. -6"], a: 0, e: "Ta chỉ cần thay số vào công thức: Thay x = -2 vào y = 4x ta tính ra được y = 4 . (-2) = -8." },
-  { q: "Câu 20: Cho x và y là hai đại lượng tỉ lệ thuận liên hệ với nhau bởi công thức x = -7y. Khi x = -42 thì giá trị của y là:", o: ["A. -294", "B. 294", "C. -6", "D. 6"], a: 3, e: "Thay x = -42 vào công thức x = -7y ta được phương trình -42 = -7y. Suy ra y = F{-42}{-7} = 6." },
-  { q: "Câu 21: Cho x y là hai đại lượng tỉ lệ nghịch liên hệ với nhau bởi công thức xy = 20. Khi x = 10 thì giá trị của y là:", o: ["A. 2", "B. -2", "C. 10", "D. 20"], a: 0, e: "Thay x = 10 vào công thức xy = 20 ta lập được 10.y = 20. Từ đó tính được y = F{20}{10} = 2." },
-  { q: "Câu 22: Cho x và y là hai đại lượng tỉ lệ nghịch liên hệ với nhau bởi công thức y = F{-32}{x}. Khi y = 8 thì giá trị của x là:", o: ["A. -4", "B. 256", "C. 4", "D. -256"], a: 0, e: "Thay y = 8 vào công thức y = F{-32}{x} ta được 8 = F{-32}{x}. Nhân chéo tìm x, ta tính được x = F{-32}{8} = -4." },
-  { q: "Câu 23: Nếu pha 5 ly nước chanh cần 7 muỗng cà phê đường thì pha 20 ly nước chanh tương tự như vậy cần bao nhiêu muỗng cà phê đường?", o: ["A. 14", "B. 27", "C. 20", "D. 28"], a: 3, e: "Số lượng ly chanh và muỗng đường là hai đại lượng tỉ lệ thuận. Số muỗng đường cần dùng là: F{20 . 7}{5} = 28 muỗng." },
-  { q: "Câu 24: Một lớp học có 39 bạn học sinh và quyên góp được số tiền 195 000 đồng ủng hộ các bạn khó khăn vui Tết. Nếu số học sinh tỉ lệ với số tiền quyên góp được thì một lớp có 43 học sinh sẽ quyên góp được số tiền là:", o: ["A. 250 000 đồng", "B. 240 000 đồng", "C. 215 000 đồng", "D. 270 000 đồng"], a: 2, e: "Số học sinh và số tiền là hai đại lượng tỉ lệ thuận. Số tiền lớp 43 học sinh quyên được là: F{43 . 195000}{39} = 215000 đồng." },
-  { q: "Câu 25: Một người đi xe máy với vận tốc 28 km/h thì tới nơi sau 9 tiếng chạy xe. Hỏi nếu người đó đi với vận tốc 36 km/h thì sau bao lâu sẽ tới nơi?", o: ["A. 16", "B. 12", "C. 7", "D. 6"], a: 2, e: "Trên cùng một quãng đường, vận tốc và thời gian là đại lượng tỉ lệ nghịch. Thời gian đi cần thiết sẽ là: F{28 . 9}{36} = 7 tiếng." },
-  { q: "Câu 26: Cho bảng sau, biết x và y là hai đại lượng tỉ lệ (thuận hay nghịch chưa rõ). x: 10, 30, 50. y: 3, 9, ?. Giá trị ở ô còn trống là:", o: ["A. 15", "B. 12", "C. 20", "D. 5"], a: 0, e: "Kiểm tra tỉ số ta thấy F{10}{3} = F{30}{9}, nên suy ra x và y là tỉ lệ thuận. Giá trị ô trống y sẽ bằng: F{50 . 3}{10} = 15." },
-  { q: "Câu 27: Cho bảng sau, biết x và y là hai đại lượng tỉ lệ (thuận hay nghịch chưa rõ). x: 45, 15, 9. y: 2, ?, 10. Giá trị ở ô còn trống là:", o: ["A. 15", "B. 12", "C. 20", "D. 6"], a: 3, e: "Kiểm tra tích ta thấy 45.2 = 9.10 = 90, nên suy ra x và y là tỉ lệ nghịch. Giá trị ô trống ở giữa bằng: F{90}{15} = 6." },
-  { q: "Câu 28: Cho bảng sau, biết x và y là hai đại lượng tỉ lệ (thuận hay nghịch chưa rõ). x: 4, 8, 9. y: ?, 6, F{16}{3}. Giá trị ở ô còn trống là:", o: ["A. 3", "B. 6", "C. 12", "D. 18"], a: 2, e: "Kiểm tra các cặp số có sẵn, ta thấy tích 8.6 = 9.(F{16}{3}) = 48, vậy x và y tỉ lệ nghịch. Giá trị ô trống đầu tiên y bằng: F{48}{4} = 12." },
-  { q: "Câu 29: Cho bảng sau, biết x và y là hai đại lượng tỉ lệ (thuận hay nghịch chưa rõ). x: 63, 21, 9. y: 51, ?, F{51}{7}. Giá trị ở ô còn trống là:", o: ["A. 17", "B. 16", "C. 15", "D. 14"], a: 0, e: "Kiểm tra tỉ số F{63}{51} và 9 : F{51}{7} ta thấy đều bằng F{21}{17}, vậy hai đại lượng x và y tỉ lệ thuận. Giá trị ô trống là y = 21 : F{21}{17} = 17." },
-  { q: "Câu 30: Một chiếc ô tô trong 2 giờ 42 phút đi được quãng đường dài 170,1 km. Nếu tổng thời gian di chuyển của xe là 4 giờ thì quãng đường chiếc xe ấy đã đi là bao nhiêu km?", o: ["A. 250", "B. 252", "C. 301,5", "D. 311,2"], a: 1, e: "Ta đổi 2 giờ 42 phút bằng 2,7 giờ. Quãng đường và thời gian ở đây là đại lượng tỉ lệ thuận. Quãng đường chiếc xe đi được trong 4 giờ là: F{4 . 170,1}{2,7} = 252 km." },
-  { q: "Câu 31: Nhóm công nhân gồm 4 người thực hiện sửa chữa một đoạn đường trong 21 ngày. Nếu muốn công việc hoàn thành sớm chỉ vỏn vẹn trong 7 ngày thì cần thêm:", o: ["A. 12 người", "B. 8 người", "C. 4 người", "D. 3 người"], a: 1, e: "Số lượng người và số ngày hoàn thành công việc là hai đại lượng tỉ lệ nghịch. Để xong trong 7 ngày cần F{4 . 21}{7} = 12 người. Vậy cần điều thêm: 12 - 4 = 8 người nữa." },
-  { q: "Câu 32: Cho đại lượng y tỉ lệ thuận với đại lượng x theo hệ số tỉ lệ k = -8. Khẳng định đúng là:", o: ["A. xy = -8", "B. x = -8y", "C. F{y}{x} = -8", "D. y = F{-8}{x}"], a: 2, e: "Đại lượng y tỉ lệ thuận với x theo hệ số k = -8 nên ta có công thức y = -8x. Suy ra F{y}{x} = -8. Vậy đáp án C là chính xác." },
-  { q: "Câu 33: Cho đại lượng y tỉ lệ nghịch với đại lượng x theo hệ số tỉ lệ a = 24. Khẳng định đúng là:", o: ["A. xy = -24", "B. x = 24y", "C. F{y}{x} = 24", "D. y = F{24}{x}"], a: 3, e: "Công thức cơ bản của đại lượng tỉ lệ nghịch là y = F{a}{x}. Thay hệ số 24 vào, ta được phương trình y = F{24}{x} (hoặc tích xy = 24)." },
-  { q: "Câu 34: Cho đại lượng y tỉ lệ thuận với đại lượng x theo hệ số tỉ lệ k = 9. Vậy đại lượng x tỉ lệ thuận với đại lượng y theo hệ số tỉ lệ là:", o: ["A. 9", "B. -9", "C. F{1}{9}", "D. F{-1}{9}"], a: 2, e: "Ta có công thức ban đầu là y = 9x. Rút x ra, ta suy ra được x = (F{1}{9})y. Như vậy đại lượng x tỉ lệ thuận với đại lượng y theo hệ số là F{1}{9}." },
-  { q: "Câu 35: Cho đại lượng m tỉ lệ nghịch với đại lượng n theo hệ số tỉ lệ a = -21. Vậy đại lượng n tỉ lệ nghịch với đại lượng m theo hệ số tỉ lệ là:", o: ["A. 21", "B. -21", "C. F{1}{21}", "D. F{-1}{21}"], a: 3, e: "Định nghĩa của đại lượng tỉ lệ nghịch là tích của hai biến không đổi. Ta có m.n = -21, suy ra đại lượng n cũng tỉ lệ nghịch với đại lượng m theo cùng hệ số đó là -21." },
-  { q: "Câu 36: Bạn Mai đọc được 48 trang của một quyển sách dày 311 trang trong 3 ngày. Nếu giữ nguyên tốc độ đọc này, bạn Mai sẽ đọc xong quyển sách trong bao nhiêu ngày?", o: ["A. 18 ngày", "B. 19 ngày", "C. 20 ngày", "D. 21 ngày"], a: 2, e: "Tốc độ đọc của Mai: F{48}{3} = 16 trang/ngày. Số ngày cần để đọc xong 311 trang là: F{311}{16} = 19,4375 ngày. Vì số ngày thực tế phải làm tròn lên để đọc hết, nên Mai sẽ đọc xong trong 20 ngày." },
-  { q: "Câu 37: Cho đại lượng y tỉ lệ thuận với đại lượng x. Biết khi x = 40 thì y = 24, vậy khi x = 5 thì:", o: ["A. y = 3", "B. y = 4", "C. y = 5", "D. y = 6"], a: 0, e: "Tính hệ số tỉ lệ k = F{y}{x} = F{24}{40} = F{3}{5}. Ta có công thức y = (F{3}{5})x. Khi x = 5 thì giá trị của y sẽ bằng (F{3}{5}) . 5 = 3." },
-  { q: "Câu 38: Cho đại lượng y tỉ lệ thuận với đại lượng x. Biết khi x = 15 thì y = 60, vậy khi y = 1 thì:", o: ["A. x = 1", "B. x = 4", "C. x = F{1}{4}", "D. x = F{1}{8}"], a: 2, e: "Tính hệ số tỉ lệ k = F{y}{x} = F{60}{15} = 4. Ta có phương trình y = 4x. Thay y = 1 vào, ta tính ra được x = F{1}{4}." },
-  { q: "Câu 39: Cho đại lượng m tỉ lệ nghịch với đại lượng n. Biết khi m = 9 thì n = 90, vậy khi n = 30 thì:", o: ["A. m = -3", "B. m = 3", "C. m = -27", "D. m = 27"], a: 3, e: "Hệ số tỉ lệ nghịch của bài toán là a = m.n = 9 . 90 = 810. Do đó khi n = 30 thì giá trị của m tính được là: F{810}{30} = 27." },
-  { q: "Câu 40: Ba lớp 7A, 7B, 7C cùng thực hiện chế tác đồ dùng từ vật liệu tái chế. Sau buổi sáng, tổng cộng 21 món đồ được làm ra. Lớp 7A có 36 học sinh, lớp 7B có 42 học sinh và lớp 7C có 48 học sinh. Số học sinh của mỗi lớp tỉ lệ thuận với số món đồ mà lớp đó làm được. Số món đồ lớp 7B làm được là:", o: ["A. 5", "B. 6", "C. 7", "D. 8"], a: 2, e: "Gọi số món đồ lớp 7A, 7B, 7C làm được lần lượt là a, b, c. Dùng tính chất dãy tỉ số bằng nhau: F{a}{36} = F{b}{42} = F{c}{48} = F{a+b+c}{36+42+48} = F{21}{126} = F{1}{6}. Lớp 7B làm được là: b = 42 . (F{1}{6}) = 7 món đồ." }
+    { type: 'mc', q: "Quá trình quang hợp có ở?", o: ["A. Động vật có xương sống", "B. Bò sát", "C. Thực vật", "D. Côn trùng"], a: 2, e: "Quang hợp là quá trình đặc trưng xảy ra ở thực vật, tảo và một số vi khuẩn." },
+    { type: 'mc', q: "Khi nhiệt độ môi trường quá cao (trên 40 độ C), cường độ quang hợp thường:", o: ["A. Tăng mạnh", "B. Không thay đổi", "C. Giảm hoặc dừng lại", "D. Đạt mức tối ưu"], a: 2, e: "Nhiệt độ quá cao sẽ làm biến tính enzyme, khiến khí khổng đóng lại để chống mất nước, làm giảm hoặc ngừng quang hợp." },
+    { type: 'mc', q: "Quá trình quang hợp diễn ra chủ yếu ở đâu?", o: ["A. Lá cây", "B. Thân cây", "C. Rễ cây", "D. Quả"], a: 0, e: "Lá cây có diện tích bề mặt lớn và chứa nhiều lục lạp, là cơ quan thực hiện quang hợp chủ yếu của cây." },
+    { type: 'mc', q: "Vì sao lá cây thường có màu xanh lục?", o: ["A. Vì lá cây chứa nhiều sắc tố diệp lục", "B. Vì lá hấp thụ toàn bộ ánh sáng xanh", "C. Vì lá chứa nhiều anthocyanin", "D. Cần màu xanh để xua đuổi côn trùng"], a: 0, e: "Lá có màu xanh do chứa nhiều sắc tố diệp lục (chlorophyll). Diệp lục không hấp thụ ánh sáng màu xanh lục mà phản xạ lại mắt chúng ta." },
+    { type: 'mc', q: "Khí khổng tập trung chủ yếu ở mặt dưới của lá có tác dụng chính là:", o: ["A. Ngăn cản ánh sáng mặt trời", "B. Hạn chế thoát hơi nước quá mức và trao đổi khí", "C. Hút nước từ môi trường không khí", "D. Bảo vệ lá khỏi sâu bệnh"], a: 1, e: "Khí khổng ở mặt dưới giúp tránh ánh sáng trực tiếp, hạn chế sự mất nước do bay hơi nhưng vẫn đảm bảo sự trao đổi khí." },
+    { type: 'mc', q: "Nhóm cây nào sau đây có phiến lá biến đổi để thích nghi với môi trường khô hạn nhưng vẫn quang hợp bằng thân?", o: ["A. Cây lúa, cây ngô", "B. Cây xương rồng, cây cành giao", "C. Cây hoa hồng, mai", "D. Cây bàng, phượng"], a: 1, e: "Xương rồng, cành giao biến lá thành gai để giảm thoát hơi nước, thân có màu xanh chứa diệp lục để quang hợp." },
+    { type: 'mc', q: "Tại sao khi trời nắng, đứng dưới bóng cây thường mát mẻ dễ chịu hơn dùng ô che?", o: ["A. Do cây thoát hơi nước làm giảm nhiệt độ", "B. Do bóng mát to rộng hơn ô", "C. Do cây tạo ra oxygen", "D. Đáp án khác"], a: 0, e: "Cây thoát hơi nước (chiếm 99% lượng nước hút vào), quá trình bay hơi thu nhiệt làm môi trường xung quanh mát mẻ." },
+    { type: 'mc', q: "Trong phương trình quang hợp, yếu tố nào đóng vai trò là điều kiện (không phải nguyên liệu)?", o: ["A. Nước", "B. Carbon dioxide", "C. Ánh sáng và diệp lục", "D. Glucose"], a: 2, e: "Ánh sáng cung cấp năng lượng, diệp lục hấp thụ năng lượng đó. Chúng là điều kiện để phản ứng xảy ra." },
+    { type: 'mc', q: "Hô hấp tế bào là:", o: ["A. Quá trình tổng hợp chất hữu cơ", "B. Quá trình phân giải chất hữu cơ bên ngoài tế bào", "C. Là quá trình phân giải chất hữu cơ diễn ra bên trong tế bào, giải phóng năng lượng", "D. Phân giải chất hữu cơ chủ yếu là tinh bột ở ngoài tế bào"], a: 2, e: "Hô hấp tế bào là quá trình tế bào phân giải chất hữu cơ (chủ yếu là glucose) để tạo ra năng lượng (ATP) cung cấp cho hoạt động sống." },
+    { type: 'mc', q: "Bào quan thực hiện chức năng hô hấp tế bào ở sinh vật nhân thực là:", o: ["A. Lục lạp", "B. Nhân tế bào", "C. Ti thể", "D. Không bào"], a: 2, e: "Ti thể được ví như nhà máy năng lượng của tế bào, là nơi diễn ra các giai đoạn chính của hô hấp tế bào." },
+    { type: 'mc', q: "Trong quá trình hô hấp tế bào, chất hữu cơ bị phân giải thành sản phẩm cuối cùng là:", o: ["A. Carbon dioxide và nước", "B. Carbon dioxide và oxygen", "C. Oxygen và nitrogen", "D. Oxygen và nước"], a: 0, e: "Sản phẩm của hô hấp tế bào là Carbon dioxide (CO2), nước (H2O) và năng lượng (ATP + nhiệt)." },
+    { type: 'mc', q: "Cơ sở khoa học của các biện pháp bảo quản nông sản là:", o: ["A. Tăng nhẹ cường độ hô hấp", "B. Giảm cường độ hô hấp tế bào tới mức tối thiểu", "C. Tiêu diệt hoàn toàn tế bào nông sản", "D. Tăng tới mức tối đa"], a: 1, e: "Bảo quản nhằm mục đích giữ nông sản tươi lâu bằng cách hãm quá trình hô hấp lại ở mức thấp nhất để không tiêu hao nhiều chất hữu cơ." },
+    { type: 'arrange', q: "Sắp xếp các từ sau để tạo thành Phương trình quang hợp dạng chữ:", words: ["Oxygen", "Nước", "Chất hữu cơ", "+", "+", "Carbon dioxide", "->"], a: "Nước + Carbon dioxide -> Chất hữu cơ + Oxygen", e: "Phương trình quang hợp: Nước + Carbon dioxide (dưới tác dụng của ánh sáng, diệp lục) -> Chất hữu cơ + Oxygen." },
+    { type: 'arrange', q: "Sắp xếp các từ sau để tạo thành Phương trình hô hấp tế bào dạng chữ:", words: ["Oxygen", "Nước", "Chất hữu cơ", "+", "+", "Carbon dioxide", "->", "Năng lượng", "+"], a: "Chất hữu cơ + Oxygen -> Carbon dioxide + Nước + Năng lượng", e: "Phương trình hô hấp: Chất hữu cơ (Glucose) + Oxygen -> Carbon dioxide + Nước + Năng lượng (ATP và nhiệt năng)." }
 ];
 
 const TARGET_MASTERY = 2;
@@ -940,6 +856,8 @@ let totalAttempts = 0;
 let currentQuestionAnswered = false;
 let currentSelection = null;
 let currentIndex = 0;
+let selectedArrangeWords = [];
+let poolArrangeWords = [];
 
 let currentStudyIndex = 0;
 let isStudyFlipped = false;
@@ -950,13 +868,12 @@ let matchedPairsCount = 0;
 let isMatchingCards = false;
 
 let userCoins = 1000;
-let inventory = { pass10: 0, help: 0, protect: 0 };
+let inventory = { pass1: 0, help: 0, protect: 0 };
 
 let currentBet = 10;
 let betWonLost = 0;
 let selectedBetStr = '10';
-
-let isPass10Used = false;
+let isPassUsed = false;
 
 let soloRoomId = null;
 let isPlayer1 = false;
@@ -966,33 +883,6 @@ let soloMyScore = 0;
 let soloUnsubscribe = null;
 let soloRoomData = null;
 let soloRewardGiven = false;
-
-function loadData() {
-    const savedCoins = localStorage.getItem('quiz_coins');
-    if(savedCoins !== null) userCoins = parseInt(savedCoins);
-
-    const savedInv = localStorage.getItem('quiz_inventory');
-    if(savedInv !== null) inventory = JSON.parse(savedInv);
-
-    const savedCorrect = localStorage.getItem('quiz_correct_counts');
-    if(savedCorrect !== null) correctCounts = JSON.parse(savedCorrect);
-
-    const savedAttempts = localStorage.getItem('quiz_total_attempts');
-    if(savedAttempts !== null) totalAttempts = parseInt(savedAttempts);
-
-    const savedWrong = localStorage.getItem('quiz_wrong_counts');
-    if(savedWrong !== null) wrongCounts = JSON.parse(savedWrong);
-}
-
-function saveData() {
-    localStorage.setItem('quiz_coins', userCoins);
-    localStorage.setItem('quiz_inventory', JSON.stringify(inventory));
-    localStorage.setItem('quiz_correct_counts', JSON.stringify(correctCounts));
-    localStorage.setItem('quiz_total_attempts', totalAttempts);
-    localStorage.setItem('quiz_wrong_counts', JSON.stringify(wrongCounts));
-}
-
-loadData();
 
 const app = document.getElementById('app');
 const nextBtn = document.getElementById('next-btn');
@@ -1032,9 +922,9 @@ const soloBtn = document.getElementById('solo-btn');
 window.showSoloMatchMsg = function(msg, isError = false, keepOpen = false) {
     const el = document.getElementById('solo-match-msg');
     el.textContent = msg;
-    el.style.backgroundColor = isError ? '#fee2e2' : '#d1fae5';
-    el.style.color = isError ? '#b91c1c' : '#047857';
-    el.style.borderColor = isError ? '#ef4444' : '#10b981';
+    el.style.backgroundColor = isError ? '#7f1d1d' : '#064e3b';
+    el.style.color = isError ? '#fecaca' : '#a7f3d0';
+    el.style.borderColor = isError ? '#dc2626' : '#059669';
     el.style.display = 'block';
     if (!keepOpen) {
         setTimeout(() => el.style.display = 'none', 3000);
@@ -1051,27 +941,24 @@ function hideAllModes() {
 }
 
 function updateCoinDisplay() {
-    const coinDisplay = document.getElementById('coin-display');
-    coinDisplay.textContent = 'Tài sản hiện tại: ' + userCoins + ' Xu';
+    document.getElementById('coin-display').textContent = 'Tài sản hiện tại: ' + userCoins + ' Xu';
 }
 
 function updateInventoryDisplay() {
-    const invDisplay = document.getElementById('inventory-display');
-    invDisplay.textContent = 'Kho đồ: ' + inventory.pass10 + ' Thẻ Pass | ' + inventory.help + ' Thẻ Trợ Giúp | ' + inventory.protect + ' Thẻ Bảo Vệ';
+    document.getElementById('inventory-display').textContent = 'Kho đồ: ' + inventory.pass1 + ' Thẻ Pass | ' + inventory.help + ' Thẻ 50/50 | ' + inventory.protect + ' Thẻ Bảo Vệ';
 }
 
 window.buyCard = function(type, price) {
     if (userCoins >= price) {
         userCoins -= price;
-        if (type === 'pass10') inventory.pass10++;
+        if (type === 'pass1') inventory.pass1++;
         else if (type === 'help') inventory.help++;
         else if (type === 'protect') inventory.protect++;
-        saveData();
         updateCoinDisplay();
         updateInventoryDisplay();
-        showShopMsg('Mua thẻ thành công!', false);
+        showShopMsg('Tớ đã thêm thẻ vào kho cho cậu rồi đó!', false);
     } else {
-        showShopMsg('Ối, cậu không đủ Xu rồi!', true);
+        showShopMsg('Ối, cậu không đủ Xu rồi, cày thêm nha!', true);
     }
 }
 
@@ -1102,12 +989,16 @@ window.showSoloError = function(msg) {
 };
 
 window.createSoloRoom = async function() {
-    if (!currentUser) return window.showSoloError('Đang kết nối hệ thống, vui lòng chờ chút...');
+    if (!currentUser) return window.showSoloError('Đang kết nối hệ thống, chờ tớ xíu...');
     soloRoomId = Math.random().toString(36).substring(2, 8).toUpperCase();
     isPlayer1 = true;
     soloRewardGiven = false;
     
-    let shuffledQs = [...questions].map((_, i) => i).sort(() => 0.5 - Math.random());
+    let mcQs = [];
+    questions.forEach((q, i) => {
+        if(q.type === 'mc') mcQs.push(i);
+    });
+    let shuffledQs = mcQs.sort(() => 0.5 - Math.random());
     
     const roomRef = ref(db, 'rooms/' + soloRoomId);
     await set(roomRef, {
@@ -1133,7 +1024,7 @@ window.createSoloRoom = async function() {
 window.joinSoloRoom = async function() {
     if (!currentUser) return window.showSoloError('Đang kết nối hệ thống...');
     const codeInput = document.getElementById('room-code-input').value.trim().toUpperCase();
-    if (!codeInput) return window.showSoloError('Vui lòng nhập mã phòng!');
+    if (!codeInput) return window.showSoloError('Cậu chưa nhập mã phòng kìa!');
     
     const roomRef = ref(db, 'rooms/' + codeInput);
     const snap = await get(roomRef);
@@ -1160,10 +1051,10 @@ window.joinSoloRoom = async function() {
             renderSoloQuestion();
             listenSoloRoom();
         } else {
-            window.showSoloError('Phòng này đã bắt đầu hoặc kết thúc!');
+            window.showSoloError('Phòng này đang chơi hoặc đóng rồi cậu ạ!');
         }
     } else {
-        window.showSoloError('Phòng không tồn tại!');
+        window.showSoloError('Tớ tìm không thấy phòng này!');
     }
 };
 
@@ -1196,26 +1087,22 @@ window.exitSoloRoom = function() {
 
 window.requestRemake = async function() {
     if (!soloRoomId || !soloRoomData) return;
-    
     const remakeBtn = document.getElementById('solo-remake-btn');
     if (remakeBtn) {
-        remakeBtn.textContent = 'Đang chờ đối thủ...';
+        remakeBtn.textContent = 'Đang chờ bạn kia...';
         remakeBtn.disabled = true;
     }
 
     const roomRef = ref(db, 'rooms/' + soloRoomId);
-    
     let updates = {};
-    if (isPlayer1) {
-        updates.remake_p1 = true;
-    } else {
-        updates.remake_p2 = true;
-    }
-    
+    if (isPlayer1) updates.remake_p1 = true; else updates.remake_p2 = true;
     const oppRemake = isPlayer1 ? soloRoomData.remake_p2 : soloRoomData.remake_p1;
     
     if (oppRemake) {
-        let shuffledQs = [...questions].map((_, i) => i).sort(() => 0.5 - Math.random());
+        let mcQs = [];
+        questions.forEach((q, i) => { if(q.type === 'mc') mcQs.push(i); });
+        let shuffledQs = mcQs.sort(() => 0.5 - Math.random());
+        
         updates.p1Score = 0;
         updates.p2Score = 0;
         updates.p1Rounds = 0;
@@ -1225,7 +1112,6 @@ window.requestRemake = async function() {
         updates.status = 'playing';
         updates.qs = shuffledQs;
     }
-    
     await update(roomRef, updates);
 };
 
@@ -1239,7 +1125,7 @@ function listenSoloRoom() {
         soloRoomData = data;
 
         if (data.status === 'closed') {
-            forceExitToLobby('Đối thủ đã rời phòng!');
+            forceExitToLobby('Bạn kia đã out phòng rồi!');
             return;
         }
         
@@ -1268,7 +1154,6 @@ function listenSoloRoom() {
                 remakeBtn.textContent = 'Chơi lại ván mới';
                 remakeBtn.disabled = false;
             }
-            
             renderSoloQuestion();
         }
         
@@ -1279,7 +1164,7 @@ function listenSoloRoom() {
                 const oppRemake = isPlayer1 ? data.remake_p2 : data.remake_p1;
                 
                 if (myRemake && !oppRemake) {
-                    remakeBtn.textContent = 'Đang chờ đối thủ...';
+                    remakeBtn.textContent = 'Đang chờ bạn kia...';
                     remakeBtn.disabled = true;
                 } else if (!myRemake) {
                     remakeBtn.textContent = 'Chơi lại ván mới';
@@ -1305,7 +1190,7 @@ function listenSoloRoom() {
         
         if (data.status === 'p1_round_won' || data.status === 'p2_round_won') {
             const iWonRound = (isPlayer1 && data.status === 'p1_round_won') || (!isPlayer1 && data.status === 'p2_round_won');
-            window.showSoloMatchMsg(iWonRound ? 'Tuyệt đỉnh! Cậu đã thắng ván này! Đang chuẩn bị ván tiếp theo...' : 'Thất bại! Đối thủ đã thắng ván này! Điểm số sắp được làm mới...', !iWonRound, true);
+            window.showSoloMatchMsg(iWonRound ? 'Tuyệt quá tớ ơi! Cậu đã thắng ván này! Đang chuyển ván...' : 'Xui quá! Đối thủ đã thắng ván này! Đang làm mới...', !iWonRound, true);
             
             document.getElementById('solo-app').style.opacity = '0.5';
             document.getElementById('solo-app').style.pointerEvents = 'none';
@@ -1348,7 +1233,7 @@ function renderSoloQuestion() {
     
     const qText = document.createElement('div');
     qText.className = 'question-text';
-    qText.innerHTML = parseFraction(q.q);
+    qText.innerHTML = q.q;
     qBlock.appendChild(qText);
     
     const optionsGrid = document.createElement('div');
@@ -1357,7 +1242,7 @@ function renderSoloQuestion() {
     q.o.forEach((optText, optIndex) => {
         const btn = document.createElement('button');
         btn.className = 'option-btn';
-        btn.innerHTML = parseFraction(optText);
+        btn.innerHTML = optText;
         
         btn.onclick = async function() {
             if (window.isSoloAnswering) return;
@@ -1370,18 +1255,15 @@ function renderSoloQuestion() {
             if (optIndex === q.a) {
                 btn.classList.add('correct-answer');
                 soloMyScore++;
-                
                 if (soloMyScore > 10) soloMyScore = 10;
                 
                 const roomRef = ref(db, 'rooms/' + soloRoomId);
-                
                 let updates = {};
                 let myRounds = isPlayer1 ? (soloRoomData.p1Rounds || 0) : (soloRoomData.p2Rounds || 0);
                 
                 if (soloMyScore >= 10) {
                     myRounds++;
-                    if (isPlayer1) updates.p1Rounds = myRounds;
-                    else updates.p2Rounds = myRounds;
+                    if (isPlayer1) updates.p1Rounds = myRounds; else updates.p2Rounds = myRounds;
                     
                     if (myRounds >= 2) {
                         updates.status = isPlayer1 ? 'p1_won' : 'p2_won';
@@ -1391,8 +1273,7 @@ function renderSoloQuestion() {
                         if (isPlayer1) updates.p1Score = soloMyScore; else updates.p2Score = soloMyScore;
                     }
                 } else {
-                    if (isPlayer1) updates.p1Score = soloMyScore;
-                    else updates.p2Score = soloMyScore;
+                    if (isPlayer1) updates.p1Score = soloMyScore; else updates.p2Score = soloMyScore;
                 }
                 
                 await update(roomRef, updates);
@@ -1410,11 +1291,10 @@ function renderSoloQuestion() {
                 penaltyMsg.style.fontWeight = '700';
                 penaltyMsg.style.marginTop = '15px';
                 penaltyMsg.style.textAlign = 'center';
-                penaltyMsg.style.fontSize = '18px';
                 qBlock.appendChild(penaltyMsg);
                 
-                let timeLeft = 4;
-                penaltyMsg.textContent = 'Chọn sai! Phạt dừng ' + timeLeft + ' giây!';
+                let timeLeft = 3;
+                penaltyMsg.textContent = 'Sai rồi cậu ơi! Đứng im ' + timeLeft + ' giây!';
                 window.soloPenaltyTimer = setInterval(() => {
                     timeLeft--;
                     if (timeLeft <= 0) {
@@ -1422,12 +1302,11 @@ function renderSoloQuestion() {
                         soloCurrentIdx++;
                         renderSoloQuestion();
                     } else {
-                        penaltyMsg.textContent = 'Chọn sai! Phạt dừng ' + timeLeft + ' giây!';
+                        penaltyMsg.textContent = 'Sai rồi cậu ơi! Đứng im ' + timeLeft + ' giây!';
                     }
                 }, 1000);
             }
         };
-        
         optionsGrid.appendChild(btn);
     });
     
@@ -1453,17 +1332,16 @@ function finishSoloGame(status) {
     const iWon = (isPlayer1 && status === 'p1_won') || (!isPlayer1 && status === 'p2_won');
     if (iWon) {
         resultContainer.classList.add('win-animation');
-        resText.textContent = "Tuyệt đỉnh! Cậu đã vô địch BO3!";
+        resText.textContent = "Hay quá cậu ơi! Cậu đã vô địch BO3!";
         resText.style.color = '#ffffff';
         if (!soloRewardGiven) {
             userCoins += 100;
-            saveData();
             updateCoinDisplay();
             soloRewardGiven = true;
         }
     } else {
         resultContainer.classList.add('lose-animation');
-        resText.textContent = "Thất bại! Đối thủ đã thắng BO3 rồi!";
+        resText.textContent = "Thua rồi cậu ạ! Lần sau cố nhé!";
         resText.style.color = '#ffffff';
     }
 }
@@ -1477,7 +1355,9 @@ function initMatchGame() {
     matchFirstCard = null;
     isMatchingCards = false;
 
-    let shuffledQs = [...questions].sort(function() { return 0.5 - Math.random() }).slice(0, 5);
+    let mcQs = [];
+    questions.forEach(q => { if(q.type === 'mc') mcQs.push(q); });
+    let shuffledQs = mcQs.sort(() => 0.5 - Math.random()).slice(0, 5);
     matchCards = [];
     
     shuffledQs.forEach(function(q, idx) {
@@ -1485,20 +1365,18 @@ function initMatchGame() {
         matchCards.push({ id: 'a' + idx, pairId: idx, text: q.o[q.a], type: 'a', matched: false });
     });
 
-    matchCards.sort(function() { return 0.5 - Math.random() });
+    matchCards.sort(() => 0.5 - Math.random());
     renderMatchGrid();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function renderMatchGrid() {
     matchGrid.innerHTML = '';
-    matchCards.forEach(function(card, index) {
+    matchCards.forEach(function(card) {
         const el = document.createElement('div');
         el.className = 'match-card';
-        if (card.matched) {
-            el.classList.add('match-matched');
-        }
-        el.innerHTML = parseFraction(card.text);
+        if (card.matched) el.classList.add('match-matched');
+        el.innerHTML = card.text;
         
         el.addEventListener('click', function() {
             if (isMatchingCards || card.matched || el.classList.contains('match-selected')) return;
@@ -1561,21 +1439,21 @@ function renderStudyMode() {
     const progressInfo = document.createElement('div');
     progressInfo.style.textAlign = 'center';
     progressInfo.style.marginBottom = '15px';
-    progressInfo.style.color = '#64748b';
+    progressInfo.style.color = '#94a3b8';
     progressInfo.style.fontWeight = '700';
     progressInfo.textContent = 'Thẻ ' + (currentStudyIndex + 1) + ' / ' + questions.length;
     card.appendChild(progressInfo);
 
     const qText = document.createElement('div');
     qText.className = 'study-q';
-    qText.innerHTML = parseFraction(q.q);
+    qText.innerHTML = q.q;
     card.appendChild(qText);
 
     if (!isStudyFlipped) {
         const flipBtn = document.createElement('button');
         flipBtn.className = 'nav-btn next-btn';
         flipBtn.style.marginTop = '20px';
-        flipBtn.textContent = 'Lật thẻ xem đáp án & giải thích';
+        flipBtn.textContent = 'Lật xem giải thích';
         flipBtn.onclick = function() {
             isStudyFlipped = true;
             renderStudyMode();
@@ -1584,11 +1462,11 @@ function renderStudyMode() {
     } else {
         const aText = document.createElement('div');
         aText.className = 'study-a';
-        aText.innerHTML = 'Đáp án đúng: ' + parseFraction(q.o[q.a]);
+        aText.innerHTML = 'Đáp án đúng: ' + (q.type === 'mc' ? q.o[q.a] : q.a);
 
         const eText = document.createElement('div');
         eText.className = 'study-e';
-        eText.innerHTML = 'Giải thích: ' + parseFraction(q.e);
+        eText.innerHTML = 'Giải thích: ' + q.e;
 
         card.appendChild(aText);
         card.appendChild(eText);
@@ -1597,7 +1475,7 @@ function renderStudyMode() {
         nextCardBtn.className = 'nav-btn next-btn';
         nextCardBtn.style.marginTop = '25px';
         if (currentStudyIndex < questions.length - 1) {
-            nextCardBtn.textContent = 'Lật sang thẻ tiếp theo';
+            nextCardBtn.textContent = 'Thẻ tiếp theo';
             nextCardBtn.onclick = function() {
                 currentStudyIndex++;
                 isStudyFlipped = false;
@@ -1634,7 +1512,7 @@ function renderStudyMode() {
 
     const randomCardBtn = document.createElement('button');
     randomCardBtn.className = 'flashcard-btn';
-    randomCardBtn.textContent = 'Rút thẻ ngẫu nhiên';
+    randomCardBtn.textContent = 'Rút ngẫu nhiên';
     randomCardBtn.onclick = function() {
         currentStudyIndex = Math.floor(Math.random() * questions.length);
         isStudyFlipped = false;
@@ -1675,7 +1553,7 @@ function renderWrongMode() {
         const msg = document.createElement('div');
         msg.className = 'info-msg tips-msg show-msg';
         msg.style.textAlign = 'center';
-        msg.textContent = 'Tuyệt vời! Cậu chưa làm sai câu nào cả!';
+        msg.textContent = 'Giỏi quá! Cậu chưa sai câu nào cả!';
         wrongList.appendChild(msg);
         return;
     }
@@ -1694,17 +1572,17 @@ function renderWrongMode() {
 
         const qText = document.createElement('div');
         qText.className = 'study-q';
-        qText.innerHTML = parseFraction(item.q.q);
+        qText.innerHTML = item.q.q;
         card.appendChild(qText);
 
         const aText = document.createElement('div');
         aText.className = 'study-a';
-        aText.innerHTML = 'Đáp án đúng: ' + parseFraction(item.q.o[item.q.a]);
+        aText.innerHTML = 'Đáp án đúng: ' + (item.q.type === 'mc' ? item.q.o[item.q.a] : item.q.a);
         card.appendChild(aText);
 
         const eText = document.createElement('div');
         eText.className = 'study-e';
-        eText.innerHTML = 'Giải thích: ' + parseFraction(item.q.e);
+        eText.innerHTML = 'Giải thích: ' + item.q.e;
         card.appendChild(eText);
 
         wrongList.appendChild(card);
@@ -1735,6 +1613,108 @@ function updateProgress() {
     progressText.textContent = 'Tiến độ thuộc bài: ' + currentMastery + ' / ' + totalMastery;
 }
 
+function processAnswer(index, isCorrect, useProtect = false, isPass = false) {
+    currentQuestionAnswered = true;
+    totalAttempts++;
+    if (isPass) {
+        correctCounts[index] = TARGET_MASTERY;
+        betWonLost = 0;
+    } else if (isCorrect) {
+        correctCounts[index]++;
+        betWonLost = currentBet;
+        userCoins += currentBet;
+    } else {
+        wrongCounts[index]++;
+        if (useProtect && inventory.protect > 0) {
+            inventory.protect--;
+            betWonLost = 0;
+        } else {
+            betWonLost = -currentBet;
+            userCoins -= currentBet;
+        }
+    }
+    updateCoinDisplay();
+    updateInventoryDisplay();
+    renderQuestion(index);
+}
+
+function renderArrangeUI(qBlock, index, q) {
+    if(!currentQuestionAnswered && selectedArrangeWords.length === 0 && poolArrangeWords.length === 0) {
+        poolArrangeWords = [...q.words];
+    }
+
+    const answerDiv = document.createElement('div');
+    answerDiv.className = 'arrange-answer';
+    
+    const poolDiv = document.createElement('div');
+    poolDiv.className = 'arrange-pool';
+
+    const renderWords = () => {
+        answerDiv.innerHTML = '';
+        poolDiv.innerHTML = '';
+
+        if(selectedArrangeWords.length === 0) {
+            const placeholder = document.createElement('span');
+            placeholder.style.color = '#64748b';
+            placeholder.textContent = 'Kéo/chọn từ ở dưới để đưa lên đây...';
+            answerDiv.appendChild(placeholder);
+        }
+
+        selectedArrangeWords.forEach((word, i) => {
+            let btn = document.createElement('button');
+            btn.className = 'word-btn';
+            btn.textContent = word;
+            btn.onclick = () => {
+                if(currentQuestionAnswered) return;
+                poolArrangeWords.push(word);
+                selectedArrangeWords.splice(i, 1);
+                renderWords();
+            }
+            answerDiv.appendChild(btn);
+        });
+
+        poolArrangeWords.forEach((word, i) => {
+            let btn = document.createElement('button');
+            btn.className = 'word-btn';
+            btn.textContent = word;
+            btn.onclick = () => {
+                if(currentQuestionAnswered) return;
+                selectedArrangeWords.push(word);
+                poolArrangeWords.splice(i, 1);
+                renderWords();
+            }
+            poolDiv.appendChild(btn);
+        });
+    };
+
+    renderWords();
+    qBlock.appendChild(answerDiv);
+    qBlock.appendChild(poolDiv);
+
+    if(!currentQuestionAnswered) {
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'nav-btn next-btn';
+        checkBtn.textContent = 'Kiểm tra câu này';
+        checkBtn.onclick = () => {
+            const userStr = selectedArrangeWords.join(' ');
+            if(userStr === q.a) {
+                processAnswer(index, true);
+            } else {
+                processAnswer(index, false, true);
+            }
+        }
+        qBlock.appendChild(checkBtn);
+    } else {
+        if(selectedArrangeWords.join(' ') === q.a || isPassUsed || currentSelection === -1) {
+            answerDiv.style.borderColor = '#059669';
+            answerDiv.style.backgroundColor = '#064e3b';
+        } else {
+            answerDiv.style.borderColor = '#dc2626';
+            answerDiv.style.backgroundColor = '#7f1d1d';
+        }
+    }
+}
+
 function renderQuestion(index) {
     app.innerHTML = '';
     updateProgress();
@@ -1750,19 +1730,18 @@ function renderQuestion(index) {
         userCoins = 50;
         currentBet = 10;
         selectedBetStr = '10';
-        saveData();
         updateCoinDisplay();
         
         const bailoutMsg = document.createElement('div');
         bailoutMsg.style.padding = '10px';
-        bailoutMsg.style.backgroundColor = '#fef3c7';
-        bailoutMsg.style.color = '#b45309';
-        bailoutMsg.style.borderRadius = '8px';
+        bailoutMsg.style.backgroundColor = '#1e293b';
+        bailoutMsg.style.color = '#fbbf24';
+        bailoutMsg.style.borderRadius = '12px';
         bailoutMsg.style.marginBottom = '15px';
         bailoutMsg.style.fontWeight = '700';
         bailoutMsg.style.textAlign = 'center';
-        bailoutMsg.style.border = '2px dashed #f59e0b';
-        bailoutMsg.textContent = 'Hết sạch Xu rồi! Hệ thống cấp vốn cho cậu 50 Xu để tiếp tục chiến đấu!';
+        bailoutMsg.style.border = '1px dashed #475569';
+        bailoutMsg.textContent = 'Hết sạch Xu rồi cậu ơi! Tớ cấp vốn lại 50 Xu để tiếp tục nhé!';
         qBlock.appendChild(bailoutMsg);
     }
 
@@ -1780,45 +1759,21 @@ function renderQuestion(index) {
 
     const qText = document.createElement('div');
     qText.className = 'question-text';
-    qText.innerHTML = parseFraction(q.q);
+    qText.innerHTML = q.q;
     qBlock.appendChild(qText);
 
-    if (!currentQuestionAnswered && inventory.pass10 > 0) {
-        const pass10Btn = document.createElement('button');
-        pass10Btn.className = 'action-btn study-btn';
-        pass10Btn.style.width = '100%';
-        pass10Btn.style.marginBottom = '20px';
-        pass10Btn.textContent = 'Dùng Thẻ Pass 10 Câu (Tự động hoàn thành ngay)';
-        pass10Btn.onclick = function() {
-            inventory.pass10--;
-            updateInventoryDisplay();
-            
-            let passedCount = 0;
-            if (correctCounts[index] < TARGET_MASTERY) {
-                correctCounts[index] = TARGET_MASTERY;
-                passedCount++;
-            }
-            
-            let unmastered = [];
-            for(let i=0; i<questions.length; i++) {
-                if (correctCounts[i] < TARGET_MASTERY) unmastered.push(i);
-            }
-            unmastered.sort(function() { return 0.5 - Math.random(); });
-            
-            for(let i=0; i<unmastered.length; i++) {
-                if (passedCount >= 10) break;
-                correctCounts[unmastered[i]] = TARGET_MASTERY;
-                passedCount++;
-            }
-            
-            isPass10Used = true;
-            currentQuestionAnswered = true;
-            currentSelection = q.a;
-            betWonLost = 0;
-            saveData();
-            renderQuestion(index);
+    if (!currentQuestionAnswered && inventory.pass1 > 0) {
+        const pass1Btn = document.createElement('button');
+        pass1Btn.className = 'action-btn study-btn';
+        pass1Btn.style.width = '100%';
+        pass1Btn.style.marginBottom = '20px';
+        pass1Btn.textContent = 'Dùng Thẻ Pass (Tự động hoàn thành câu này)';
+        pass1Btn.onclick = function() {
+            inventory.pass1--;
+            isPassUsed = true;
+            processAnswer(index, true, false, true);
         };
-        qBlock.appendChild(pass10Btn);
+        qBlock.appendChild(pass1Btn);
     }
 
     if (!currentQuestionAnswered) {
@@ -1830,18 +1785,14 @@ function renderQuestion(index) {
         betAmounts.forEach(function(amount) {
             const btn = document.createElement('button');
             btn.className = 'bet-btn';
-            
             let amtValue = amount === 'Tất tay' ? userCoins : amount;
             
-            if (amount.toString() === selectedBetStr) {
-                btn.classList.add('bet-selected');
-            }
+            if (amount.toString() === selectedBetStr) btn.classList.add('bet-selected');
             if (amount !== 'Tất tay' && amount > userCoins) {
                 btn.disabled = true;
-                btn.style.opacity = '0.5';
+                btn.style.opacity = '0.3';
                 btn.style.cursor = 'not-allowed';
             }
-
             btn.textContent = amount;
             btn.onclick = function() {
                 selectedBetStr = amount.toString();
@@ -1853,105 +1804,84 @@ function renderQuestion(index) {
         qBlock.appendChild(betContainer);
     }
 
-    const optionsGrid = document.createElement('div');
-    optionsGrid.className = 'options-grid';
+    if(q.type === 'arrange') {
+        renderArrangeUI(qBlock, index, q);
+    } else {
+        const optionsGrid = document.createElement('div');
+        optionsGrid.className = 'options-grid';
 
-    q.o.forEach((optText, optIndex) => {
-        const btn = document.createElement('button');
-        btn.className = 'option-btn';
-        btn.innerHTML = parseFraction(optText);
+        q.o.forEach((optText, optIndex) => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerHTML = optText;
 
-        if (currentQuestionAnswered) {
-            btn.disabled = true;
-            if (optIndex === q.a) {
-                btn.classList.add('correct-answer');
-            } else if (currentSelection === optIndex) {
-                btn.classList.add('wrong-answer');
-            } else {
-                btn.classList.add('neutral-answer');
-            }
-        } else {
-            btn.addEventListener('click', function() {
-                currentSelection = optIndex;
-                currentQuestionAnswered = true;
-                totalAttempts++;
-
-                if (currentSelection === q.a) {
-                    correctCounts[index]++;
-                    betWonLost = currentBet;
-                    userCoins += currentBet;
+            if (currentQuestionAnswered) {
+                btn.disabled = true;
+                if (optIndex === q.a) {
+                    btn.classList.add('correct-answer');
+                } else if (currentSelection === optIndex) {
+                    btn.classList.add('wrong-answer');
                 } else {
-                    wrongCounts[index]++;
-                    if (inventory.protect > 0) {
-                        inventory.protect--;
-                        updateInventoryDisplay();
-                        betWonLost = 0;
-                    } else {
-                        betWonLost = -currentBet;
-                        userCoins -= currentBet;
-                    }
+                    btn.classList.add('neutral-answer');
                 }
-                
-                saveData();
-                updateCoinDisplay();
-                renderQuestion(index);
-            });
-        }
-
-        optionsGrid.appendChild(btn);
-    });
-
-    qBlock.appendChild(optionsGrid);
+            } else {
+                btn.addEventListener('click', function() {
+                    currentSelection = optIndex;
+                    if (currentSelection === q.a) {
+                        processAnswer(index, true);
+                    } else {
+                        processAnswer(index, false, true);
+                    }
+                });
+            }
+            optionsGrid.appendChild(btn);
+        });
+        qBlock.appendChild(optionsGrid);
+    }
 
     if (!currentQuestionAnswered) {
         const toolsRow = document.createElement('div');
         toolsRow.className = 'study-nav-row tools-row';
         toolsRow.style.marginTop = '25px';
 
-        const fiftyBtn = document.createElement('button');
-        fiftyBtn.className = 'action-btn motivate-btn';
-        fiftyBtn.style.flex = '1';
-        
-        if (inventory.help > 0) {
-            fiftyBtn.textContent = 'Dùng phao: Gợi ý 50/50 (Miễn phí nhờ Thẻ)';
-            fiftyBtn.onclick = function() {
-                inventory.help--;
-                saveData();
-                updateInventoryDisplay();
-                let wrongIndexes = [];
-                for(let i=0; i<4; i++) {
-                    if(i !== q.a) wrongIndexes.push(i);
-                }
-                wrongIndexes.sort(function() { return Math.random() - 0.5; });
-                
-                const optionBtns = optionsGrid.children;
-                optionBtns[wrongIndexes[0]].classList.add('hidden-option');
-                optionBtns[wrongIndexes[1]].classList.add('hidden-option');
-                fiftyBtn.style.display = 'none';
-            };
-        } else {
-            fiftyBtn.textContent = 'Dùng phao: Gợi ý 50/50 (Phí: 20 Xu)';
-            if (userCoins < 20) {
-                fiftyBtn.disabled = true;
-                fiftyBtn.style.opacity = '0.5';
-                fiftyBtn.textContent += ' - Không đủ Xu';
-            } else {
+        if(q.type === 'mc') {
+            const fiftyBtn = document.createElement('button');
+            fiftyBtn.className = 'action-btn motivate-btn';
+            fiftyBtn.style.flex = '1';
+            
+            if (inventory.help > 0) {
+                fiftyBtn.textContent = 'Dùng phao: Gợi ý 50/50 (Thẻ)';
                 fiftyBtn.onclick = function() {
-                    userCoins -= 20;
-                    saveData();
-                    updateCoinDisplay();
+                    inventory.help--;
+                    updateInventoryDisplay();
                     let wrongIndexes = [];
-                    for(let i=0; i<4; i++) {
-                        if(i !== q.a) wrongIndexes.push(i);
-                    }
-                    wrongIndexes.sort(function() { return Math.random() - 0.5; });
-                    
-                    const optionBtns = optionsGrid.children;
+                    for(let i=0; i<4; i++) { if(i !== q.a) wrongIndexes.push(i); }
+                    wrongIndexes.sort(() => Math.random() - 0.5);
+                    const optionBtns = qBlock.querySelector('.options-grid').children;
                     optionBtns[wrongIndexes[0]].classList.add('hidden-option');
                     optionBtns[wrongIndexes[1]].classList.add('hidden-option');
                     fiftyBtn.style.display = 'none';
                 };
+            } else {
+                fiftyBtn.textContent = 'Gợi ý 50/50 (20 Xu)';
+                if (userCoins < 20) {
+                    fiftyBtn.disabled = true;
+                    fiftyBtn.style.opacity = '0.5';
+                } else {
+                    fiftyBtn.onclick = function() {
+                        userCoins -= 20;
+                        updateCoinDisplay();
+                        let wrongIndexes = [];
+                        for(let i=0; i<4; i++) { if(i !== q.a) wrongIndexes.push(i); }
+                        wrongIndexes.sort(() => Math.random() - 0.5);
+                        const optionBtns = qBlock.querySelector('.options-grid').children;
+                        optionBtns[wrongIndexes[0]].classList.add('hidden-option');
+                        optionBtns[wrongIndexes[1]].classList.add('hidden-option');
+                        fiftyBtn.style.display = 'none';
+                    };
+                }
             }
+            toolsRow.appendChild(fiftyBtn);
         }
 
         const giveUpBtn = document.createElement('button');
@@ -1965,11 +1895,8 @@ function renderQuestion(index) {
             correctCounts[index] = 0;
             wrongCounts[index]++;
             betWonLost = 0;
-            saveData();
             renderQuestion(index);
         };
-
-        toolsRow.appendChild(fiftyBtn);
         toolsRow.appendChild(giveUpBtn);
         qBlock.appendChild(toolsRow);
     }
@@ -1978,33 +1905,33 @@ function renderQuestion(index) {
         const feedbackDiv = document.createElement('div');
         feedbackDiv.style.marginTop = '15px';
         feedbackDiv.style.fontWeight = '700';
-        feedbackDiv.style.fontSize = '18px';
+        feedbackDiv.style.fontSize = '16px';
         
-        let wasPass10 = isPass10Used;
+        let isRight = (q.type === 'mc' && currentSelection === q.a) || (q.type === 'arrange' && selectedArrangeWords.join(' ') === q.a);
         
-        if (wasPass10) {
-            feedbackDiv.style.color = '#8b5cf6';
-            feedbackDiv.textContent = 'Quyền năng vĩ đại! Cậu đã dùng thẻ Pass và tự động thông thạo câu này cùng tối đa 9 câu chưa thuộc khác!';
-            isPass10Used = false;
-        } else if (currentSelection === q.a) {
-            feedbackDiv.style.color = '#10b981';
+        if (isPassUsed) {
+            feedbackDiv.style.color = '#c026d3';
+            feedbackDiv.textContent = 'Cậu đã dùng thẻ Pass! Câu này coi như cậu làm đúng luôn nha!';
+            isPassUsed = false;
+        } else if (isRight) {
+            feedbackDiv.style.color = '#34d399';
             let txt = 'Chính xác! Cậu thắng ' + betWonLost + ' Xu!';
             if (correctCounts[index] >= TARGET_MASTERY) {
                 txt += ' Cậu đã thuộc lòng câu này!';
             } else {
-                txt += ' Trả lời đúng ' + (TARGET_MASTERY - correctCounts[index]) + ' lần nữa để thuộc bài nhé!';
+                txt += ' Đúng ' + (TARGET_MASTERY - correctCounts[index]) + ' lần nữa là thuộc nhé!';
             }
             feedbackDiv.textContent = txt;
         } else if (currentSelection === -1) {
-            feedbackDiv.style.color = '#f59e0b';
-            feedbackDiv.textContent = 'Đã mở đáp án! Cược được hoàn trả. Cứ thong thả đọc giải thích nhé!';
+            feedbackDiv.style.color = '#fbbf24';
+            feedbackDiv.textContent = 'Đã mở đáp án! Cược được hoàn trả. Nhớ đọc kỹ nha cậu!';
         } else {
             if (betWonLost === 0) {
-                feedbackDiv.style.color = '#f59e0b';
-                feedbackDiv.textContent = 'Sai rồi! Nhưng Thẻ Bảo Vệ Tiền đã được kích hoạt, cậu không bị trừ Xu nào!';
+                feedbackDiv.style.color = '#fbbf24';
+                feedbackDiv.textContent = 'Sai rồi cậu ơi! Nhưng Thẻ Bảo Vệ đã giúp cậu không mất Xu nào!';
             } else {
                 feedbackDiv.style.color = '#ef4444';
-                feedbackDiv.textContent = 'Sai rồi! Cậu bị trừ ' + Math.abs(betWonLost) + ' Xu nhưng mức độ thuộc vẫn được giữ nguyên. Đọc kỹ giải thích nhé!';
+                feedbackDiv.textContent = 'Sai mất rồi! Trừ ' + Math.abs(betWonLost) + ' Xu nha. Đọc kỹ phần giải thích nhé!';
             }
         }
         qBlock.appendChild(feedbackDiv);
@@ -2018,19 +1945,19 @@ function renderQuestion(index) {
         
         const expContent = document.createElement('div');
         expContent.className = 'explanation-content';
-        expContent.innerHTML = parseFraction(q.e);
+        expContent.innerHTML = q.e;
 
         explanationBox.appendChild(expTitle);
         explanationBox.appendChild(expContent);
         qBlock.appendChild(explanationBox);
         
-        if (wasPass10) {
+        if (isPassUsed) {
             nextBtn.disabled = false;
             setNormalNextBtnText();
         } else {
-            let delay = (currentSelection === q.a) ? 1 : 4;
+            let delay = isRight ? 1 : 4;
             nextBtn.disabled = true;
-            nextBtn.textContent = 'Bắt buộc đọc giải thích (' + delay + 's)...';
+            nextBtn.textContent = 'Đọc giải thích (' + delay + 's)...';
             window.quizTimer = setInterval(function() {
                 delay--;
                 if (delay <= 0) {
@@ -2038,7 +1965,7 @@ function renderQuestion(index) {
                     nextBtn.disabled = false;
                     setNormalNextBtnText();
                 } else {
-                    nextBtn.textContent = 'Bắt buộc đọc giải thích (' + delay + 's)...';
+                    nextBtn.textContent = 'Đọc giải thích (' + delay + 's)...';
                 }
             }, 1000);
         }
@@ -2076,27 +2003,26 @@ function showResults() {
 
     let accuracy = Math.round((questions.length * TARGET_MASTERY / totalAttempts) * 100);
 
-    resultText.textContent = 'Chúc mừng! Cậu đã thuộc lòng toàn bộ bài!';
+    resultText.textContent = 'Đỉnh quá! Cậu đã thuộc toàn bộ bài!';
     
     let compliment = '';
     if (accuracy >= 90) {
-        compliment = 'Cậu quá xuất sắc! Độ chính xác lên tới ' + accuracy + '%, trí nhớ thật đáng nể!';
+        compliment = 'Cậu thật xuất sắc! Trí nhớ như siêu máy tính luôn!';
     } else if (accuracy >= 70) {
-        compliment = 'Cậu làm rất tốt! Độ chính xác đạt ' + accuracy + '%, cứ giữ phong độ này nhé!';
+        compliment = 'Làm rất tốt! Giữ vững phong độ này nhé cậu ơi!';
     } else {
-        compliment = 'Hoan hô tinh thần kiên trì của cậu! Độ chính xác ' + accuracy + '%, sai nhiều sẽ giúp cậu nhớ bài sâu hơn rất nhiều đó!';
+        compliment = 'Tớ thích sự kiên trì của cậu! Làm sai mới học được nhiều đó!';
     }
     complimentText.textContent = compliment;
-    
     resultDiv.style.display = 'block';
 
-    questions.forEach((q, index) => {
+    questions.forEach((q) => {
         const qBlock = document.createElement('div');
         qBlock.className = 'question-block';
 
         const qText = document.createElement('div');
         qText.className = 'question-text';
-        qText.innerHTML = parseFraction(q.q);
+        qText.innerHTML = q.q;
         qBlock.appendChild(qText);
 
         const explanationBox = document.createElement('div');
@@ -2104,12 +2030,12 @@ function showResults() {
         
         const expTitle = document.createElement('div');
         expTitle.className = 'explanation-title';
-        expTitle.innerHTML = 'Đáp án đúng: ' + parseFraction(q.o[q.a]);
+        expTitle.innerHTML = 'Đáp án đúng: ' + (q.type === 'mc' ? q.o[q.a] : q.a);
         
         const expContent = document.createElement('div');
         expContent.className = 'explanation-content';
         expContent.style.marginTop = '10px';
-        expContent.innerHTML = parseFraction(q.e);
+        expContent.innerHTML = q.e;
 
         explanationBox.appendChild(expTitle);
         explanationBox.appendChild(expContent);
@@ -2139,6 +2065,8 @@ nextBtn.addEventListener('click', function() {
     if (found) {
         currentQuestionAnswered = false;
         currentSelection = null;
+        selectedArrangeWords = [];
+        poolArrangeWords = [];
         renderQuestion(currentIndex);
     } else {
         showResults();
