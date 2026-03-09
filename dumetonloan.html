@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KHTN 7 - Quang Hop Va Ho Hap</title>
+<title>KHTN 7 - Quang Hợp & Hô Hấp</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
 body {
@@ -715,47 +715,47 @@ h1 {
 <div id="match-end-overlay"></div>
 
 <div class="container">
-    <h1>KHTN 7 - QUANG HOP VA HO HAP</h1>
+    <h1>KHTN 7 - QUANG HỢP & HÔ HẤP</h1>
     
     <div class="header-actions">
-        <button id="solo-btn" class="action-btn solo-btn">Che Do Solo BO3</button>
-        <button id="shop-btn" class="action-btn shop-btn">Cua Hang The</button>
-        <button id="wrong-btn" class="action-btn wrong-btn">On Cau Sai</button>
-        <button id="study-btn" class="action-btn study-btn">Luyen Tri Nho</button>
-        <button id="match-btn" class="action-btn match-btn">Tro Choi Ghep</button>
-        <button id="tips-btn" class="action-btn tips-btn">Bi Kip</button>
-        <button id="motivate-btn" class="action-btn motivate-btn">Dong Vien</button>
+        <button id="solo-btn" class="action-btn solo-btn">Chế Độ Solo BO3</button>
+        <button id="shop-btn" class="action-btn shop-btn">Cửa Hàng Thẻ</button>
+        <button id="wrong-btn" class="action-btn wrong-btn">Ôn Câu Sai</button>
+        <button id="study-btn" class="action-btn study-btn">Luyện Trí Nhớ</button>
+        <button id="match-btn" class="action-btn match-btn">Trò Chơi Ghép</button>
+        <button id="tips-btn" class="action-btn tips-btn">Bí Kíp</button>
+        <button id="motivate-btn" class="action-btn motivate-btn">Động Viên</button>
     </div>
 
     <div id="tips-msg" class="info-msg tips-msg">
-        BI KIP MON KHTN 7:
+        BÍ KÍP MÔN KHTN 7:
         <ul>
-            <li>Quang hop: Nuoc + Carbon dioxide -> Chat huu co + Oxygen.</li>
-            <li>Ho hap te bao: Chat huu co + Oxygen -> Carbon dioxide + Nuoc + Nang luong.</li>
-            <li>Quang hop dien ra o luc lap, ho hap dien ra o ti the.</li>
-            <li>Bao quan thuc pham nham giam cuong do ho hap xuong muc toi thieu.</li>
+            <li>Quang hợp: Nước + Carbon dioxide -> Chất hữu cơ + Oxygen.</li>
+            <li>Hô hấp tế bào: Chất hữu cơ + Oxygen -> Carbon dioxide + Nước + Năng lượng.</li>
+            <li>Quang hợp diễn ra ở lục lạp, hô hấp diễn ra ở ti thể.</li>
+            <li>Bảo quản thực phẩm nhằm giảm cường độ hô hấp xuống mức tối thiểu.</li>
         </ul>
     </div>
     
     <div id="motivate-msg" class="info-msg motivate-msg"></div>
 
     <div id="solo-mode-container">
-        <div class="review-title" style="display: block;">THACH DAU BO3</div>
+        <div class="review-title" style="display: block;">THÁCH ĐẤU BO3</div>
         <div id="solo-lobby" style="text-align: center;">
-            <p style="margin-bottom: 20px; color: #94a3b8; font-weight: 500; line-height: 1.6;">Thi dau trac nghiem BO3. Moi van 10 diem, thang 2 van se nhan thuong!</p>
-            <button onclick="createSoloRoom()" class="nav-btn solo-btn" style="margin-bottom: 20px;">Tao phong moi</button>
+            <p style="margin-bottom: 20px; color: #94a3b8; font-weight: 500; line-height: 1.6;">Thi đấu trắc nghiệm BO3. Mỗi ván 10 điểm, thắng 2 ván sẽ nhận thưởng!</p>
+            <button onclick="createSoloRoom()" class="nav-btn solo-btn" style="margin-bottom: 20px;">Tạo phòng mới</button>
             <br>
-            <input type="text" id="room-code-input" placeholder="Nhap ma phong..." style="padding: 15px; border-radius: 999px; border: 1px solid #334155; background: #0f172a; color: white; font-size: 16px; font-family: inherit; font-weight: 700; text-align: center; text-transform: uppercase; width: 60%; margin-bottom: 15px;">
-            <button onclick="joinSoloRoom()" class="nav-btn shop-btn">Vao phong</button>
+            <input type="text" id="room-code-input" placeholder="Nhập mã phòng..." style="padding: 15px; border-radius: 999px; border: 1px solid #334155; background: #0f172a; color: white; font-size: 16px; font-family: inherit; font-weight: 700; text-align: center; text-transform: uppercase; width: 60%; margin-bottom: 15px;">
+            <button onclick="joinSoloRoom()" class="nav-btn shop-btn">Vào phòng</button>
             <div id="solo-error-msg" class="info-msg motivate-msg" style="margin-top: 15px; display: none;"></div>
-            <button onclick="exitSoloRoom()" class="nav-btn back-quiz-btn" style="margin-top: 30px;">Quay lai</button>
+            <button onclick="exitSoloRoom()" class="nav-btn back-quiz-btn" style="margin-top: 30px;">Quay lại</button>
         </div>
 
         <div id="solo-waiting" style="display: none; text-align: center;">
-            <h3 style="color: #cbd5e1;">Ma phong cua cau: <span id="display-room-code" style="color: #ef4444; font-size: 32px; letter-spacing: 2px;"></span></h3>
-            <p style="font-weight: 500; color: #94a3b8;">Hay gui ma nay cho ban de bat dau!</p>
+            <h3 style="color: #cbd5e1;">Mã phòng của cậu: <span id="display-room-code" style="color: #ef4444; font-size: 32px; letter-spacing: 2px;"></span></h3>
+            <p style="font-weight: 500; color: #94a3b8;">Hãy gửi mã này cho bạn để bắt đầu!</p>
             <div class="loader"></div>
-            <button onclick="exitSoloRoom()" class="nav-btn back-quiz-btn" style="margin-top: 30px;">Huy</button>
+            <button onclick="exitSoloRoom()" class="nav-btn back-quiz-btn" style="margin-top: 30px;">Hủy</button>
         </div>
 
         <div id="solo-playing" style="display: none; position: relative;">
@@ -763,8 +763,8 @@ h1 {
             <div style="background: #1e293b; padding: 20px; border-radius: 20px; margin-bottom: 30px; border: 1px solid #334155;">
                 <div style="margin-bottom: 15px;">
                     <div style="display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 8px; color: #34d399;">
-                        <span>Cau (Thang: <span id="solo-my-rounds">0</span>) - Diem: <span id="solo-my-score">0</span></span>
-                        <span>Dich: 10</span>
+                        <span>Cậu (Thắng: <span id="solo-my-rounds">0</span>) - Điểm: <span id="solo-my-score">0</span></span>
+                        <span>Đích: 10</span>
                     </div>
                     <div class="progress-container" style="margin-bottom: 0;">
                         <div id="solo-my-progress" class="progress-bar" style="background: #10b981;"></div>
@@ -773,8 +773,8 @@ h1 {
                 
                 <div>
                     <div style="display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 8px; color: #f43f5e;">
-                        <span>Doi thu (Thang: <span id="solo-opp-rounds">0</span>) - Diem: <span id="solo-opp-score">0</span></span>
-                        <span>Dich: 10</span>
+                        <span>Đối thủ (Thắng: <span id="solo-opp-rounds">0</span>) - Điểm: <span id="solo-opp-score">0</span></span>
+                        <span>Đích: 10</span>
                     </div>
                     <div class="progress-container" style="margin-bottom: 0;">
                         <div id="solo-opp-progress" class="progress-bar" style="background: #e11d48;"></div>
@@ -788,69 +788,69 @@ h1 {
         <div id="solo-result" style="display: none; text-align: center; padding: 40px; border-radius: 28px; margin-top: 20px; background: #1e293b;">
             <div id="solo-result-text" style="font-size: 28px; font-weight: 700; margin-bottom: 30px; line-height: 1.5;"></div>
             <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                <button id="solo-remake-btn" onclick="requestRemake()" class="nav-btn next-btn" style="width: auto; padding: 15px 30px;">Choi lai van moi</button>
-                <button onclick="exitSoloRoom()" class="nav-btn back-quiz-btn" style="width: auto; padding: 15px 30px; margin-top: 0; background: #334155;">Roi phong</button>
+                <button id="solo-remake-btn" onclick="requestRemake()" class="nav-btn next-btn" style="width: auto; padding: 15px 30px;">Chơi lại ván mới</button>
+                <button onclick="exitSoloRoom()" class="nav-btn back-quiz-btn" style="width: auto; padding: 15px 30px; margin-top: 0; background: #334155;">Rời phòng</button>
             </div>
         </div>
     </div>
 
     <div id="shop-mode-container">
-        <div class="review-title" style="display: block;">CUA HANG THE BAI</div>
+        <div class="review-title" style="display: block;">CỬA HÀNG THẺ BÀI</div>
         <div id="shop-message" class="info-msg motivate-msg"></div>
         <div class="match-grid">
             <div class="study-item" style="text-align: center;">
-                <div class="study-q">The Pass 1 Cau</div>
-                <div class="study-e" style="margin-bottom:15px; color:#93c5fd;">Vuot qua cau hien tai ngay lap tuc.</div>
-                <div class="study-a">Gia: 500 Xu</div>
+                <div class="study-q">Thẻ Pass 1 Câu</div>
+                <div class="study-e" style="margin-bottom:15px; color:#93c5fd;">Vượt qua câu hiện tại ngay lập tức.</div>
+                <div class="study-a">Giá: 500 Xu</div>
                 <button onclick="buyCard('pass1', 500)" class="nav-btn next-btn" style="margin-top: 10px;">Mua ngay</button>
             </div>
             <div class="study-item" style="text-align: center;">
-                <div class="study-q">The Tro Giup 50/50</div>
-                <div class="study-e" style="margin-bottom:15px; color:#93c5fd;">Loai bo 2 dap an sai.</div>
-                <div class="study-a">Gia: 50 Xu</div>
+                <div class="study-q">Thẻ Trợ Giúp 50/50</div>
+                <div class="study-e" style="margin-bottom:15px; color:#93c5fd;">Loại bỏ 2 đáp án sai.</div>
+                <div class="study-a">Giá: 50 Xu</div>
                 <button onclick="buyCard('help', 50)" class="nav-btn next-btn" style="margin-top: 10px;">Mua ngay</button>
             </div>
             <div class="study-item" style="text-align: center; grid-column: 1 / -1;">
-                <div class="study-q">The Bao Ve Tien</div>
-                <div class="study-e" style="margin-bottom:15px; color:#93c5fd;">Bao toan Xu khi tra loi sai.</div>
-                <div class="study-a">Gia: 150 Xu</div>
+                <div class="study-q">Thẻ Bảo Vệ Tiền</div>
+                <div class="study-e" style="margin-bottom:15px; color:#93c5fd;">Bảo toàn Xu khi trả lời sai.</div>
+                <div class="study-a">Giá: 150 Xu</div>
                 <button onclick="buyCard('protect', 150)" class="nav-btn next-btn" style="margin-top: 10px;">Mua ngay</button>
             </div>
         </div>
-        <button id="back-quiz-from-shop-btn" class="nav-btn back-quiz-btn">Quay lai</button>
+        <button id="back-quiz-from-shop-btn" class="nav-btn back-quiz-btn">Quay lại</button>
     </div>
 
     <div id="match-mode-container">
-        <div class="review-title" style="display: block;">GHEP THE TIM DAP AN</div>
-        <div id="match-win-msg" class="match-win-msg">Chuc mung! Cau da ghep dung toan bo!</div>
+        <div class="review-title" style="display: block;">GHÉP THẺ TÌM ĐÁP ÁN</div>
+        <div id="match-win-msg" class="match-win-msg">Chúc mừng! Cậu đã ghép đúng toàn bộ!</div>
         <div id="match-grid" class="match-grid"></div>
-        <button id="play-match-again-btn" class="nav-btn next-btn" style="display: none; margin-bottom: 15px;">Choi van moi</button>
-        <button id="back-quiz-from-match-btn" class="nav-btn back-quiz-btn" style="margin-top: 0;">Quay lai</button>
+        <button id="play-match-again-btn" class="nav-btn next-btn" style="display: none; margin-bottom: 15px;">Chơi ván mới</button>
+        <button id="back-quiz-from-match-btn" class="nav-btn back-quiz-btn" style="margin-top: 0;">Quay lại</button>
     </div>
 
     <div id="study-mode-container">
-        <div class="review-title" style="display: block;">THE GHI NHO FLASHCARD</div>
+        <div class="review-title" style="display: block;">THẺ GHI NHỚ FLASHCARD</div>
         <div id="study-list"></div>
-        <button id="back-quiz-from-study-btn" class="nav-btn back-quiz-btn">Quay lai</button>
+        <button id="back-quiz-from-study-btn" class="nav-btn back-quiz-btn">Quay lại</button>
     </div>
 
     <div id="wrong-mode-container">
-        <div class="review-title" style="display: block;">DANH SACH CAU SAI</div>
+        <div class="review-title" style="display: block;">DANH SÁCH CÂU SAI</div>
         <div id="wrong-list"></div>
-        <button id="back-quiz-from-wrong-btn" class="nav-btn back-quiz-btn">Quay lai</button>
+        <button id="back-quiz-from-wrong-btn" class="nav-btn back-quiz-btn">Quay lại</button>
     </div>
     
     <div id="quiz-mode-container">
-        <div id="coin-display" class="coin-display">Tai san hien tai: 1000 Xu</div>
-        <div id="inventory-display" class="inventory-display">Kho do: 0 The Pass | 0 The 50/50 | 0 The Bao Ve</div>
+        <div id="coin-display" class="coin-display">Tài sản hiện tại: 1000 Xu</div>
+        <div id="inventory-display" class="inventory-display">Kho đồ: 0 Thẻ Pass | 0 Thẻ 50/50 | 0 Thẻ Bảo Vệ</div>
 
         <div class="filter-container">
-            <button class="filter-btn filter-active" onclick="setFilter('all')">Tat ca</button>
-            <button class="filter-btn" onclick="setFilter('mc')">Trac nghiem</button>
-            <button class="filter-btn" onclick="setFilter('arrange')">Tu luan (Keo tha)</button>
-            <button class="filter-btn" onclick="setFilter('tf')">Tu luan (Dung/Sai)</button>
-            <button class="filter-btn" onclick="setFilter('quanghop')">Quang hop</button>
-            <button class="filter-btn" onclick="setFilter('hohap')">Ho hap</button>
+            <button class="filter-btn filter-active" onclick="setFilter('all')">Tất cả</button>
+            <button class="filter-btn" onclick="setFilter('mc')">Trắc nghiệm</button>
+            <button class="filter-btn" onclick="setFilter('arrange')">Tự luận (Kéo thả)</button>
+            <button class="filter-btn" onclick="setFilter('tf')">Tự luận (Đúng/Sai)</button>
+            <button class="filter-btn" onclick="setFilter('quanghop')">Quang hợp</button>
+            <button class="filter-btn" onclick="setFilter('hohap')">Hô hấp</button>
         </div>
 
         <div id="result" class="result-container">
@@ -863,12 +863,12 @@ h1 {
         </div>
         <div id="progress-text" class="progress-text"></div>
 
-        <div id="review-title" class="review-title">XEM LAI DAP AN</div>
+        <div id="review-title" class="review-title">XEM LẠI ĐÁP ÁN</div>
 
         <div id="app"></div>
 
         <div id="navigation" class="navigation-buttons">
-            <button id="next-btn" class="nav-btn next-btn">Cau tiep theo</button>
+            <button id="next-btn" class="nav-btn next-btn">Câu tiếp theo</button>
         </div>
     </div>
 </div>
@@ -906,10 +906,10 @@ onAuthStateChanged(auth, user => {
 });
 
 const quotes = [
-    "Cố lên nhé!",
-    "Làm bài từ từ thôi!",
-    "Sai thì sửa, không sao cả!",
-    "Tập trung nào!"
+    "Cố lên nhé cậu ơi!",
+    "Làm bài từ từ thôi, tớ đợi!",
+    "Sai thì sửa, không sao cả đâu!",
+    "Tập trung nào, sắp xong rồi!"
 ];
 
 let shopMsgTimeout;
@@ -1122,7 +1122,7 @@ window.setFilter = function(filterType) {
 
 function playBo3Intro(callback) {
     const overlay = document.getElementById('bo3-intro-overlay');
-    overlay.innerHTML = '<div class="intro-left">CAU</div><div class="intro-vs">VS</div><div class="intro-right">DOI THU</div><div class="intro-flash"></div>';
+    overlay.innerHTML = '<div class="intro-left">CẬU</div><div class="intro-vs">VS</div><div class="intro-right">ĐỐI THỦ</div><div class="intro-flash"></div>';
     overlay.style.display = 'block';
     setTimeout(function() {
         overlay.style.display = 'none';
@@ -1138,11 +1138,11 @@ function showRoundEffect(isWin) {
     if (isWin) {
         overlay.className = 'round-win-bg';
         text.className = 'round-text round-text-win';
-        text.textContent = 'THANG VAN NAY!';
+        text.textContent = 'THẮNG VÁN NÀY!';
     } else {
         overlay.className = 'round-lose-bg';
         text.className = 'round-text round-text-lose';
-        text.textContent = 'THUA VAN NAY!';
+        text.textContent = 'THUA VÁN NÀY!';
     }
 }
 
@@ -1204,11 +1204,11 @@ function hideAllModes() {
 }
 
 function updateCoinDisplay() {
-    document.getElementById('coin-display').textContent = 'Tai san hien tai: ' + userCoins + ' Xu';
+    document.getElementById('coin-display').textContent = 'Tài sản hiện tại: ' + userCoins + ' Xu';
 }
 
 function updateInventoryDisplay() {
-    document.getElementById('inventory-display').textContent = 'Kho do: ' + inventory.pass1 + ' The Pass | ' + inventory.help + ' The 50/50 | ' + inventory.protect + ' The Bao Ve';
+    document.getElementById('inventory-display').textContent = 'Kho đồ: ' + inventory.pass1 + ' Thẻ Pass | ' + inventory.help + ' Thẻ 50/50 | ' + inventory.protect + ' Thẻ Bảo Vệ';
 }
 
 window.buyCard = function(type, price) {
@@ -1219,9 +1219,9 @@ window.buyCard = function(type, price) {
         else if (type === 'protect') inventory.protect++;
         updateCoinDisplay();
         updateInventoryDisplay();
-        showShopMsg('Mua thanh cong!', false);
+        showShopMsg('Mua thành công!', false);
     } else {
-        showShopMsg('Khong du Xu!', true);
+        showShopMsg('Không đủ Xu!', true);
     }
 }
 
@@ -1245,7 +1245,7 @@ soloBtn.addEventListener('click', function() {
 });
 
 window.createSoloRoom = async function() {
-    if (!currentUser) return window.showSoloError('Dang ket noi...');
+    if (!currentUser) return window.showSoloError('Đang kết nối...');
     soloRoomId = Math.random().toString(36).substring(2, 8).toUpperCase();
     isPlayer1 = true;
     soloRewardGiven = false;
@@ -1278,9 +1278,9 @@ window.createSoloRoom = async function() {
 };
 
 window.joinSoloRoom = async function() {
-    if (!currentUser) return window.showSoloError('Dang ket noi...');
+    if (!currentUser) return window.showSoloError('Đang kết nối...');
     const codeInput = document.getElementById('room-code-input').value.trim().toUpperCase();
-    if (!codeInput) return window.showSoloError('Vui long nhap ma!');
+    if (!codeInput) return window.showSoloError('Vui lòng nhập mã!');
     
     const roomRef = ref(db, 'rooms/' + codeInput);
     const snap = await get(roomRef);
@@ -1308,10 +1308,10 @@ window.joinSoloRoom = async function() {
             });
             listenSoloRoom();
         } else {
-            window.showSoloError('Phong da bat dau hoac dong!');
+            window.showSoloError('Phòng đã bắt đầu hoặc đóng!');
         }
     } else {
-        window.showSoloError('Khong tim thay phong!');
+        window.showSoloError('Không tìm thấy phòng!');
     }
 };
 
@@ -1346,7 +1346,7 @@ window.requestRemake = async function() {
     if (!soloRoomId || !soloRoomData) return;
     const remakeBtn = document.getElementById('solo-remake-btn');
     if (remakeBtn) {
-        remakeBtn.textContent = 'Dang cho...';
+        remakeBtn.textContent = 'Đang chờ...';
         remakeBtn.disabled = true;
     }
 
@@ -1382,7 +1382,7 @@ function listenSoloRoom() {
         soloRoomData = data;
 
         if (data.status === 'closed') {
-            forceExitToLobby('Doi thu da thoat!');
+            forceExitToLobby('Đối thủ đã thoát!');
             return;
         }
         
@@ -1409,7 +1409,7 @@ function listenSoloRoom() {
                 
                 const remakeBtn = document.getElementById('solo-remake-btn');
                 if(remakeBtn) {
-                    remakeBtn.textContent = 'Choi lai van moi';
+                    remakeBtn.textContent = 'Chơi lại ván mới';
                     remakeBtn.disabled = false;
                 }
                 renderSoloQuestion();
@@ -1423,10 +1423,10 @@ function listenSoloRoom() {
                 const oppRemake = isPlayer1 ? data.remake_p2 : data.remake_p1;
                 
                 if (myRemake && !oppRemake) {
-                    remakeBtn.textContent = 'Dang cho...';
+                    remakeBtn.textContent = 'Đang chờ...';
                     remakeBtn.disabled = true;
                 } else if (!myRemake) {
-                    remakeBtn.textContent = 'Choi lai van moi';
+                    remakeBtn.textContent = 'Chơi lại ván mới';
                     remakeBtn.disabled = false;
                 }
             }
@@ -1561,7 +1561,7 @@ function renderSoloQuestion() {
                 qBlock.appendChild(penaltyMsg);
                 
                 let timeLeft = 3;
-                penaltyMsg.textContent = 'Phat dung ' + timeLeft + ' giay!';
+                penaltyMsg.textContent = 'Phạt đứng ' + timeLeft + ' giây!';
                 window.soloPenaltyTimer = setInterval(() => {
                     timeLeft--;
                     if (timeLeft <= 0) {
@@ -1569,7 +1569,7 @@ function renderSoloQuestion() {
                         soloCurrentIdx++;
                         renderSoloQuestion();
                     } else {
-                        penaltyMsg.textContent = 'Phat dung ' + timeLeft + ' giay!';
+                        penaltyMsg.textContent = 'Phạt đứng ' + timeLeft + ' giây!';
                     }
                 }, 1000);
             }
@@ -1589,7 +1589,7 @@ function finishSoloGame(status) {
     const remakeBtn = document.getElementById('solo-remake-btn');
     
     if (remakeBtn) {
-        remakeBtn.textContent = 'Choi lai van moi';
+        remakeBtn.textContent = 'Chơi lại ván mới';
         remakeBtn.disabled = false;
     }
     
@@ -1703,7 +1703,7 @@ function renderStudyMode() {
     progressInfo.style.marginBottom = '15px';
     progressInfo.style.color = '#94a3b8';
     progressInfo.style.fontWeight = '700';
-    progressInfo.textContent = 'The ' + (currentStudyIndex + 1) + ' / ' + allQuestions.length;
+    progressInfo.textContent = 'Thẻ ' + (currentStudyIndex + 1) + ' / ' + allQuestions.length;
     card.appendChild(progressInfo);
 
     const qText = document.createElement('div');
@@ -1715,7 +1715,7 @@ function renderStudyMode() {
         const flipBtn = document.createElement('button');
         flipBtn.className = 'nav-btn next-btn';
         flipBtn.style.marginTop = '20px';
-        flipBtn.textContent = 'Lat xem giai thich';
+        flipBtn.textContent = 'Lật xem giải thích';
         flipBtn.onclick = function() {
             isStudyFlipped = true;
             renderStudyMode();
@@ -1724,11 +1724,11 @@ function renderStudyMode() {
     } else {
         const aText = document.createElement('div');
         aText.className = 'study-a';
-        aText.innerHTML = 'Dap an: ' + (q.type === 'mc' || q.type === 'tf' ? q.o[q.a] : q.a);
+        aText.innerHTML = 'Đáp án: ' + (q.type === 'mc' || q.type === 'tf' ? q.o[q.a] : q.a);
 
         const eText = document.createElement('div');
         eText.className = 'study-e';
-        eText.innerHTML = 'Giai thich: ' + q.e;
+        eText.innerHTML = 'Giải thích: ' + q.e;
 
         card.appendChild(aText);
         card.appendChild(eText);
@@ -1737,14 +1737,14 @@ function renderStudyMode() {
         nextCardBtn.className = 'nav-btn next-btn';
         nextCardBtn.style.marginTop = '25px';
         if (currentStudyIndex < allQuestions.length - 1) {
-            nextCardBtn.textContent = 'The tiep theo';
+            nextCardBtn.textContent = 'Thẻ tiếp theo';
             nextCardBtn.onclick = function() {
                 currentStudyIndex++;
                 isStudyFlipped = false;
                 renderStudyMode();
             };
         } else {
-            nextCardBtn.textContent = 'Quay lai tu dau';
+            nextCardBtn.textContent = 'Quay lại từ đầu';
             nextCardBtn.onclick = function() {
                 currentStudyIndex = 0;
                 isStudyFlipped = false;
@@ -1759,7 +1759,7 @@ function renderStudyMode() {
 
     const prevCardBtn = document.createElement('button');
     prevCardBtn.className = 'flashcard-btn';
-    prevCardBtn.textContent = 'The truoc';
+    prevCardBtn.textContent = 'Thẻ trước';
     if (currentStudyIndex === 0) {
         prevCardBtn.style.opacity = '0.5';
         prevCardBtn.style.cursor = 'not-allowed';
@@ -1774,7 +1774,7 @@ function renderStudyMode() {
 
     const randomCardBtn = document.createElement('button');
     randomCardBtn.className = 'flashcard-btn';
-    randomCardBtn.textContent = 'Rut ngau nhien';
+    randomCardBtn.textContent = 'Rút ngẫu nhiên';
     randomCardBtn.onclick = function() {
         currentStudyIndex = Math.floor(Math.random() * allQuestions.length);
         isStudyFlipped = false;
@@ -1815,7 +1815,7 @@ function renderWrongMode() {
         const msg = document.createElement('div');
         msg.className = 'info-msg tips-msg show-msg';
         msg.style.textAlign = 'center';
-        msg.textContent = 'Khong co cau sai nao!';
+        msg.textContent = 'Không có câu sai nào!';
         wrongList.appendChild(msg);
         return;
     }
@@ -1829,7 +1829,7 @@ function renderWrongMode() {
         countInfo.style.marginBottom = '15px';
         countInfo.style.color = '#ef4444';
         countInfo.style.fontWeight = '700';
-        countInfo.textContent = 'Da sai: ' + item.count + ' lan';
+        countInfo.textContent = 'Đã sai: ' + item.count + ' lần';
         card.appendChild(countInfo);
 
         const qText = document.createElement('div');
@@ -1839,12 +1839,12 @@ function renderWrongMode() {
 
         const aText = document.createElement('div');
         aText.className = 'study-a';
-        aText.innerHTML = 'Dap an: ' + (item.q.type === 'mc' || item.q.type === 'tf' ? item.q.o[item.q.a] : item.q.a);
+        aText.innerHTML = 'Đáp án: ' + (item.q.type === 'mc' || item.q.type === 'tf' ? item.q.o[item.q.a] : item.q.a);
         card.appendChild(aText);
 
         const eText = document.createElement('div');
         eText.className = 'study-e';
-        eText.innerHTML = 'Giai thich: ' + item.q.e;
+        eText.innerHTML = 'Giải thích: ' + item.q.e;
         card.appendChild(eText);
 
         wrongList.appendChild(card);
@@ -1873,7 +1873,7 @@ function updateProgress() {
     let percent = 0;
     if(totalMastery > 0) percent = (currentMastery / totalMastery) * 100;
     progressBar.style.width = percent + '%';
-    progressText.textContent = 'Tien do thuoc bai: ' + currentMastery + ' / ' + totalMastery;
+    progressText.textContent = 'Tiến độ thuộc bài: ' + currentMastery + ' / ' + totalMastery;
 }
 
 function processAnswer(index, isCorrect, useProtect = false, isPass = false) {
@@ -1919,7 +1919,7 @@ function renderArrangeUI(qBlock, index, q) {
         if(selectedArrangeWords.length === 0) {
             const placeholder = document.createElement('span');
             placeholder.style.color = '#64748b';
-            placeholder.textContent = 'Keo/chon tu o duoi de dua len day...';
+            placeholder.textContent = 'Kéo/chọn từ ở dưới để đưa lên đây...';
             answerDiv.appendChild(placeholder);
         }
 
@@ -1957,7 +1957,7 @@ function renderArrangeUI(qBlock, index, q) {
     if(!currentQuestionAnswered) {
         const checkBtn = document.createElement('button');
         checkBtn.className = 'nav-btn next-btn';
-        checkBtn.textContent = 'Kiem tra cau nay';
+        checkBtn.textContent = 'Kiểm tra câu này';
         checkBtn.onclick = () => {
             const userStr = selectedArrangeWords.join(' ');
             if(userStr === q.a) {
@@ -1982,7 +1982,7 @@ function renderQuestion(index) {
     app.innerHTML = '';
     
     if(activeQuestions.length === 0) {
-        app.innerHTML = '<div style="text-align:center; padding: 40px; color: #94a3b8; font-weight: 700; font-size: 18px;">Khong co cau hoi nao!</div>';
+        app.innerHTML = '<div style="text-align:center; padding: 40px; color: #94a3b8; font-weight: 700; font-size: 18px;">Không có câu hỏi nào!</div>';
         return;
     }
 
@@ -2010,20 +2010,20 @@ function renderQuestion(index) {
         bailoutMsg.style.fontWeight = '700';
         bailoutMsg.style.textAlign = 'center';
         bailoutMsg.style.border = '1px dashed #475569';
-        bailoutMsg.textContent = 'Cap von lai 50 Xu!';
+        bailoutMsg.textContent = 'Cấp vốn lại 50 Xu!';
         qBlock.appendChild(bailoutMsg);
     }
 
     if (!currentQuestionAnswered && currentBet > userCoins) {
         currentBet = userCoins;
-        selectedBetStr = 'Tat tay';
+        selectedBetStr = 'Tất tay';
     }
 
     const q = activeQuestions[index];
 
     const masteryBadge = document.createElement('div');
     masteryBadge.className = 'mastery-badge';
-    masteryBadge.textContent = 'Muc do thuoc: ' + correctCounts[index] + '/' + TARGET_MASTERY + ' lan';
+    masteryBadge.textContent = 'Mức độ thuộc: ' + correctCounts[index] + '/' + TARGET_MASTERY + ' lần';
     qBlock.appendChild(masteryBadge);
 
     const qText = document.createElement('div');
@@ -2034,16 +2034,16 @@ function renderQuestion(index) {
     if (!currentQuestionAnswered) {
         const betContainer = document.createElement('div');
         betContainer.className = 'bet-container';
-        betContainer.textContent = 'Chon muc cuoc: ';
+        betContainer.textContent = 'Chọn mức cược: ';
 
-        const betAmounts = [10, 30, 50, 'Tat tay'];
+        const betAmounts = [10, 30, 50, 'Tất tay'];
         betAmounts.forEach(function(amount) {
             const btn = document.createElement('button');
             btn.className = 'bet-btn';
-            let amtValue = amount === 'Tat tay' ? userCoins : amount;
+            let amtValue = amount === 'Tất tay' ? userCoins : amount;
             
             if (amount.toString() === selectedBetStr) btn.classList.add('bet-selected');
-            if (amount !== 'Tat tay' && amount > userCoins) {
+            if (amount !== 'Tất tay' && amount > userCoins) {
                 btn.disabled = true;
                 btn.style.opacity = '0.3';
                 btn.style.cursor = 'not-allowed';
@@ -2103,7 +2103,7 @@ function renderQuestion(index) {
             const passBtn = document.createElement('button');
             passBtn.className = 'action-btn pass-btn';
             passBtn.style.flex = '1';
-            passBtn.textContent = 'Dung The Pass';
+            passBtn.textContent = 'Dùng Thẻ Pass';
             passBtn.onclick = function() {
                 inventory.pass1--;
                 isPassUsed = true;
@@ -2118,7 +2118,7 @@ function renderQuestion(index) {
             fiftyBtn.style.flex = '1';
             
             if (inventory.help > 0) {
-                fiftyBtn.textContent = '50/50 (The)';
+                fiftyBtn.textContent = '50/50 (Thẻ)';
                 fiftyBtn.onclick = function() {
                     inventory.help--;
                     updateInventoryDisplay();
@@ -2155,7 +2155,7 @@ function renderQuestion(index) {
         const giveUpBtn = document.createElement('button');
         giveUpBtn.className = 'action-btn give-up-btn';
         giveUpBtn.style.flex = '1';
-        giveUpBtn.textContent = 'Mo dap an';
+        giveUpBtn.textContent = 'Mở đáp án';
         giveUpBtn.onclick = function() {
             currentSelection = -1;
             currentQuestionAnswered = true;
@@ -2179,22 +2179,22 @@ function renderQuestion(index) {
         
         if (isPassUsed) {
             feedbackDiv.style.color = '#d946ef';
-            feedbackDiv.textContent = 'Da dung the Pass!';
+            feedbackDiv.textContent = 'Đã dùng thẻ Pass!';
             isPassUsed = false;
         } else if (isRight) {
             feedbackDiv.style.color = '#34d399';
-            let txt = 'Chinh xac! Thang ' + betWonLost + ' Xu!';
+            let txt = 'Chính xác! Thắng ' + betWonLost + ' Xu!';
             feedbackDiv.textContent = txt;
         } else if (currentSelection === -1) {
             feedbackDiv.style.color = '#fbbf24';
-            feedbackDiv.textContent = 'Da mo dap an!';
+            feedbackDiv.textContent = 'Đã mở đáp án!';
         } else {
             if (betWonLost === 0) {
                 feedbackDiv.style.color = '#fbbf24';
-                feedbackDiv.textContent = 'The Bao Ve da giup cau khong mat Xu!';
+                feedbackDiv.textContent = 'Thẻ Bảo Vệ đã giúp cậu không mất Xu!';
             } else {
                 feedbackDiv.style.color = '#ef4444';
-                feedbackDiv.textContent = 'Sai roi! Tru ' + Math.abs(betWonLost) + ' Xu!';
+                feedbackDiv.textContent = 'Sai rồi! Trừ ' + Math.abs(betWonLost) + ' Xu!';
             }
         }
         qBlock.appendChild(feedbackDiv);
@@ -2204,7 +2204,7 @@ function renderQuestion(index) {
 
         const expTitle = document.createElement('div');
         expTitle.className = 'explanation-title';
-        expTitle.textContent = 'Giai thich:';
+        expTitle.textContent = 'Giải thích:';
         
         const expContent = document.createElement('div');
         expContent.className = 'explanation-content';
@@ -2220,7 +2220,7 @@ function renderQuestion(index) {
         } else {
             let delay = isRight ? 1 : 4;
             nextBtn.disabled = true;
-            nextBtn.textContent = 'Cho (' + delay + 's)...';
+            nextBtn.textContent = 'Chờ (' + delay + 's)...';
             window.quizTimer = setInterval(function() {
                 delay--;
                 if (delay <= 0) {
@@ -2228,7 +2228,7 @@ function renderQuestion(index) {
                     nextBtn.disabled = false;
                     setNormalNextBtnText();
                 } else {
-                    nextBtn.textContent = 'Cho (' + delay + 's)...';
+                    nextBtn.textContent = 'Chờ (' + delay + 's)...';
                 }
             }, 1000);
         }
@@ -2238,7 +2238,7 @@ function renderQuestion(index) {
 
     if (!currentQuestionAnswered) {
         nextBtn.disabled = true;
-        nextBtn.textContent = 'Cau tiep theo';
+        nextBtn.textContent = 'Câu tiếp theo';
     }
 
     function setNormalNextBtnText() {
@@ -2250,9 +2250,9 @@ function renderQuestion(index) {
             }
         }
         if (isDone) {
-            nextBtn.textContent = 'Hoan Thanh';
+            nextBtn.textContent = 'Hoàn Thành';
         } else {
-            nextBtn.textContent = 'Cau tiep theo';
+            nextBtn.textContent = 'Câu tiếp theo';
         }
     }
 }
@@ -2266,15 +2266,15 @@ function showResults() {
 
     let accuracy = Math.round((activeQuestions.length * TARGET_MASTERY / totalAttempts) * 100);
 
-    resultText.textContent = 'Xuat sac!';
+    resultText.textContent = 'Xuất sắc!';
     
     let compliment = '';
     if (accuracy >= 90) {
-        compliment = 'Tuyet voi!';
+        compliment = 'Tuyệt vời!';
     } else if (accuracy >= 70) {
-        compliment = 'Rat tot!';
+        compliment = 'Rất tốt!';
     } else {
-        compliment = 'Co gang hon nhe!';
+        compliment = 'Cố gắng hơn nhé!';
     }
     complimentText.textContent = compliment;
     resultDiv.style.display = 'block';
@@ -2293,7 +2293,7 @@ function showResults() {
         
         const expTitle = document.createElement('div');
         expTitle.className = 'explanation-title';
-        expTitle.innerHTML = 'Dap an: ' + (q.type === 'mc' || q.type === 'tf' ? q.o[q.a] : q.a);
+        expTitle.innerHTML = 'Đáp án: ' + (q.type === 'mc' || q.type === 'tf' ? q.o[q.a] : q.a);
         
         const expContent = document.createElement('div');
         expContent.className = 'explanation-content';
