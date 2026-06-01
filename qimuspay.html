@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác minh thanh toán</title>
+</head>
+<body style="font-family:sans-serif;text-align:center;padding:50px;background:#f3f3f3;">
+    <h2 style="color:#005a9e;">Xác nhận thanh toán 50K</h2>
+    <p id="st">Vui lòng tải lên ảnh chụp màn hình bill chuyển khoản</p>
+    <input type="file" id="f" accept="image/*" style="margin:20px 0;"/><br/>
+    <button id="btn" onclick="s()" style="padding:12px 24px;background:#0078D7;color:white;border:none;border-radius:8px;font-size:16px;">Gửi ảnh xác nhận</button>
+    <script>
+        function s(){
+            var u = new URLSearchParams(window.location.search).get('id');
+            var i = document.getElementById('f').files[0];
+            if(!i || !u) return;
+            document.getElementById('st').innerText = 'Đang tải ảnh lên hệ thống...';
+            document.getElementById('btn').style.display = 'none';
+            var r = new FileReader();
+            r.onload = function(e){
+                var b64 = e.target.result.split(',')[1];
+                fetch('https://emqiziutility-web-default-rtdb.firebaseio.com/payments/' + u + '.json', {
+                    method: 'PUT',
+                    body: JSON.stringify({ img: b64 })
+                }).then(function(){
+                    document.getElementById('st').innerText = 'Hệ thống đã nhận ảnh! Hãy kiểm tra ứng dụng trên máy tính của bạn.';
+                    document.getElementById('st').style.color = 'green';
+                });
+            };
+            r.readAsDataURL(i);
+        }
+    </script>
+</body>
+</html>
