@@ -3,32 +3,475 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xác minh thanh toán</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0a0f1d;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-radius: 24px;
+            padding: 40px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-sizing: border-box;
+        }
+        .panel-wide {
+            max-width: 1200px;
+            padding: 45px;
+        }
+        h2 {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 25px;
+            margin-top: 0;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        .greeting {
+            text-align: center;
+            font-size: 22px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 15px;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.3s, background 0.3s;
+        }
+        input:focus {
+            border-color: #8ab4f8;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #8ab4f8;
+            color: #0a0f1d;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 12px;
+            transition: transform 0.1s, background 0.3s, box-shadow 0.3s;
+        }
+        button:hover {
+            background: #aecbfa;
+            box-shadow: 0 0 15px rgba(138, 180, 248, 0.4);
+        }
+        button.secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+        }
+        button.secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: none;
+        }
+        button.danger {
+            background: rgba(250, 82, 82, 0.1);
+            border: 1px solid rgba(250, 82, 82, 0.4);
+            color: #ff8787;
+        }
+        button.danger:hover {
+            background: rgba(250, 82, 82, 0.2);
+            box-shadow: none;
+        }
+        button:disabled {
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.3);
+            cursor: not-allowed;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: none;
+        }
+        .switch-link {
+            text-align: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 15px;
+        }
+        .switch-link span {
+            color: #8ab4f8;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .package-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            gap: 20px;
+            margin-bottom: 30px;
+            justify-content: center;
+            align-items: stretch;
+            overflow-x: auto;
+            padding: 15px 10px 25px 10px;
+        }
+        .package-card {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px 20px;
+            flex: 1 1 0;
+            min-width: 220px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s, border-color 0.3s, background 0.3s;
+        }
+        .package-card:hover {
+            transform: translateY(-8px);
+            border-color: #8ab4f8;
+            background: rgba(138, 180, 248, 0.05);
+        }
+        .free-card {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .package-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+        .package-price {
+            font-size: 24px;
+            color: #8ab4f8;
+            font-weight: 700;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 20px;
+        }
+        .package-benefits {
+            flex-grow: 1;
+            margin-bottom: 25px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+        }
+        .benefit-item {
+            display: flex;
+            margin-bottom: 12px;
+        }
+        .benefit-item span {
+            margin-right: 10px;
+            color: #8ab4f8;
+            font-weight: bold;
+        }
+        .benefit-item.negative span {
+            color: #fa5252;
+        }
+        .error-text {
+            color: #ff8787;
+            text-align: center;
+            font-size: 14px;
+            min-height: 20px;
+            margin-bottom: 10px;
+        }
+        .qr-box {
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .qr-image {
+            width: 100%;
+            max-width: 250px;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+        }
+        .loader {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top: 4px solid #8ab4f8;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .hidden {
+            display: none !important;
+        }
+        .status-box {
+            background: rgba(138, 180, 248, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 35px;
+            text-align: center;
+            border: 1px solid rgba(138, 180, 248, 0.2);
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+            min-height: 80px;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+    </style>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 </head>
-<body style="font-family:sans-serif;text-align:center;padding:50px;background:#f3f3f3;">
-    <h2 style="color:#005a9e;">Xác nhận thanh toán 50K</h2>
-    <p id="st">Vui lòng tải lên ảnh chụp màn hình bill chuyển khoản</p>
-    <input type="file" id="f" accept="image/*" style="margin:20px 0;"/><br/>
-    <button id="btn" onclick="s()" style="padding:12px 24px;background:#0078D7;color:white;border:none;border-radius:8px;font-size:16px;">Gửi ảnh xác nhận</button>
+<body>
+
+    <div id="login-panel" class="panel">
+        <h2>Đăng nhập</h2>
+        <input type="email" id="login-email" placeholder="Địa chỉ Email">
+        <input type="password" id="login-password" placeholder="Mật khẩu">
+        <p id="login-error" class="error-text"></p>
+        <button onclick="login()">Đăng nhập vào hệ thống</button>
+        <div class="switch-link">
+            Chưa có tài khoản? <span onclick="switchPanel('register-panel')">Đăng ký ngay</span>
+        </div>
+    </div>
+
+    <div id="register-panel" class="panel hidden">
+        <h2>Tạo tài khoản mới</h2>
+        <input type="email" id="reg-email" placeholder="Địa chỉ Email">
+        <input type="password" id="reg-password" placeholder="Tạo mật khẩu">
+        <p id="reg-error" class="error-text"></p>
+        <button onclick="register()">Đăng ký tài khoản</button>
+        <div class="switch-link">
+            Đã có tài khoản? <span onclick="switchPanel('login-panel')">Quay lại đăng nhập</span>
+        </div>
+    </div>
+
+    <div id="dashboard-panel" class="panel panel-wide hidden">
+        <div class="greeting" id="greeting-text"></div>
+        <div id="user-status-box" class="status-box">
+            <p id="user-status" style="margin: 0; font-size: 15px;"></p>
+        </div>
+        
+        <div id="premium-packages" class="package-container">
+            <div class="package-card free-card" id="free-package-card">
+                <div class="package-title">Gói Free</div>
+                <div class="package-price" style="color: rgba(255, 255, 255, 0.5);">0 VNĐ</div>
+                <div class="package-benefits">
+                    <div class="benefit-item negative"><span>-</span> Tích hợp quảng cáo âm thanh</div>
+                    <div class="benefit-item negative"><span>-</span> Tốc độ xử lý tiêu chuẩn</div>
+                    <div class="benefit-item"><span>-</span> Dọn dẹp USB cơ bản</div>
+                    <div class="benefit-item"><span>-</span> Giới hạn luồng tải xuống</div>
+                </div>
+                <button id="btn-free" disabled>Đang sử dụng</button>
+            </div>
+
+            <div class="package-card">
+                <div class="package-title">Gói 1 Ngày</div>
+                <div class="package-price">10.000 VNĐ</div>
+                <div class="package-benefits">
+                    <div class="benefit-item"><span>+</span> Loại bỏ hoàn toàn quảng cáo</div>
+                    <div class="benefit-item"><span>+</span> Tốc độ tải và xử lý tối đa</div>
+                    <div class="benefit-item"><span>+</span> Không giới hạn số lượng bài</div>
+                    <div class="benefit-item"><span>+</span> Trải nghiệm âm thanh gốc</div>
+                </div>
+                <button onclick="requestPayment(1, 10000)">Nâng cấp gói này</button>
+            </div>
+
+            <div class="package-card">
+                <div class="package-title">Gói 1 Tháng</div>
+                <div class="package-price">50.000 VNĐ</div>
+                <div class="package-benefits">
+                    <div class="benefit-item"><span>+</span> Loại bỏ hoàn toàn quảng cáo</div>
+                    <div class="benefit-item"><span>+</span> Tốc độ tải và xử lý tối đa</div>
+                    <div class="benefit-item"><span>+</span> Không giới hạn số lượng bài</div>
+                    <div class="benefit-item"><span>+</span> Trải nghiệm âm thanh gốc</div>
+                </div>
+                <button onclick="requestPayment(30, 50000)">Nâng cấp gói này</button>
+            </div>
+            
+            <div class="package-card">
+                <div class="package-title">Gói 1 Năm</div>
+                <div class="package-price">300.000 VNĐ</div>
+                <div class="package-benefits">
+                    <div class="benefit-item"><span>+</span> Loại bỏ hoàn toàn quảng cáo</div>
+                    <div class="benefit-item"><span>+</span> Tốc độ tải và xử lý tối đa</div>
+                    <div class="benefit-item"><span>+</span> Không giới hạn số lượng bài</div>
+                    <div class="benefit-item"><span>+</span> Trải nghiệm âm thanh gốc</div>
+                </div>
+                <button onclick="requestPayment(365, 300000)">Nâng cấp gói này</button>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="secondary" onclick="continueToApp()" style="flex: 2;">Quay lại sử dụng ứng dụng</button>
+            <button class="danger" onclick="logout()" style="flex: 1;">Đăng xuất</button>
+        </div>
+    </div>
+
+    <div id="waiting-panel" class="panel hidden">
+        <h2>Thanh toán tự động</h2>
+        <p style="text-align: center; color: rgba(255, 255, 255, 0.7); line-height: 1.5; margin-bottom: 20px; font-size: 14px;">
+            Mã QR dưới đây đã được tích hợp sẵn số tiền và nội dung xác nhận. Vui lòng sử dụng App ngân hàng để quét.
+        </p>
+        
+        <div class="qr-box">
+            <img id="qr-image" class="qr-image" src="" alt="" />
+        </div>
+
+        <div style="background: rgba(0, 0, 0, 0.3); border: 1px dashed rgba(255, 255, 255, 0.2); padding: 15px; border-radius: 12px; text-align: center; margin-bottom: 25px;">
+            <span style="font-size: 13px; color: rgba(255, 255, 255, 0.6);">Nội dung chuyển khoản (OTP):</span><br>
+            <span id="tx-code-display" style="font-size: 26px; font-weight: bold; color: #8ab4f8; letter-spacing: 3px;"></span>
+        </div>
+        
+        <div class="loader"></div>
+        <p style="text-align: center; font-size: 13px; color: rgba(255, 255, 255, 0.5); margin-bottom: 20px;">
+            Hệ thống đang chờ đối soát tự động... Vui lòng giữ nguyên màn hình này.
+        </p>
+        
+        <button class="secondary" onclick="cancelPaymentRequest()">Hủy bỏ giao dịch</button>
+    </div>
+
     <script>
-        function s(){
-            var u = new URLSearchParams(window.location.search).get('id');
-            var i = document.getElementById('f').files[0];
-            if(!i || !u) return;
-            document.getElementById('st').innerText = 'Đang tải ảnh lên hệ thống...';
-            document.getElementById('btn').style.display = 'none';
-            var r = new FileReader();
-            r.onload = function(e){
-                var b64 = e.target.result.split(',')[1];
-                fetch('https://emqiziutility-web-default-rtdb.firebaseio.com/payments/' + u + '.json', {
-                    method: 'PUT',
-                    body: JSON.stringify({ img: b64 })
-                }).then(function(){
-                    document.getElementById('st').innerText = 'Hệ thống đã nhận ảnh! Hãy kiểm tra ứng dụng trên máy tính của bạn.';
-                    document.getElementById('st').style.color = 'green';
-                });
-            };
-            r.readAsDataURL(i);
+        const firebaseConfig = {
+            apiKey: "AIzaSyDzE74eLLu6VVmG2FlBnH8oac843dHe7r4",
+            authDomain: "emqiziutility-web.firebaseapp.com",
+            databaseURL: "https://emqiziutility-web-default-rtdb.firebaseio.com",
+            projectId: "emqiziutility-web",
+            storageBucket: "emqiziutility-web.firebasestorage.app",
+            messagingSenderId: "645675862911",
+            appId: "1:645675862911:web:3298820136a699ef99a84a"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.database();
+
+        let currentUser = null;
+        let isPremium = false;
+
+        function switchPanel(panelId) {
+            document.getElementById('login-panel').classList.add('hidden');
+            document.getElementById('register-panel').classList.add('hidden');
+            document.getElementById('dashboard-panel').classList.add('hidden');
+            document.getElementById('waiting-panel').classList.add('hidden');
+            
+            document.getElementById(panelId).classList.remove('hidden');
+        }
+
+        function login() {
+            const email = document.getElementById('login-email').value;
+            const pass = document.getElementById('login-password').value;
+            document.getElementById('login-error').innerText = "";
+            auth.signInWithEmailAndPassword(email, pass).catch(e => {
+                document.getElementById('login-error').innerText = "Đăng nhập thất bại: " + e.message;
+            });
+        }
+
+        function register() {
+            const email = document.getElementById('reg-email').value;
+            const pass = document.getElementById('reg-password').value;
+            document.getElementById('reg-error').innerText = "";
+            auth.createUserWithEmailAndPassword(email, pass).catch(e => {
+                document.getElementById('reg-error').innerText = "Đăng ký thất bại: " + e.message;
+            });
+        }
+
+        function logout() {
+            auth.signOut().then(() => {
+                document.getElementById('login-email').value = "";
+                document.getElementById('login-password').value = "";
+                switchPanel('login-panel');
+            });
+        }
+
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                currentUser = user;
+                let displayName = user.email.split('@')[0];
+                document.getElementById('greeting-text').innerText = "Xin chào, " + displayName + "!";
+                switchPanel('dashboard-panel');
+                listenToPremiumStatus();
+            } else {
+                switchPanel('login-panel');
+            }
+        });
+
+        function listenToPremiumStatus() {
+            document.getElementById('user-status').innerHTML = "<span style='color: #8ab4f8;'>Đang tải dữ liệu máy chủ...</span>";
+            
+            db.ref('users/' + currentUser.uid).on('value', snapshot => {
+                const data = snapshot.val();
+                const now = new Date().getTime();
+                
+                if (data && data.premiumUntil && data.premiumUntil > now) {
+                    isPremium = true;
+                    const date = new Date(data.premiumUntil);
+                    document.getElementById('user-status').innerHTML = "Trạng thái: <strong style='color: #8ab4f8; font-size: 18px;'>PREMIUM</strong><br><span style='font-size: 13px; color: rgba(255,255,255,0.7);'>Thời hạn đến: " + date.toLocaleDateString() + "</span>";
+                    document.getElementById('premium-packages').classList.add('hidden');
+                    
+                    if (!document.getElementById('waiting-panel').classList.contains('hidden')) {
+                        switchPanel('dashboard-panel');
+                    }
+                } else {
+                    isPremium = false;
+                    document.getElementById('user-status').innerHTML = "Trạng thái: <strong style='color: #ff8787; font-size: 18px;'>GÓI MIỄN PHÍ</strong><br><span style='font-size: 13px; color: rgba(255,255,255,0.7);'>Tài khoản sẽ bị chèn âm thanh quảng cáo khi sử dụng</span>";
+                    document.getElementById('premium-packages').classList.remove('hidden');
+                    document.getElementById('btn-free').innerText = "Đang sử dụng";
+                }
+            }, error => {
+                isPremium = false;
+                document.getElementById('user-status').innerHTML = "Trạng thái: <strong style='color: #ff8787; font-size: 18px;'>GÓI MIỄN PHÍ</strong><br><span style='font-size: 13px; color: rgba(255,255,255,0.7);'>Chưa có dữ liệu thanh toán hoặc mất kết nối</span>";
+                document.getElementById('premium-packages').classList.remove('hidden');
+                document.getElementById('btn-free').innerText = "Đang sử dụng";
+            });
+        }
+
+        function requestPayment(days, price) {
+            const txCode = Math.floor(100000 + Math.random() * 900000).toString();
+            
+            const qrUrl = "https://img.vietqr.io/image/vcb-9974325186-compact2.png?amount=" + price + "&addInfo=" + txCode + "&accountName=Tran%20Thi%20Minh%20Nguyet";
+            document.getElementById('qr-image').src = qrUrl;
+            
+            const botToken = "YOUR_BOT_TOKEN";
+            const chatId = "YOUR_CHAT_ID";
+            const text = encodeURIComponent("Yêu cầu duyệt Premium\nEmail: " + currentUser.email + "\nUID: " + currentUser.uid + "\nGói: " + days + " ngày\nSố tiền: " + price + " VNĐ\nMÃ GIAO DỊCH (OTP): " + txCode);
+            
+            fetch("https://api.telegram.org/bot" + botToken + "/sendMessage?chat_id=" + chatId + "&text=" + text);
+
+            document.getElementById('tx-code-display').innerText = txCode;
+            switchPanel('waiting-panel');
+        }
+
+        function cancelPaymentRequest() {
+            switchPanel('dashboard-panel');
+        }
+
+        function continueToApp() {
+            if (window.chrome && window.chrome.webview) {
+                if (isPremium) {
+                    window.chrome.webview.postMessage("STATUS:PREMIUM");
+                } else {
+                    window.chrome.webview.postMessage("STATUS:FREE");
+                }
+            }
         }
     </script>
 </body>
