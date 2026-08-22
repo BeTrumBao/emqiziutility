@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Trị Laundry - Material 3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        :root {
+            /* Premium Color Palette */
+            --md-sys-color-primary: #1A73E8;
+            --md-sys-color-on-primary: #FFFFFF;
+            --md-sys-color-primary-container: #D2E3FC;
+            --md-sys-color-on-primary-container: #174EA6;
+            --md-sys-color-surface: #FFFFFF;
+            --md-sys-color-on-surface: #202124;
+            --md-sys-color-surface-container: #F1F3F4;
+            --md-sys-color-outline: #5F6368;
+            --md-sys-color-success: #1E8E3E;
+            --md-sys-color-warning: #F9AB00;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #F1F3F4 0%, #E8F0FE 100%);
+            color: var(--md-sys-color-on-surface);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Tùy chỉnh thanh cuộn */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #D2E3FC; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #1A73E8; }
+
+        .app-container {
+            width: 100%;
+            max-width: 800px;
+            background: var(--md-sys-color-surface);
+            border-radius: 32px;
+            box-shadow: 0 12px 40px rgba(26, 115, 232, 0.08);
+            margin: 40px 20px;
+            box-sizing: border-box;
+            overflow: hidden;
+            position: relative;
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Bar */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 32px;
+            background: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stats-summary {
+            display: flex;
+            gap: 16px;
+        }
+
+        .stat-pill {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .stat-pill strong {
+            font-size: 16px;
+        }
+
+        /* Order List */
+        .content {
+            padding: 32px;
+            flex: 1;
+            overflow-y: auto;
+            background: #F8F9FA;
+        }
+
+        .order-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .order-card {
+            background: #FFFFFF;
+            border: 1px solid #E8EAED;
+            border-radius: 20px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            position: relative;
+        }
+
+        .order-card:hover {
+            border-color: var(--md-sys-color-primary);
+            box-shadow: 0 8px 24px rgba(26, 115, 232, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .order-id {
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .order-date {
+            font-size: 14px;
+            color: var(--md-sys-color-outline);
+            margin-top: 4px;
+        }
+
+        .order-total {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--md-sys-color-primary);
+        }
+
+        .order-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px dashed #E8EAED;
+        }
+
+        /* Buttons & Selects */
+        select.custom-select {
+            background: #FFFFFF;
+            color: var(--md-sys-color-on-surface);
+            border: 1px solid var(--md-sys-color-outline);
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-family: 'Outfit';
+            font-size: 14px;
+            outline: none;
+            cursor: pointer;
+            transition: border-color 0.2s;
+            min-width: 160px;
+        }
+
+        select.custom-select:hover {
+            border-color: var(--md-sys-color-primary);
+        }
+
+        .btn {
+            background: #F8F9FA;
+            color: var(--md-sys-color-on-surface);
+            border: 1px solid #E8EAED;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-family: 'Outfit';
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background: #F1F3F4;
+            border-color: #D2E3FC;
+            color: var(--md-sys-color-primary);
+        }
+
+        .btn-primary {
+            background: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #174EA6;
+            color: var(--md-sys-color-on-primary);
+        }
+
+        .btn-icon {
+            padding: 8px;
+        }
+
+        .badge {
+            padding: 6px 12px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Modal Chi Tiết */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(32, 33, 36, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: var(--md-sys-color-surface);
+            border-radius: 32px;
+            width: 90%;
+            max-width: 480px;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 24px 48px rgba(0,0,0,0.2);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 32px 32px 24px;
+            text-align: center;
+            border-bottom: 2px dashed #E8EAED;
+            position: relative;
+        }
+
+        .btn-close {
+            position: absolute;
+            top: 24px; right: 24px;
+            background: #F1F3F4;
+            border: none;
+            color: var(--md-sys-color-outline);
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.2s;
+        }
+
+        .btn-close:hover {
+            background: #E8EAED;
+            color: var(--md-sys-color-on-surface);
+        }
+
+        .invoice-items {
+            padding: 24px 32px;
+        }
+
+        .invoice-item-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+
+        .invoice-total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 2px dashed #E8EAED;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--md-sys-color-primary);
+        }
+
+        /* Image Display */
+        .process-images {
+            padding: 0 32px 24px;
+            text-align: center;
+        }
+
+        .img-card {
+            border: 1px solid #E8EAED;
+            border-radius: 16px;
+            padding: 12px;
+            margin-top: 12px;
+            background: #F8F9FA;
+        }
+
+        .img-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .loader {
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* Helpers */
+        .flex-row { display: flex; align-items: center; gap: 12px; }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--md-sys-color-outline);
+        }
+        .empty-state span {
+            font-size: 64px;
+            opacity: 0.2;
+            margin-bottom: 16px;
+            display: block;
+            color: var(--md-sys-color-primary);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="header">
+            <h1><span class="material-symbols-outlined" style="font-size: 32px">local_laundry_service</span> Quản Lý Đơn Hàng</h1>
+            <div class="stats-summary">
+                <div class="stat-pill">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">pending_actions</span>
+                    Chờ xử lý: <strong id="count-pending">0</strong>
+                </div>
+                <div class="stat-pill">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">check_circle</span>
+                    Hoàn thành: <strong id="count-completed">0</strong>
+                </div>
+                <div class="stat-pill" style="cursor: pointer; background: #FFF0F5; color: #E91E63;" onclick="openPromoListModal()">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">local_offer</span>
+                    Quản Lý Mã Giảm Giá
+                </div>
+                <div class="stat-pill" style="cursor: pointer; background: #FFF3E0; color: #E65100;" onclick="scanAndCancelOverdueOrders()">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">delete_sweep</span>
+                    Dọn Đơn Quá Hạn (7 ngày)
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="order-list" id="order-list">
+                <div class="empty-state">
+                    <span class="material-symbols-outlined loader">autorenew</span>
+                    <p>Đang tải dữ liệu từ Firebase...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Chi tiết -->
+    <div class="modal-overlay" id="invoice-modal">
+        <div class="modal-content" id="printable-modal">
+            <button class="btn-close" onclick="closeModal()" style="z-index: 9999; cursor: pointer;">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <div class="modal-header">
+                <span class="material-symbols-outlined" style="font-size: 48px; color: var(--md-sys-color-primary); margin-bottom: 12px;">receipt_long</span>
+                <h2 style="margin: 0 0 8px 0; font-size: 24px; color: var(--md-sys-color-on-surface)">Chi Tiết Đơn Hàng</h2>
+                <div id="modal-id" style="color: var(--md-sys-color-outline); font-size: 14px; margin-bottom: 4px;"></div>
+                <div id="modal-date" style="color: var(--md-sys-color-outline); font-size: 14px; margin-bottom: 16px;"></div>
+                <div id="modal-badge"></div>
+            </div>
+            
+            <div class="invoice-items" id="modal-items"></div>
+            
+            <div class="process-images" id="modal-images" style="display: none;">
+                <div style="font-size: 14px; color: var(--md-sys-color-outline); font-weight: 500;">Ảnh cập nhật quá trình:</div>
+                <div class="img-card">
+                    <img id="process-img-display" src="" alt="Ảnh tiến trình">
+                </div>
+            </div>
+
+            <div style="padding: 24px 32px; background: #F8F9FA; border-top: 1px solid #E8EAED; display: flex; justify-content: center; gap: 12px;">
+                <button class="btn btn-primary" style="padding: 12px 24px;" onclick="saveAsJPG()">
+                    <span class="material-symbols-outlined">download</span> Tải Hóa Đơn JPG
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tạo Mã Giảm Giá -->
+    <div class="modal-overlay" id="promo-modal" style="z-index: 1010;">
+        <div class="modal-content" style="max-width: 400px; padding: 24px;">
+            <button class="btn-close" onclick="closePromoModal()" style="top: 16px; right: 16px; width: 32px; height: 32px;">
+                <span class="material-symbols-outlined" style="font-size: 20px;">close</span>
+            </button>
+            <h2 style="margin: 0 0 16px 0; font-size: 20px; color: var(--md-sys-color-primary);">Tạo Mã Giảm Giá Mới</h2>
+            
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <input type="text" id="promo-code" placeholder="Mã Code (vd: GIAM50K)" style="padding: 10px; border-radius: 8px; border: 1px solid var(--md-sys-color-outline); font-family: 'Outfit';">
+                <input type="text" id="promo-title" placeholder="Tiêu đề (vd: Giảm 50K cho đơn mới)" style="padding: 10px; border-radius: 8px; border: 1px solid var(--md-sys-color-outline); font-family: 'Outfit';">
+                <input type="text" id="promo-desc" placeholder="Mô tả chi tiết (vd: Áp dụng cho đơn từ 100k)" style="padding: 10px; border-radius: 8px; border: 1px solid var(--md-sys-color-outline); font-family: 'Outfit';">
+                
+                <select id="promo-icon" class="custom-select">
+                    <option value="local-offer">Icon: Thẻ Giá (local-offer)</option>
+                    <option value="card-giftcard">Icon: Hộp Quà (card-giftcard)</option>
+                    <option value="star">Icon: Ngôi Sao (star)</option>
+                    <option value="discount">Icon: Phần Trăm (discount)</option>
+                </select>
+                
+                <select id="promo-type" class="custom-select" onchange="togglePromoType()">
+                    <option value="amount">Giảm tiền trực tiếp (VNĐ)</option>
+                    <option value="percent">Giảm theo phần trăm (%)</option>
+                </select>
+
+                <input type="number" id="promo-value" placeholder="Mức giảm (VNĐ)" style="padding: 10px; border-radius: 8px; border: 1px solid var(--md-sys-color-outline); font-family: 'Outfit';">
+                <input type="number" id="promo-max" placeholder="Giảm tối đa (VNĐ)" style="display: none; padding: 10px; border-radius: 8px; border: 1px solid var(--md-sys-color-outline); font-family: 'Outfit';">
+                
+                <input type="number" id="promo-min" placeholder="Đơn tối thiểu (VNĐ) - Tùy chọn" style="padding: 10px; border-radius: 8px; border: 1px solid var(--md-sys-color-outline); font-family: 'Outfit';">
+                
+                <input type="text" id="promo-target-uid" placeholder="Tặng riêng cho UID (Bỏ trống nếu tặng chung)" style="padding: 10px; border-radius: 8px; border: 1px solid #1A73E8; font-family: 'Outfit'; background-color: #E8F0FE;">
+
+                <input type="date" id="promo-expiry" style="padding: 10px; border-radius: 8px; border: 1px solid var(--md-sys-color-outline); font-family: 'Outfit';">
+                
+                <button class="btn btn-primary" style="justify-content: center; padding: 12px; margin-top: 8px;" onclick="savePromoCode()">
+                    <span class="material-symbols-outlined">save</span> Lưu Mã Giảm Giá
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Danh Sách Mã Giảm Giá -->
+    <div class="modal-overlay" id="promo-list-modal">
+        <div class="modal-content" style="max-width: 600px; padding: 0; display: block; overflow: hidden; max-height: 90vh;">
+            <div style="height: 80px; padding: 0 24px; border-bottom: 1px solid #E8EAED; display: flex; justify-content: space-between; align-items: center; background: #fff; z-index: 2; box-sizing: border-box;">
+                <h2 style="margin: 0; font-size: 20px; color: var(--md-sys-color-primary);">Quản Lý Mã Giảm Giá</h2>
+                <div style="display: flex; gap: 12px; align-items: center;">
+                    <button class="btn btn-primary" onclick="openPromoModal(true)" style="padding: 8px 16px;">
+                        <span class="material-symbols-outlined" style="font-size: 18px;">add</span> Thêm Mới
+                    </button>
+                    <button class="btn-close" onclick="closePromoListModal()" style="position: static; width: 40px; height: 40px; margin: 0; background: #F1F3F4;">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">close</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div id="promo-list-container" style="max-height: calc(90vh - 80px); padding: 24px; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; box-sizing: border-box;">
+                <!-- Promo items will be rendered here -->
+                <div class="empty-state" style="padding: 20px;">
+                    <span class="material-symbols-outlined loader" style="font-size: 32px;">autorenew</span>
+                    <p style="font-size: 14px;">Đang tải danh sách...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. Khởi tạo Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyDzE74eLLu6VVmG2FlBnH8oac843dHe7r4",
+            authDomain: "emqiziutility-web.firebaseapp.com",
+            databaseURL: "https://emqiziutility-web-default-rtdb.firebaseio.com",
+            projectId: "emqiziutility-web",
+            storageBucket: "emqiziutility-web.firebasestorage.app",
+            messagingSenderId: "645675862911",
+            appId: "1:645675862911:web:3298820136a699ef99a84a"
+        };
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const db = firebase.database();
+        const firestore = firebase.firestore();
+
+        // Biến toàn cục
+        let allOrders = [];
+        let currentViewingOrder = null;
+
+        const formatPrice = (price) => price.toLocaleString('vi-VN') + ' VNĐ';
+
+        const getBadgeStyle = (status) => {
+            switch(status) {
+                case 'draft': return { bg: '#FEF7E0', color: '#F9AB00', text: 'Lưu Tạm' };
+                case 'awaiting_payment': 
+                case 'pending': return { bg: '#FFEBEE', color: '#D32F2F', text: 'Chờ Thanh Toán' };
+                case 'awaiting_wash': return { bg: '#E3F2FD', color: '#1976D2', text: 'Chờ Giặt' };
+                case 'awaiting_dry': return { bg: '#F3E5F5', color: '#7B1FA2', text: 'Chờ Phơi' };
+                case 'completed': return { bg: '#E6F4EA', color: '#1E8E3E', text: 'Hoàn Thành' };
+                case 'cancelled': return { bg: '#FCE8E6', color: '#C5221F', text: 'Đã Hủy' };
+                default: return { bg: '#F1F3F4', color: '#5F6368', text: 'Không rõ' };
+            }
+        };
+
+        // 2. Lắng nghe Realtime từ Firebase
+        db.ref('laundry_orders').on('value', (snapshot) => {
+            allOrders = [];
+            let pendingCount = 0;
+            let completedCount = 0;
+
+            snapshot.forEach((childSnap) => {
+                const order = childSnap.val();
+                order.firebaseKey = childSnap.key; // Lưu lại key để update sau
+                // Chỉ lấy đơn đã đặt lịch (bỏ qua draft)
+                if (order.status !== 'draft') {
+                    allOrders.push(order);
+                    if (order.status === 'completed') completedCount++;
+                    else pendingCount++;
+                }
+            });
+
+            // Sắp xếp đơn mới nhất lên đầu
+            allOrders.sort((a, b) => b.timestamp - a.timestamp);
+
+            document.getElementById('count-pending').innerText = pendingCount;
+            document.getElementById('count-completed').innerText = completedCount;
+            
+            renderOrders();
+        });
+
+        // 3. Render danh sách
+        const renderOrders = () => {
+            const listContainer = document.getElementById('order-list');
+            listContainer.innerHTML = '';
+
+            if (allOrders.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="empty-state">
+                        <span class="material-symbols-outlined">inbox</span>
+                        <p>Chưa có đơn hàng nào từ ứng dụng.</p>
+                    </div>`;
+                return;
+            }
+
+            allOrders.forEach(order => {
+                const dateStr = new Date(order.timestamp).toLocaleString('vi-VN');
+                const badge = getBadgeStyle(order.status);
+                
+                const card = document.createElement('div');
+                card.className = 'order-card';
+                card.innerHTML = `
+                    <div class="order-header">
+                        <div>
+                            <div class="order-id">
+                                Đơn: ${order.id}
+                                <span class="badge" style="background: ${badge.bg}; color: ${badge.color}">${badge.text}</span>
+                            </div>
+                            <div class="order-date">${dateStr}</div>
+                            <div id="user-info-${order.firebaseKey}" style="font-size: 13px; color: var(--md-sys-color-outline); margin-top: 6px; line-height: 1.4;">
+                                <span class="material-symbols-outlined loader" style="font-size: 12px; vertical-align: middle;">autorenew</span> Đang tải TT khách...
+                                <br><span style="font-size:11px;">UID: ${order.uid || 'N/A'}</span>
+                            </div>
+                        </div>
+                        <div class="order-total">${formatPrice(order.total)}</div>
+                    </div>
+
+                    <div class="order-actions">
+                        <div class="flex-row">
+                            <span style="font-size: 14px; color: var(--md-sys-color-outline); font-weight: 500;">Cập nhật:</span>
+                            <div style="position: relative;">
+                                <select class="custom-select" onchange="updateStatus('${order.firebaseKey}', this.value)">
+                                    <option value="awaiting_payment" ${order.status === 'awaiting_payment' || order.status === 'pending' ? 'selected' : ''}>Chờ thanh toán</option>
+                                    <option value="awaiting_wash" ${order.status === 'awaiting_wash' ? 'selected' : ''}>Chờ giặt</option>
+                                    <option value="awaiting_dry" ${order.status === 'awaiting_dry' ? 'selected' : ''}>Chờ phơi</option>
+                                    <option value="completed" ${order.status === 'completed' ? 'selected' : ''}>Hoàn thành</option>
+                                    <option value="cancelled" ${order.status === 'cancelled' ? 'selected' : ''}>Đã hủy</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="flex-row">
+                            <label id="upload-label-${order.firebaseKey}" class="btn" style="margin: 0; background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); border-color: transparent;">
+                                <span class="material-symbols-outlined" style="font-size: 18px;">upload</span> Tải ảnh lên
+                                <input type="file" style="display: none;" accept="image/*" onchange="uploadImage('${order.firebaseKey}', '${order.status}', this)">
+                            </label>
+                            
+                            <button class="btn btn-icon" onclick="openModal('${order.firebaseKey}')" title="Xem chi tiết" style="background: #FFFFFF;">
+                                <span class="material-symbols-outlined" style="font-size: 20px; color: var(--md-sys-color-primary)">visibility</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                listContainer.appendChild(card);
+                
+                // Fetch User Email
+                if (order.uid && order.uid !== 'anonymous') {
+                    if (window.userCache && window.userCache[order.uid]) {
+                        const el = document.getElementById(`user-info-${order.firebaseKey}`);
+                        if (el) el.innerHTML = `<span class="material-symbols-outlined" style="font-size: 14px; vertical-align: middle; color: var(--md-sys-color-primary)">person</span> <strong style="color:var(--md-sys-color-primary)">${window.userCache[order.uid].email}</strong><br>UID: <span style="font-size:11px;">${order.uid}</span>`;
+                    } else {
+                        firestore.collection('users').doc(order.uid).get().then(doc => {
+                            window.userCache = window.userCache || {};
+                            const el = document.getElementById(`user-info-${order.firebaseKey}`);
+                            if (doc.exists) {
+                                const u = doc.data();
+                                window.userCache[order.uid] = u;
+                                if (el) el.innerHTML = `<span class="material-symbols-outlined" style="font-size: 14px; vertical-align: middle; color: var(--md-sys-color-primary)">person</span> <strong style="color:var(--md-sys-color-primary)">${u.email}</strong><br>UID: <span style="font-size:11px;">${order.uid}</span>`;
+                            } else {
+                                if (el) el.innerHTML = `Khách: <strong>Không tìm thấy</strong><br>UID: <span style="font-size:11px;">${order.uid}</span>`;
+                            }
+                        }).catch(err => {
+                            const el = document.getElementById(`user-info-${order.firebaseKey}`);
+                            if (el) el.innerHTML = `Khách: <strong>Lỗi tải</strong><br>UID: <span style="font-size:11px;">${order.uid}</span>`;
+                        });
+                    }
+                } else {
+                    const el = document.getElementById(`user-info-${order.firebaseKey}`);
+                    if (el) el.innerHTML = `<span class="material-symbols-outlined" style="font-size: 14px; vertical-align: middle; color: #5F6368">person_off</span> <strong style="color: #5F6368">Khách vãng lai</strong>`;
+                }
+            });
+        };
+
+        // 4. Update Trạng thái lên Firebase
+        window.updateStatus = (firebaseKey, newStatus) => {
+            const updates = { status: newStatus };
+            if (newStatus === 'cancelled') {
+                const reason = prompt("Nhập lý do hủy đơn hàng này:");
+                if (reason === null) {
+                    renderOrders(); // Revert dropdown UI
+                    return;
+                }
+                updates.cancelReason = reason || 'Quản trị viên hủy không nêu lý do';
+                db.ref('laundry_orders/' + firebaseKey).update(updates)
+                    .then(() => console.log('Cập nhật trạng thái thành công'))
+                    .catch(err => alert("Lỗi: " + err.message));
+            } else if (newStatus === 'completed') {
+                db.ref('laundry_orders/' + firebaseKey).once('value').then(snapshot => {
+                    const order = snapshot.val();
+                    if (order) {
+                        const totalQty = order.items.reduce((sum, item) => sum + item.qty, 0);
+                        const washTime = Math.ceil(totalQty / 10) || 1;
+                        const dryTime = order.items.reduce((sum, item) => sum + (item.qty * (item.time || 1)), 0);
+                        const totalHours = washTime + dryTime;
+                        const etaDate = order.timestamp + totalHours * 3600 * 1000;
+                        
+                        if (Date.now() > etaDate) {
+                            const voucherCode = 'TREHEN' + Math.floor(1000 + Math.random() * 9000);
+                            const expiryDate = new Date();
+                            expiryDate.setDate(expiryDate.getDate() + 30); // Hạn 30 ngày
+                            
+                            const promoData = {
+                                code: voucherCode,
+                                title: 'Xin Lỗi Vì Giặt Trễ',
+                                desc: 'Giảm ngay 15.000đ cho đơn từ 100k',
+                                discountAmount: 15000,
+                                minOrderAmount: 100000,
+                                isActive: true,
+                                target_uid: order.uid,
+                                icon: 'local-offer',
+                                expiryDate: expiryDate
+                            };
+                            firestore.collection('laundry_promos').doc(voucherCode).set(promoData);
+                            alert("Đơn hàng hoàn thành trễ hẹn! Đã tự động gửi mã voucher " + voucherCode + " 15K vào tài khoản khách hàng.");
+                        }
+                    }
+                    db.ref('laundry_orders/' + firebaseKey).update(updates)
+                        .then(() => console.log('Cập nhật trạng thái thành công'))
+                        .catch(err => alert("Lỗi: " + err.message));
+                });
+            } else {
+                db.ref('laundry_orders/' + firebaseKey).update(updates)
+                    .then(() => console.log('Cập nhật trạng thái thành công'))
+                    .catch(err => alert("Lỗi: " + err.message));
+            }
+        };
+
+        // 5. Upload Ảnh lên imgbb và lưu link vào Firebase
+        window.uploadImage = async (firebaseKey, currentStatus, inputElement) => {
+            const file = inputElement.files[0];
+            if (!file) return;
+
+            const label = document.getElementById('upload-label-' + firebaseKey);
+            const originalHtml = label.innerHTML;
+            label.innerHTML = `<span class="material-symbols-outlined loader" style="font-size: 18px;">autorenew</span> Đang tải...`;
+            label.style.pointerEvents = 'none';
+
+            const formData = new FormData();
+            formData.append('image', file);
+
+            try {
+                const res = await fetch('https://api.imgbb.com/1/upload?key=e6c2724ff8344c073410da4876c3d35f', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await res.json();
+                
+                if (data && data.data && data.data.url) {
+                    const imageUrl = data.data.url;
+                    const order = allOrders.find(o => o.firebaseKey === firebaseKey);
+                    
+                    if (order) {
+                        let processImages = order.processImages || {};
+                        processImages[currentStatus] = imageUrl;
+                        
+                        // Push to Firebase
+                        await db.ref('laundry_orders/' + firebaseKey).update({ processImages: processImages });
+                        alert("Đã tải ảnh thành công cho khâu: " + currentStatus);
+                    }
+                } else {
+                    alert("Lỗi khi tải ảnh lên máy chủ ImgBB!");
+                }
+            } catch(err) {
+                alert("Lỗi mạng: " + err.message);
+            } finally {
+                label.innerHTML = originalHtml;
+                label.style.pointerEvents = 'auto';
+            }
+        };
+
+        // 6. Xử lý Modal
+        window.openModal = (firebaseKey) => {
+            const order = allOrders.find(o => o.firebaseKey === firebaseKey);
+            if(!order) return;
+            currentViewingOrder = order;
+
+            document.getElementById('modal-id').innerText = "Mã ĐH: " + order.id;
+            document.getElementById('modal-date').innerText = "Thời gian: " + new Date(order.timestamp).toLocaleString('vi-VN');
+            
+            const badge = getBadgeStyle(order.status);
+            document.getElementById('modal-badge').innerHTML = `<span class="badge" style="background: ${badge.bg}; color: ${badge.color}">${badge.text}</span>`;
+
+            const itemsContainer = document.getElementById('modal-items');
+            itemsContainer.innerHTML = '';
+            
+            order.items.forEach(item => {
+                const itemTotal = item.qty * item.price;
+                itemsContainer.innerHTML += `
+                    <div class="invoice-item-row">
+                        <span>${item.name} <strong style="color: var(--md-sys-color-primary)">x${item.qty}</strong></span>
+                        <span style="font-weight: 500;">${formatPrice(itemTotal)}</span>
+                    </div>
+                `;
+            });
+
+            itemsContainer.innerHTML += `
+                <div class="invoice-item-row" style="margin-top: 16px; font-weight: 600; color: #5F6368;">
+                    <span>Tạm tính:</span>
+                    <span>${formatPrice(order.subtotal || 0)}</span>
+                </div>
+            `;
+
+            if (order.discount && order.discount > 0) {
+                itemsContainer.innerHTML += `
+                    <div class="invoice-item-row" style="color: #E91E63; font-weight: 600;">
+                        <span>Giảm giá ${order.promoCode ? '(' + order.promoCode + ')' : ''}:</span>
+                        <span>- ${formatPrice(order.discount)}</span>
+                    </div>
+                `;
+            }
+
+            itemsContainer.innerHTML += `
+                <div class="invoice-total-row">
+                    <span>Tổng cộng:</span>
+                    <span>${formatPrice(order.total || 0)}</span>
+                </div>
+            `;
+            
+            // Hiện ảnh đính kèm của khách (nếu có)
+            if (order.photoUrl) {
+                itemsContainer.innerHTML += `
+                    <div style="margin-top: 16px; border-top: 1px dashed #E8EAED; padding-top: 16px;">
+                        <div style="font-size: 14px; color: var(--md-sys-color-outline); font-weight: 500; margin-bottom: 8px;">Ảnh đồ khách tải lên lúc đặt hàng:</div>
+                        <img src="${order.photoUrl}" style="width: 100%; height: 180px; object-fit: cover; border-radius: 12px; border: 1px solid #E8EAED;" alt="Ảnh khách chụp">
+                    </div>
+                `;
+            }
+
+            const imgContainer = document.getElementById('modal-images');
+            const imgDisplay = document.getElementById('process-img-display');
+            
+            if (order.processImages && order.processImages[order.status]) {
+                imgDisplay.src = order.processImages[order.status];
+                imgContainer.style.display = 'block';
+            } else {
+                imgContainer.style.display = 'none';
+            }
+
+            const overlay = document.getElementById('invoice-modal');
+            overlay.style.display = 'flex';
+            setTimeout(() => overlay.classList.add('active'), 10);
+        };
+
+        window.closeModal = () => {
+            document.body.style.overflow = '';
+            const overlay = document.getElementById('invoice-modal');
+            overlay.classList.remove('active');
+            setTimeout(() => overlay.style.display = 'none', 300);
+            currentViewingOrder = null;
+        };
+
+        window.saveAsJPG = () => {
+            const modal = document.getElementById('printable-modal');
+            const closeBtn = document.querySelector('.btn-close');
+            const downloadBtnContainer = modal.lastElementChild;
+            
+            closeBtn.style.display = 'none';
+            downloadBtnContainer.style.display = 'none';
+            modal.style.transform = 'none';
+            modal.style.boxShadow = 'none';
+
+            html2canvas(modal, { backgroundColor: '#FFFFFF', scale: 2 }).then(canvas => {
+                closeBtn.style.display = 'flex';
+                downloadBtnContainer.style.display = 'flex';
+                modal.style.transform = '';
+                modal.style.boxShadow = '';
+
+                const link = document.createElement('a');
+                link.download = `HoaDon_${currentViewingOrder.id}.jpg`;
+                link.href = canvas.toDataURL('image/jpeg', 0.9);
+                link.click();
+            });
+        };
+
+        // 7. Logic Quản lý Danh Sách Mã Giảm Giá
+        window.openPromoListModal = () => {
+            document.body.style.overflow = 'hidden';
+            const overlay = document.getElementById('promo-list-modal');
+            overlay.style.display = 'flex';
+            setTimeout(() => overlay.classList.add('active'), 10);
+            loadPromos();
+        };
+
+        window.closePromoListModal = () => {
+            document.body.style.overflow = '';
+            const overlay = document.getElementById('promo-list-modal');
+            overlay.classList.remove('active');
+            setTimeout(() => overlay.style.display = 'none', 300);
+        };
+
+        let promosUnsubscribe = null;
+        window.loadPromos = () => {
+            if (promosUnsubscribe) promosUnsubscribe();
+            
+            const container = document.getElementById('promo-list-container');
+            promosUnsubscribe = firestore.collection('laundry_promos')
+                .onSnapshot(snapshot => {
+                    container.innerHTML = '';
+                    if (snapshot.empty) {
+                        container.innerHTML = `<div class="empty-state" style="padding: 20px;"><span class="material-symbols-outlined" style="font-size: 32px; color: var(--md-sys-color-outline);">local_offer</span><p>Chưa có mã giảm giá nào.</p></div>`;
+                        return;
+                    }
+                    
+                    const promoList = [];
+                    snapshot.forEach(doc => {
+                        promoList.push(doc.data());
+                    });
+                    
+                    // Sắp xếp mã mới nhất lên đầu, nếu không có createdAt thì cho xuống cuối
+                    promoList.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                    
+                    promoList.forEach(p => {
+                        const isPercent = p.discountPercent != null;
+                        const valueText = isPercent ? `Giảm ${p.discountPercent}%` : `Giảm ${formatPrice(p.discountAmount || 0)}`;
+                        const minText = p.minOrderAmount ? `Đơn từ ${formatPrice(p.minOrderAmount)}` : `Mọi đơn hàng`;
+                        const expDate = p.expiryDate ? new Date(p.expiryDate).toLocaleDateString('vi-VN') : 'Không giới hạn';
+                        const targetBadge = p.target_uid ? `<span style="font-size: 11px; color: #fff; background: #1A73E8; padding: 2px 6px; border-radius: 4px; margin-left: 8px;">Riêng: ${p.target_uid}</span>` : `<span style="font-size: 11px; color: #1E8E3E; background: #E6F4EA; padding: 2px 6px; border-radius: 4px; margin-left: 8px;">Chung (Tất cả)</span>`;
+                        
+                        const pJson = encodeURIComponent(JSON.stringify(p));
+
+                        container.innerHTML += `
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px; background: #FFF; border: 1px solid #E8EAED; border-radius: 12px; margin-bottom: 8px;">
+                                <div>
+                                    <div style="font-weight: 700; color: var(--md-sys-color-primary); font-size: 16px;">${p.code} <span style="font-size: 12px; color: #E91E63; background: #FFF0F5; padding: 2px 6px; border-radius: 4px; font-weight: normal; margin-left: 8px;">${valueText}</span></div>
+                                    <div style="font-size: 14px; font-weight: 500; color: #202124; margin-top: 4px;">${p.title} ${targetBadge}</div>
+                                    <div style="font-size: 13px; color: #5F6368; margin-top: 4px;">${minText} | HSD: ${expDate}</div>
+                                </div>
+                                <div style="display: flex; gap: 8px;">
+                                    <button class="btn btn-icon" onclick="editPromo('${pJson}')" style="background: #E8F0FE; color: #1A73E8; border: none;"><span class="material-symbols-outlined">edit</span></button>
+                                    <button class="btn btn-icon" onclick="deletePromo('${p.code}')" style="background: #FFEBEE; color: #D32F2F; border: none;"><span class="material-symbols-outlined">delete</span></button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                });
+        };
+
+        window.deletePromo = (code) => {
+            if (confirm(`Bạn có chắc chắn muốn xóa mã ${code} vĩnh viễn không?`)) {
+                firestore.collection('laundry_promos').doc(code).delete()
+                    .then(() => alert('Xóa mã thành công!'))
+                    .catch(err => alert('Lỗi xóa mã: ' + err.message));
+            }
+        };
+
+        window.editPromo = (pJsonString) => {
+            const p = JSON.parse(decodeURIComponent(pJsonString));
+            
+            document.getElementById('promo-code').value = p.code;
+            document.getElementById('promo-code').disabled = true; // Không cho sửa code
+            document.getElementById('promo-title').value = p.title || '';
+            document.getElementById('promo-desc').value = p.desc || '';
+            document.getElementById('promo-icon').value = p.icon || 'local-offer';
+            document.getElementById('promo-target-uid').value = p.target_uid || '';
+            
+            if (p.discountPercent) {
+                document.getElementById('promo-type').value = 'percent';
+                document.getElementById('promo-value').value = p.discountPercent;
+                document.getElementById('promo-max').style.display = 'block';
+                document.getElementById('promo-max').value = p.maxDiscount || '';
+            } else {
+                document.getElementById('promo-type').value = 'amount';
+                document.getElementById('promo-value').value = p.discountAmount || '';
+                document.getElementById('promo-max').style.display = 'none';
+                document.getElementById('promo-max').value = '';
+            }
+            
+            document.getElementById('promo-min').value = p.minOrderAmount || '';
+            
+            if (p.expiryDate) {
+                const d = new Date(p.expiryDate);
+                const yyyy = d.getFullYear();
+                const mm = String(d.getMonth() + 1).padStart(2, '0');
+                const dd = String(d.getDate()).padStart(2, '0');
+                document.getElementById('promo-expiry').value = `${yyyy}-${mm}-${dd}`;
+            } else {
+                document.getElementById('promo-expiry').value = '';
+            }
+            
+            openPromoModal(false);
+        };
+
+        // 8. Logic Tạo/Sửa Mã Giảm Giá
+        window.openPromoModal = (isNew = true) => {
+            const overlay = document.getElementById('promo-modal');
+            overlay.style.display = 'flex';
+            setTimeout(() => overlay.classList.add('active'), 10);
+            if (isNew) {
+                document.getElementById('promo-code').value = '';
+                document.getElementById('promo-code').disabled = false;
+                document.getElementById('promo-title').value = '';
+                document.getElementById('promo-desc').value = '';
+                document.getElementById('promo-icon').value = 'local-offer';
+                document.getElementById('promo-value').value = '';
+                document.getElementById('promo-max').value = '';
+                document.getElementById('promo-min').value = '';
+                document.getElementById('promo-target-uid').value = '';
+                document.getElementById('promo-expiry').value = '';
+            }
+            overlay.style.display = 'flex';
+            setTimeout(() => overlay.classList.add('active'), 10);
+        };
+
+        window.closePromoModal = () => {
+            const overlay = document.getElementById('promo-modal');
+            overlay.classList.remove('active');
+            setTimeout(() => overlay.style.display = 'none', 300);
+        };
+
+        window.togglePromoType = () => {
+            const type = document.getElementById('promo-type').value;
+            const valueInput = document.getElementById('promo-value');
+            const maxInput = document.getElementById('promo-max');
+            
+            if (type === 'percent') {
+                valueInput.placeholder = 'Phần trăm giảm (%)';
+                maxInput.style.display = 'block';
+            } else {
+                valueInput.placeholder = 'Mức giảm (VNĐ)';
+                maxInput.style.display = 'none';
+                maxInput.value = '';
+            }
+        };
+
+        window.savePromoCode = () => {
+            const code = document.getElementById('promo-code').value.trim().toUpperCase();
+            const title = document.getElementById('promo-title').value.trim();
+            const desc = document.getElementById('promo-desc').value.trim();
+            const icon = document.getElementById('promo-icon').value;
+            const type = document.getElementById('promo-type').value;
+            const value = parseFloat(document.getElementById('promo-value').value);
+            const max = parseFloat(document.getElementById('promo-max').value);
+            const minOrderAmount = parseFloat(document.getElementById('promo-min').value);
+            const targetUid = document.getElementById('promo-target-uid').value.trim();
+            const expiry = document.getElementById('promo-expiry').value;
+
+            if (!code || !title || !value || !expiry) {
+                alert("Vui lòng điền đầy đủ các thông tin mã giảm giá!");
+                return;
+            }
+
+            const expiryDateObj = new Date(expiry);
+            expiryDateObj.setHours(23, 59, 59, 999);
+
+            const promoData = {
+                code: code,
+                title: title,
+                desc: desc || '',
+                icon: icon,
+                expiryDate: expiryDateObj,
+                isActive: true
+            };
+
+            if (targetUid) {
+                promoData.target_uid = targetUid;
+            }
+
+            if (minOrderAmount && !isNaN(minOrderAmount)) {
+                promoData.minOrderAmount = minOrderAmount;
+            }
+
+            if (type === 'percent') {
+                promoData.discountPercent = value;
+                if (max) promoData.maxDiscount = max;
+            } else {
+                promoData.discountAmount = value;
+            }
+
+            // Lưu vào Firestore
+            firestore.collection('laundry_promos').doc(code).set(promoData)
+                .then(() => {
+                    alert("Lưu mã ưu đãi thành công!");
+                    closePromoModal();
+                    // Clear inputs
+                    document.getElementById('promo-code').value = '';
+                    document.getElementById('promo-title').value = '';
+                    document.getElementById('promo-desc').value = '';
+                    document.getElementById('promo-icon').value = 'local-offer';
+                    document.getElementById('promo-value').value = '';
+                    document.getElementById('promo-max').value = '';
+                    document.getElementById('promo-min').value = '';
+                    document.getElementById('promo-target-uid').value = '';
+                    document.getElementById('promo-expiry').value = '';
+                })
+                .catch(err => {
+                    alert("Lỗi khi tạo mã: " + err.message);
+                });
+        };
+        // Dọn dẹp đơn quá hạn
+        window.scanAndCancelOverdueOrders = () => {
+            const now = Date.now();
+            const sevenDaysInMs = 7 * 24 * 3600 * 1000;
+            const overdueOrders = allOrders.filter(order => {
+                const isPending = order.status === 'pending' || order.status === 'awaiting_payment';
+                const isOverdue = (now - order.timestamp) > sevenDaysInMs;
+                return isPending && isOverdue;
+            });
+
+            if (overdueOrders.length === 0) {
+                alert('Tuyệt vời! Hiện không có đơn hàng nào bị quá hạn thanh toán trên 7 ngày.');
+                return;
+            }
+
+            const confirmMsg = `Phát hiện ${overdueOrders.length} đơn hàng chưa thanh toán và đã quá hạn 7 ngày.\n\nBạn có chắc chắn muốn TỰ ĐỘNG HỦY tất cả các đơn này không? Hành động này không thể hoàn tác.`;
+            if (confirm(confirmMsg)) {
+                let updates = {};
+                overdueOrders.forEach(order => {
+                    updates[order.firebaseKey + '/status'] = 'cancelled';
+                    updates[order.firebaseKey + '/cancelReason'] = 'Hệ thống tự động hủy do quá hạn thanh toán 7 ngày.';
+                });
+                
+                db.ref('laundry_orders').update(updates)
+                  .then(() => {
+                      alert(`Đã dọn dẹp và hủy thành công ${overdueOrders.length} đơn hàng quá hạn!`);
+                  })
+                  .catch(err => {
+                      alert('Có lỗi xảy ra khi dọn dẹp: ' + err.message);
+                  });
+            }
+        };
+    </script>
+</body>
+</html>

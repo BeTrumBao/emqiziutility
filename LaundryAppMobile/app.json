@@ -1,0 +1,46 @@
+{
+  "expo": {
+    "name": "LaundryApp",
+    "slug": "LaundryAppMobile",
+    "version": "2026.1.0.release",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.emqizi.laundryapp"
+    },
+    "android": {
+      "package": "com.emqizi.laundryapp",
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "plugins": [
+      "expo-font"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "dfc94295-243d-4267-8044-bfe65f54bf90"
+      }
+    },
+    "owner": "emqizi",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/dfc94295-243d-4267-8044-bfe65f54bf90"
+    }
+  }
+}
